@@ -22,13 +22,10 @@ public class Solution {
                     A.charAt(low) <= 'Z') || (A.charAt(low) >= '0' && A.charAt(low) <= '9')) == false) {
                 low++;
             }
-
             while (low < high && ((A.charAt(high) >= 'a' && A.charAt(high) <= 'z') || (A.charAt(high) >= 'A' &&
                     A.charAt(high) <= 'Z') || (A.charAt(high) >= '0' && A.charAt(high) <= '9')) == false) {
                 high--;
             }
-
-
             if (low <= high && Character.toUpperCase(A.charAt(low)) == Character.toUpperCase(A.charAt(high))) {
                 low++;
                 high--;
