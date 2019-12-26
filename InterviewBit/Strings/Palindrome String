@@ -1,0 +1,42 @@
+https://www.interviewbit.com/problems/palindrome-string/
+
+/*
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Example:
+
+"A man, a plan, a canal: Panama" is a palindrome.
+
+"race a car" is not a palindrome.
+
+Return 0 / 1 ( 0 for false, 1 for true ) for this problem
+*/
+
+public class Solution {
+    public int isPalindrome(String A) {
+        return isPalindrome(A, 0, A.length() - 1);
+    }
+    public int isPalindrome(String A, int low, int high) {
+        while (low < high) {
+            while (low < high && ((A.charAt(low) >= 'a' && A.charAt(low) <= 'z') || (A.charAt(low) >= 'A' &&
+                    A.charAt(low) <= 'Z') || (A.charAt(low) >= '0' && A.charAt(low) <= '9')) == false) {
+                low++;
+            }
+
+            while (low < high && ((A.charAt(high) >= 'a' && A.charAt(high) <= 'z') || (A.charAt(high) >= 'A' &&
+                    A.charAt(high) <= 'Z') || (A.charAt(high) >= '0' && A.charAt(high) <= '9')) == false) {
+                high--;
+            }
+
+
+            if (low <= high && Character.toUpperCase(A.charAt(low)) == Character.toUpperCase(A.charAt(high))) {
+                low++;
+                high--;
+            } else {
+                return 0;
+            }
+
+        }
+        return 1;
+    }
+}
