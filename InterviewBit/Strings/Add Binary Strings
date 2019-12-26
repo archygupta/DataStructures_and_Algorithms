@@ -1,0 +1,20 @@
+https://www.interviewbit.com/problems/add-binary-strings/
+
+/*
+Given two binary strings, return their sum (also a binary string).
+
+Example:
+
+a = "100"
+b = "11"
+Return a + b = “111”.
+*/
+
+import java.math.BigInteger;
+public class Solution {
+    public String addBinary(String A, String B) {
+        BigInteger B1 = new BigInteger(A, 2);
+        BigInteger B2 = new BigInteger(B, 2);
+        return (B1.add(B2)).toString(2);
+    }
+}
