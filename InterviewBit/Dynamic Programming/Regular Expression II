@@ -1,0 +1,61 @@
+https://www.interviewbit.com/problems/regular-expression-ii/
+
+/*
+Implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
+
+The matching should cover the entire input string (not partial).
+
+The function prototype should be:
+
+int isMatch(const char *s, const char *p)
+Some examples:
+
+isMatch("aa","a") → 0
+isMatch("aa","aa") → 1
+isMatch("aaa","aa") → 0
+isMatch("aa", "a*") → 1
+isMatch("aa", ".*") → 1
+isMatch("ab", ".*") → 1
+isMatch("aab", "c*a*b") → 1
+Return 0 / 1 ( 0 for false, 1 for true ) for this problem
+*/
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int isMatch(final String A, final String B) {
+        Stack < Character > st1 = new Stack < Character > ();
+        Stack < Character > st2 = new Stack < Character > ();
+        for (int i = 0; i < A.length(); i++) {
+            st1.push(A.charAt(i));
+        }
+        for (int i = 0; i < B.length(); i++) {
+            st2.push(B.charAt(i));
+        }
+        while (!st1.empty() && !st2.empty()) {
+            if (!st2.empty() && st2.peek() == '*') {
+                st2.pop();
+                if (!st2.empty() && st2.peek() == '.')
+                    return 1;
+                char c = st2.pop();
+                while (!st1.empty() && st1.peek() == c) {
+                    st1.pop();
+                }
+            } else if (!st2.empty() && st2.peek() == '.') {
+                st1.pop();
+                st2.pop();
+            } else if (!st2.empty() && !st1.empty() && st1.peek() == st2.peek()) {
+                st1.pop();
+                st2.pop();
+            } else
+                return 0;
+        }
+        if (st1.empty())
+            return 1;
+        else
+            return 0;
+
+    }
+}
