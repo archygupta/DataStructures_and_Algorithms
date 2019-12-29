@@ -14,6 +14,8 @@ Given binary tree
 return [1,2,3].
 */
 
+//Recursive
+
 public class Solution {
     public static void preorderTraversal(TreeNode A, ArrayList < Integer > li) {
         if (A == null)
@@ -25,6 +27,25 @@ public class Solution {
     public ArrayList < Integer > preorderTraversal(TreeNode A) {
         ArrayList < Integer > li = new ArrayList < Integer > ();
         preorderTraversal(A, li);
+        return li;
+    }
+}
+
+//Iterative
+
+public class Solution {
+    public ArrayList < Integer > preorderTraversal(TreeNode A) {
+        ArrayList < Integer > li = new ArrayList < Integer > ();
+        Stack < TreeNode > st = new Stack < TreeNode > ();
+        st.push(A);
+        while (!st.isEmpty()) {
+            TreeNode temp = st.pop();
+            li.add(temp.val);
+            if (temp.right != null)
+                st.push(temp.right);
+            if (temp.left != null)
+                st.push(temp.left);
+        }
         return li;
     }
 }
