@@ -1,0 +1,34 @@
+https://www.interviewbit.com/problems/kth-smallest-element-in-tree/
+
+/*
+Given a binary search tree, write a function to find the kth smallest element in the tree.
+
+Example :
+
+Input : 
+  2
+ / \
+1   3
+and k = 2
+
+Return : 2. As 2 is the second smallest element in the tree.
+NOTE : You may assume 1 <= k <= Total number of nodes in BST
+*/
+
+public class Solution {
+    public static void addElementsInPQ(TreeNode A, PriorityQueue < Integer > q) {
+        if (A == null)
+            return;
+        q.add(A.val);
+        addElementsInPQ(A.left, q);
+        addElementsInPQ(A.right, q);
+    }
+    public int kthsmallest(TreeNode A, int B) {
+        PriorityQueue < Integer > q = new PriorityQueue < Integer > ();
+        addElementsInPQ(A, q);
+        while (--B > 0) {
+            q.poll();
+        }
+        return q.poll();
+    }
+}
