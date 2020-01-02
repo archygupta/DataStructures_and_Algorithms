@@ -1,0 +1,73 @@
+https://www.interviewbit.com/problems/merge-two-sorted-lists/
+
+/*
+Merge two sorted linked lists and return it as a new list.
+The new list should be made by splicing together the nodes of the first two lists, and should also be sorted.
+
+For example, given following linked lists :
+
+  5 -> 8 -> 20 
+  4 -> 11 -> 15
+The merged list should be :
+
+4 -> 5 -> 8 -> 11 -> 15 -> 20
+*/
+
+//Recursive approach :- can result in stackoverflow for bigger inputs.
+
+public class Solution {
+    public ListNode mergeTwoLists(ListNode A, ListNode B) {
+        ListNode res = null;
+        if (A == null && B == null)
+            return null;
+        if (A == null)
+            return B;
+        if (B == null)
+            return A;
+        if (A.val < B.val) {
+            res = A;
+            res.next = mergeTwoLists(A.next, B);
+        } else {
+            res = B;
+            res.next = mergeTwoLists(A, B.next);
+        }
+        return res;
+    }
+}
+
+//Iterative approach
+
+public class Solution {
+    public ListNode mergeTwoLists(ListNode A, ListNode B) {
+        if (A == null && B == null) return null;
+        if (B == null) return A;
+        if (A == null) return B;
+        ListNode res = null;
+        if (A.val < B.val) {
+            res = A;
+            A = A.next;
+        } else {
+            res = B;
+            B = B.next;
+        }
+        ListNode sol = res;
+        while (A != null && B != null) {
+            if (A.val < B.val) {
+                res.next = A;
+                res = res.next;
+                A = A.next;
+            } else {
+                res.next = B;
+                res = res.next;
+                B = B.next;
+            }
+        }
+        if (A != null) {
+            res.next = A;
+        }
+        if (B != null) {
+            res.next = B;
+        }
+        return sol;
+    }
+}
