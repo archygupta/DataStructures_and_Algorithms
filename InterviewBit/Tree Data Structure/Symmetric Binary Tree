@@ -1,0 +1,41 @@
+https://www.interviewbit.com/problems/symmetric-binary-tree/
+
+/*
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+Example :
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+The above binary tree is symmetric.
+But the following is not:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+Return 0 / 1 ( 0 for false, 1 for true ) for this problem
+*/
+
+public class Solution {
+    public static boolean isMirror(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        return root1.val == root2.val &&
+            isMirror(root1.left, root2.right) &&
+            isMirror(root1.right, root2.left);
+
+    }
+    public int isSymmetric(TreeNode A) {
+        if (isMirror(A, A))
+            return 1;
+        else
+            return 0;
+    }
+}
