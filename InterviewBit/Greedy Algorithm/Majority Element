@@ -1,0 +1,29 @@
+https://www.interviewbit.com/problems/majority-element/
+
+/*
+Given an array of size n, find the majority element. The majority element is the element that appears more than floor(n/2) times.
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+Example :
+Input : [2, 1, 2]
+Return  : 2 which occurs 2 times which is greater than 3/2. 
+*/
+
+public class Solution {
+    public int majorityElement(final int[] A) {
+        LinkedHashMap < Integer, Integer > mp = new LinkedHashMap < Integer, Integer > ();
+        for (int i = 0; i < A.length; i++) {
+            if (mp.containsKey(A[i])) {
+                int j = mp.get(A[i]);
+                mp.put(A[i], j + 1);
+            } else
+                mp.put(A[i], 1);
+        }
+        for (Map.Entry m: mp.entrySet()) {
+            if (((int) m.getValue()) > (A.length) / 2) {
+                return (int) m.getKey();
+            }
+        }
+        return 0;
+    }
+}
