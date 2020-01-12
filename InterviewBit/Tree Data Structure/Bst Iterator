@@ -1,0 +1,87 @@
+https://www.interviewbit.com/problems/bst-iterator/
+
+/*
+Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+
+The first call to next() will return the smallest number in BST. Calling next() again will return the next smallest number in the BST, and so on.
+
+ Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+Try to optimize the additional space complexity apart from the amortized time complexity. 
+*/
+
+
+public class Solution {
+
+ TreeNode root;
+ public Solution(TreeNode root) {
+  this.root = root;
+ }
+
+ /** @return whether we have a next smallest number */
+ public boolean hasNext() {
+  if (root == null) {
+   return false;
+  }
+  return true;
+ }
+
+ /** @return the next smallest number */
+ public int next() {
+  if (root.left == null) {
+   int temp = root.val;
+   root = root.right;
+   return temp;
+  }
+  TreeNode pre = root;
+  TreeNode succ = root.left;
+  while (succ.left != null) {
+   pre = pre.left;
+   succ = succ.left;
+  }
+  if (succ.right == null) {
+   pre.left = null;
+   return succ.val;
+  } else if (succ.right != null) {
+   pre.left = succ.right;
+   return succ.val;
+  }
+  return 0;
+ }
+
+}
+
+/*you may want to look at the code below as well, it doesn't pass the submission 
+but when i try my code with same input, which it is failing for it gives me the correct output.*/
+
+public class Solution {
+
+ ArrayList < Integer > ar = new ArrayList < Integer > ();
+ public Solution(TreeNode root) {
+  inorder(root);
+
+ }
+
+ public void inorder(TreeNode root) {
+  if (root == null)
+   return;
+  if (root.left != null)
+   inorder(root.left);
+  ar.add(root.val);
+  if (root.right != null)
+   inorder(root.right);
+
+ }
+
+ static int has = 0;
+ /** @return whether we have a next smallest number */
+ public boolean hasNext() {
+  if (has < ar.size())
+   return true;
+  return false;
+ }
+
+ /** @return the next smallest number */
+ public int next() {
+  return ar.get(has++);
+ }
+}
