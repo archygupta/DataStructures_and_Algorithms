@@ -1,0 +1,46 @@
+https://www.interviewbit.com/problems/construct-binary-tree-from-inorder-and-preorder/
+
+/*
+Given preorder and inorder traversal of a tree, construct the binary tree.
+Note: You may assume that duplicates do not exist in the tree. 
+
+Example :
+
+Input :
+        Preorder : [1, 2, 3]
+        Inorder  : [2, 1, 3]
+
+Return :
+            1
+           / \
+          2   3
+*/
+
+//Time limit exceeds with this solution
+
+class Index {
+	int index;
+}
+
+public class Solution {
+
+	public TreeNode buildTree(ArrayList<Integer> A, ArrayList<Integer> B, int s, int e, Index pI) {
+		if (s > e)
+			return null;
+		TreeNode node = new TreeNode(A.get(pI.index));
+		pI.index++;
+		if (s == e)
+			return node;
+		int iI = B.indexOf(A.get(pI.index - 1));
+		node.left = buildTree(A, B, s, iI - 1, pI);
+		node.right = buildTree(A, B, iI + 1, e, pI);
+		return node;
+	}
+
+	public TreeNode buildTree(ArrayList<Integer> A, ArrayList<Integer> B) {
+		int n = A.size();
+		Index pI = new Index();
+		pI.index = 0;
+		return buildTree(A, B, 0, n - 1, pI);
+	}
+}
