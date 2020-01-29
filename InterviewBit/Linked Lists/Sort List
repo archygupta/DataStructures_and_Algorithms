@@ -1,0 +1,52 @@
+https://www.interviewbit.com/problems/sort-list/
+
+/*
+Sort a linked list in O(n log n) time using constant space complexity.
+
+Example :
+Input : 1 -> 5 -> 4 -> 3
+Returned list : 1 -> 3 -> 4 -> 5
+*/
+
+//This code is correct but gives StackOverflow exception on submission due to large inputs. Iterative equivalent will be submitted without any exceptions.
+public class Solution {
+	ListNode mergeSortList(ListNode l, ListNode r) {
+		ListNode res = null;
+		if (l == null)
+			return r;
+		if (r == null)
+			return l;
+		if (l.val <= r.val) {
+			res = l;
+			res.next = mergeSortList(l.next, r);
+		} else {
+			res = r;
+			res.next = mergeSortList(l, res.next);
+		}
+		return res;
+	}
+
+	public ListNode sortList(ListNode A) {
+		if (A == null || A.next == null)
+			return A;
+		ListNode middle = getMiddle(A);
+		ListNode nextOfMiddle = middle.next;
+		middle.next = null;
+		ListNode l = sortList(A);
+		ListNode r = sortList(nextOfMiddle);
+		ListNode sortedList = mergeSortList(l, r);
+		return sortedList;
+	}
+
+	ListNode getMiddle(ListNode node) {
+		if (node == null)
+			return node;
+		ListNode fast = node;
+		ListNode slow = node;
+		while (fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+		return slow;
+	}
+}
