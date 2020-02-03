@@ -1,0 +1,31 @@
+https://www.interviewbit.com/problems/palindrome-list/
+
+/*
+Given a singly linked list, determine if its a palindrome. Return 1 or 0 denoting if its a palindrome or not, respectively.
+
+Notes:
+Expected solution is linear in time and constant in space.
+
+For example,
+
+List 1-->2-->1 is a palindrome.
+List 1-->2-->3 is not a palindrome.
+*/
+
+public class Solution {
+	public int lPalin(ListNode A) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		ListNode head = A;
+		while (head != null) {
+			list.add(head.val);
+			head = head.next;
+		}
+		for (int i = 0, j = list.size() - 1; i < j; i++, j--) {
+			if ((int) list.get(i) != (int) list.get(j)) {
+
+				return 0;
+			}
+		}
+		return 1;
+	}
+}
