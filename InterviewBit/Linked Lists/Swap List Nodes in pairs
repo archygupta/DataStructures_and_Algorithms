@@ -1,0 +1,41 @@
+https://www.interviewbit.com/problems/swap-list-nodes-in-pairs/
+
+/*
+Given a linked list, swap every two adjacent nodes and return its head.
+
+For example,
+Given 1->2->3->4, you should return the list as 2->1->4->3.
+
+Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+*/
+
+public class Solution {
+	public ListNode swapPairs(ListNode A) {
+		ListNode prev = A;
+		if (A == null || A.next == null) {
+			return A;
+		}
+		ListNode head1 = A;
+		ListNode head2 = A.next;
+		boolean flag = true;
+		while (head1 != null && head2 != null) {
+			head1.next = head2.next;
+			head2.next = head1;
+			if (flag == true) {
+				A = head2;
+				flag = false;
+			} else {
+				prev.next = head2;
+			}
+			prev = head1;
+			if (head1.next != null && head1.next.next != null) {
+				head1 = head1.next;
+				head2 = head1.next;
+			} else {
+				break;
+			}
+
+		}
+		return A;
+	}
+}
