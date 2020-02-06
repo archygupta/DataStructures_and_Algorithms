@@ -1,0 +1,50 @@
+https://www.interviewbit.com/problems/implement-strstr/
+
+/*
+Please Note:
+Another question which belongs to the category of questions which are intentionally stated vaguely.
+Expectation is that you will ask for correct clarification or you will state your assumptions before you start coding.
+
+Implement strStr().
+
+strstr - locate a substring ( needle ) in a string ( haystack ). 
+Try not to use standard library string functions for this question.
+
+Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+NOTE: Good clarification questions:
+What should be the return value if the needle is empty?
+What if both haystack and needle are empty?
+For the purpose of this problem, assume that the return value should be -1 in both cases. 
+*/
+
+public class Solution {
+	// DO NOT MODIFY THE LIST. IT IS READ ONLY
+	public int strStr(final String A, final String B) {
+		if (A == null || B == null) {
+			return -1;
+		}
+		char c = B.charAt(0);
+		for (int i = 0; i < A.length(); i++) {
+			if (A.charAt(i) == c) {
+				i++;
+				int j = 1;
+				int n = B.length() - 1;
+				while (i < A.length() && n > 0) {
+					if (A.charAt(i) == B.charAt(j)) {
+						n--;
+						i++;
+						j++;
+					} else {
+						i = i - j;
+						break;
+					}
+				}
+				if (n == 0) {
+					return i - j;
+				}
+			}
+		}
+		return -1;
+	}
+}
