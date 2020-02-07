@@ -1,0 +1,47 @@
+https://www.interviewbit.com/problems/inorder-traversal-of-cartesian-tree/
+
+/*
+Given an inorder traversal of a cartesian tree, construct the tree.
+
+ Cartesian tree : is a heap ordered binary tree, where the root is greater than all the elements in the subtree. 
+ Note: You may assume that duplicates do not exist in the tree. 
+Example :
+
+Input : [1 2 3]
+
+Return :   
+          3
+         /
+        2
+       /
+      1
+*/
+
+public class Solution {
+	static int findMax(ArrayList<Integer> A, int start, int end) {
+		int val = A.get(start);
+		for (int i = start + 1; i <= end; i++) {
+			if (A.get(i) > val)
+				val = A.get(i);
+		}
+		return A.indexOf(val);
+	}
+
+	public static TreeNode buildTree(ArrayList<Integer> A, int start, int end, TreeNode res) {
+		if (start > end)
+			return null;
+		int i = findMax(A, start, end);
+		res = new TreeNode(A.get(i));
+		if (start == end)
+			return res;
+		res.left = buildTree(A, start, i - 1, res);
+		res.right = buildTree(A, i + 1, end, res);
+		return res;
+	}
+
+	public TreeNode buildTree(ArrayList<Integer> A) {
+		TreeNode res = null;
+		return buildTree(A, 0, A.size() - 1, res);
+
+	}
+}
