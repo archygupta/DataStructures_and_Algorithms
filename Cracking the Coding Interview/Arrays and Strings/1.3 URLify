@@ -1,0 +1,38 @@
+*/
+Write a method to replace all spaces in a string with '%20'. You may assume that the string has sufficient space at the end to hold the 
+additional characters, and that you are given the "true" length of the string. (Note: If Implementing in Java, please use a character array
+so that you can perform ths operation in place.)
+
+Example
+Input:  "Mr John Smith    ", 13
+Output: "Mr%20John%20Smith"
+*/
+
+package ArraysAndStrings;
+
+import java.util.Scanner;
+
+public class URLify_3 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		String s = "Mr John Smith    ";
+		int n = 13;
+		System.out.println(urlifyTheString(s.toCharArray(), n));
+		System.out.println(urlifyTheString("Archy".toCharArray(), 5));
+		System.out.println(urlifyTheString("Archy Gupta  ".toCharArray(), 11));
+	}
+
+	private static String urlifyTheString(char[] ch, int len) {
+		int j = ch.length - 1;
+		for (int i = len - 1; i >= 0; i--) {
+			if (ch[i] != ' ') {
+				ch[j--] = ch[i];
+			} else {
+				ch[j--] = '0';
+				ch[j--] = '2';
+				ch[j--] = '%';
+			}
+		}
+		return new String(ch);
+	}
+}
