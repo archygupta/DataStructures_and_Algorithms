@@ -1,0 +1,28 @@
+/*
+Problem Statement:
+Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structres?
+*/
+
+package ArraysAndStrings;
+
+import java.util.Scanner;
+
+public class IsUnique_1 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		System.out.println(isUnique(s));
+	}
+
+	private static boolean isUnique(String s) {
+		if (s.length() > 128)
+			return false;
+		int[] ch = new int[128];
+		for (int i = 0; i < s.length(); i++) {
+			if (ch[s.charAt(i)] == 1)
+				return false;
+			ch[s.charAt(i)]++;
+		}
+		return true;
+	}
+}
