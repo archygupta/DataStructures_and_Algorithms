@@ -1,0 +1,52 @@
+/*
+Problem Statement:
+Palindrome Permutation: Given a string, write a function to check if it is a permutation of a palindrome. A palindrome is a word or
+phrase that is the same forwards and backwards. A permutation is a rearrangement of letters. The palindrome does not need to be limited
+to just dictionary words.
+
+Example:
+Input: Tach Coa
+Output: True (Permutations: "taco cat", "atco cta", etc.)
+*/
+
+package ArraysAndStrings;
+
+import java.util.Scanner;
+
+public class PalindromePermutation_4 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		System.out.println(isPermutationPalindrome(s));
+		System.out.println(isPermutationPalindrome("cat o cat"));
+	}
+
+	private static boolean isPermutationPalindrome(String s) {
+		int[] freTable = new int['z' - 'a' + 1];
+		return isPermutationPalindrome(s, freTable);
+	}
+
+	private static boolean isPermutationPalindrome(String s, int[] freTable) {
+		int countOdd = 0;
+		for (int i = 0; i < s.length(); i++) {
+			int index = getCharNumber(s.charAt(i));
+			if (index != -1) {
+				freTable[index]++;
+				if (freTable[index] % 2 == 1) {
+					countOdd++;
+				} else {
+					countOdd--;
+				}
+			}
+		}
+		return countOdd <= 1;
+	}
+
+	private static int getCharNumber(char ch) {
+		if (ch >= 'a' && ch <= 'z') {
+			return ch - 'a';
+		}
+		return -1;
+	}
+
+}
