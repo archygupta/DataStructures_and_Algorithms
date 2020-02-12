@@ -1,0 +1,66 @@
+/*
+Problem Statement:
+There are three types o edits that can be performed on strings: insert a character, remove a character, or replace a character. Given two 
+Strings, write a function to check if they are one edit(or zero edit) away.
+
+Example:
+pale, ple -> true
+pales, pale -> true
+pale, bale -> true
+pale, bake -> false
+*/
+
+package ArraysAndStrings;
+
+import java.util.Scanner;
+
+public class OneAway_5 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		String s1 = sc.next();
+		String s2 = sc.next();
+		System.out.println(isOneAway(s1, s2));
+	}
+
+	private static boolean isOneAway(String s1, String s2) {
+		if (s1.length() == s2.length()) {
+			return oneEditAway(s1, s2);
+		} else if (s1.length() + 1 == s2.length()) {
+			return oneInsertOrDeleteAway(s2, s1);
+		} else if (s1.length() - 1 == s2.length()) {
+			return oneInsertOrDeleteAway(s1, s2);
+		}
+		return false;
+	}
+
+	private static boolean oneEditAway(String s1, String s2) {
+
+		boolean foundDiff = false;
+		for (int i = 0; i < s1.length(); i++) {
+			if (s1.charAt(i) != s2.charAt(i)) {
+				if (foundDiff) {
+					return false;
+				}
+				foundDiff = true;
+			}
+		}
+		return true;
+	}
+
+	private static boolean oneInsertOrDeleteAway(String s1, String s2) {
+		int index1 = 0;
+		int index2 = 0;
+		while (index1 < s1.length() && index2 < s2.length()) {
+			if (s1.charAt(index1) != s2.charAt(index2)) {
+				if (index1 != index2) {
+					return false;
+				}
+				index1++;
+			} else {
+				index1++;
+				index2++;
+			}
+		}
+		return true;
+	}
+}
