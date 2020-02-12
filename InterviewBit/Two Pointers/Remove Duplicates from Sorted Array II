@@ -1,0 +1,64 @@
+https://www.interviewbit.com/problems/remove-duplicates-from-sorted-array-ii/
+
+/*
+Remove Duplicates from Sorted Array
+Given a sorted array, remove the duplicates in place such that each element can appear atmost twice and return the new length.
+Do not allocate extra space for another array, you must do this in place with constant memory.
+
+Note that even though we want you to return the new length, make sure to change the original array as well in place
+
+For example,
+Given input array A = [1,1,1,2],
+Your function should return length = 3, and A is now [1,1,2].
+*/
+
+public class Solution {
+    public int removeDuplicates(ArrayList < Integer > a) {
+        TreeSet < Integer > ts = new TreeSet < Integer > ();
+        ts.addAll(a);
+        LinkedHashMap < Integer, Integer > hm = new LinkedHashMap < Integer, Integer > ();
+        for (int i = 0; i < a.size(); i++) {
+            int count = 1;
+            int j = i;
+            while (i < a.size() - 1 && (a.get(i)).equals(a.get(i + 1))) {
+                count = count + 1;
+                i++;
+            }
+            hm.put(a.get(i), count);
+        }
+        a.clear();
+        for (Map.Entry < Integer, Integer > m: hm.entrySet()) {
+            if (m.getValue() >= 2) {
+                a.add(m.getKey());
+            }
+            a.add(m.getKey());
+        }
+        return a.size();
+    }
+}
+
+//TimeoutException
+
+public class Solution {
+    public int removeDuplicates(ArrayList < Integer > a) {
+        for (int i = 0; i < a.size() - 1; i++) {
+            int n = a.get(i);
+            int j = i;
+            boolean flag = false;
+            while (i < a.size() - 1 && a.get(i).equals(a.get(i + 1))) {
+                i++;
+                if (j == i - 2) {
+                    flag = true;
+                    break;
+                }
+            }
+            while (flag && i < a.size() && a.get(i) == n) {
+                a.remove(i);
+            }
+            if (flag == true) {
+                i--;
+            }
+        }
+        return a.size();
+    }
+}
