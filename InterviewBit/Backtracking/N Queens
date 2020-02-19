@@ -1,0 +1,79 @@
+https://www.interviewbit.com/problems/nqueens/
+
+/*
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+N Queens: Example 1
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+Each solution contains a distinct board configuration of the n-queens’ placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+
+For example,
+There exist two distinct solutions to the 4-queens puzzle:
+
+[
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // Solution 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+*/
+
+public class Solution {
+    static ArrayList < ArrayList < String >> res = new ArrayList < ArrayList < String >> ();
+    public static void addSol(int[][] arr, int n) {
+        ArrayList < String > tempRes = new ArrayList < String > ();
+        for (int i = 0; i < n; i++) {
+            StringBuilder temp = new StringBuilder();;
+            for (int j = 0; j < n; j++) {
+                if (arr[i][j] == 1) {
+                    temp.append("Q");
+                } else {
+                    temp.append(".");
+                }
+            }
+            tempRes.add(temp.toString());
+        }
+        res.add(tempRes);
+    }
+
+    public static boolean isSafe(int[][] arr, int row, int col) {
+        int i, j;
+        for (i = 0; i < col; i++)
+            if (arr[row][i] == 1)
+                return false;
+        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            if (arr[i][j] == 1)
+                return false;
+        for (i = row, j = col; j >= 0 && i < arr.length; i++, j--)
+            if (arr[i][j] == 1)
+                return false;
+        return true;
+    }
+    public static boolean solveNQueens(int[][] arr, int col, int n) {
+        if (col == n) {
+            addSol(arr, n);
+            return true;
+        }
+        boolean r = false;
+        for (int i = 0; i < n; i++) {
+            if (isSafe(arr, i, col)) {
+                arr[i][col] = 1;
+                r = solveNQueens(arr, col + 1, n) || r;
+                arr[i][col] = 0;
+            }
+        }
+        return r;
+    }
+    public ArrayList < ArrayList < String >> solveNQueens(int a) {
+        int arr[][] = new int[a][a];
+        solveNQueens(arr, 0, a);
+        ArrayList < ArrayList < String >> m = new ArrayList < ArrayList < String >> (res);
+        res.clear();
+        return m;
+    }
+}
