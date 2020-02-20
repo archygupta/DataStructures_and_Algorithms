@@ -1,6 +1,8 @@
 /*
 Problem Statement:
 Implement an algorithm to find the kth to last element of a singly linked list.
+
+Both Iterative and Recursive implemention is available below
 */
 
 package LinkedLists;
@@ -28,18 +30,35 @@ public class ReturnKthToLast_2 {
 		head.next.next.next.next.next.next = new Node(6);
 		head.next.next.next.next.next.next.next = new Node(2);
 		printList(head);
-		printKthToLast(head, 5);
-		printKthToLast(head, 11);
-		printKthToLast(head, 0);
-		printKthToLast(head, -1);
-		printKthToLast(head, 3);
+		printKthToLastRecursive(head, 5);
+		printKthToLastRecursive(head, 11);
+		printKthToLastRecursive(head, 0);
+		printKthToLastRecursive(head, -1);
+		printKthToLastIteraive(head, 3);
+		printKthToLastIteraive(head, 7);
+		printKthToLastIteraive(head, 4);
 	}
 
-	private static int printKthToLast(Node head, int k) {
+	private static void printKthToLastIteraive(Node head, int k) {
+		Node p1 = head;
+		Node p2 = head;
+		while (p1 != null && k > 0) {
+			p1 = p1.next;
+			k--;
+		}
+		while (p1 != null) {
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+		System.out.println(p2.data);
+
+	}
+
+	private static int printKthToLastRecursive(Node head, int k) {
 		if (head == null) {
 			return 0;
 		}
-		int index = printKthToLast(head.next, k) + 1;
+		int index = printKthToLastRecursive(head.next, k) + 1;
 		if (index == k) {
 			System.out.println(head.data);
 		}
