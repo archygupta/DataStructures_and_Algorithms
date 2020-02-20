@@ -1,0 +1,58 @@
+
+package LinkedLists;
+
+import java.util.HashSet;
+
+public class RemoveDups_1 {
+	static class Node {
+		public Node(int data) {
+			super();
+			this.data = data;
+			this.next = null;
+		}
+
+		int data;
+		Node next;
+	}
+
+	public static void main(String args[]) {
+		Node head = new Node(1);
+		head.next = new Node(5);
+		head.next.next = new Node(2);
+		head.next.next.next = new Node(5);
+		head.next.next.next.next = new Node(3);
+		head.next.next.next.next.next = new Node(5);
+		head.next.next.next.next.next.next = new Node(3);
+		head.next.next.next.next.next.next.next = new Node(2);
+		printList(head);
+		removeDuplicates(head);
+		printList(head);
+	}
+
+	private static void printList(Node head) {
+		Node node = head;
+		while (node != null) {
+			System.out.print(node.data);
+			node = node.next;
+		}
+		System.out.println();
+	}
+
+	private static void removeDuplicates(Node head) {
+		if (head == null || head.next == null)
+			return;
+		HashSet<Integer> hs = new HashSet<Integer>();
+		Node prev = head;
+		hs.add(head.data);
+		Node node = head.next;
+		while (node != null) {
+			if (hs.contains(node.data)) {
+				prev.next = node.next;
+			} else {
+				hs.add(node.data);
+				prev = node;
+			}
+			node = node.next;
+		}
+	}
+}
