@@ -1,0 +1,97 @@
+package LinkedLists;
+
+class Node {
+	public Node(int data) {
+		super();
+		this.data = data;
+		this.next = null;
+	}
+
+	int data;
+	Node next;
+}
+
+class Result {
+	public Result(Node tail, int size) {
+		super();
+		this.tail = tail;
+		this.size = size;
+	}
+
+	public Node tail;
+	public int size;
+
+	public static Result getSizeAndTail(Node node) {
+		if (node == null) {
+			return null;
+		}
+		Node curr = node;
+		int size = 1;
+		while (curr.next != null) {
+			size++;
+			curr = curr.next;
+		}
+		return new Result(curr, size);
+	}
+
+	public static Node getKthNode(Node longer, int k) {
+		Node kthNode = longer;
+		while (k > 0 && kthNode != null) {
+			kthNode = kthNode.next;
+			k--;
+		}
+		return kthNode;
+	}
+}
+
+public class Intersection_7 {
+	public static void main(String args[]) {
+		Node list1 = new Node(1);
+		list1.next = new Node(0);
+		list1.next.next = new Node(13);
+		list1.next.next.next = new Node(8);
+		list1.next.next.next.next = new Node(3);
+		list1.next.next.next.next.next = new Node(4);
+		list1.next.next.next.next.next.next = new Node(6);
+		list1.next.next.next.next.next.next.next = new Node(2);
+		Node list2 = new Node(1);
+		list2.next = new Node(5);
+		list2.next.next = new Node(7);
+		list2.next.next.next = new Node(2);
+		list2.next.next.next.next = list1.next.next.next.next.next;
+		printList(list1);
+		printList(list2);
+		Node result = findIntersection(list1, list2);
+		System.out.println(result.data);
+	}
+
+	private static Node findIntersection(Node list1, Node list2) {
+		if (list1 == null || list2 == null) {
+			return null;
+		}
+		Result list1Res = Result.getSizeAndTail(list1);
+		Result list2Res = Result.getSizeAndTail(list2);
+
+		if (list1Res.tail != list2Res.tail) {
+			return null;
+		}
+		Node longer = list1Res.size > list2Res.size ? list1 : list2;
+		Node shorter = list1Res.size > list2Res.size ? list2 : list1;
+		longer = Result.getKthNode(longer, Math.abs(list1Res.size - list2Res.size));
+
+		while (longer != shorter) {
+			longer = longer.next;
+			shorter = shorter.next;
+		}
+		return shorter;
+	}
+
+	private static void printList(Node head) {
+		Node node = head;
+		while (node != null) {
+			System.out.print(node.data + " ");
+			node = node.next;
+		}
+		System.out.println();
+	}
+}
