@@ -1,1 +1,92 @@
+/*
+Problem Statement:
+Three in One: Describe how you could use a single array to implement three stacks.
+*/
 
+package StacksAndQueues;
+
+class FixedMultiStack {
+	int numOfStacks = 3;
+	int stackCapacity;
+	int values[];
+	int size[];
+
+	public FixedMultiStack(int stackSize) {
+		stackCapacity = stackSize;
+		size = new int[numOfStacks];
+		values = new int[numOfStacks * stackSize];
+	}
+
+	public void push(int val, int stackNum) {
+		if (isFull(stackNum)) {
+			System.out.println("Stack overflow");
+			return;
+		}
+		int top = indexOfTop(stackNum);
+		size[stackNum]++;
+		values[top] = val;
+	}
+
+	public int pop(int stackNum) {
+		if (isEmpty(stackNum)) {
+			System.out.println("Stack underflow");
+			return -1;
+		}
+		int top = indexOfTop(stackNum);
+		int val = values[top - 1];
+		values[top - 1] = 0;
+		size[stackNum]--;
+		return val;
+	}
+
+	public int peek(int stackNum) {
+		if (isEmpty(stackNum)) {
+			System.out.println("Stack underflow");
+			return -1;
+		}
+		return values[indexOfTop(stackNum) - 1];
+	}
+
+	public boolean isEmpty(int stackNum) {
+		return size[stackNum] == 0;
+	}
+
+	public boolean isFull(int stackNum) {
+		return size[stackNum] == stackCapacity;
+	}
+
+	public int indexOfTop(int stackNum) {
+		int offset = stackNum * stackCapacity;
+		return offset + size[stackNum];
+	}
+}
+
+public class ThreeInOne_1 {
+	public static void main(String args[]) {
+		FixedMultiStack threeStack = new FixedMultiStack(5);
+		threeStack.push(1, 0);
+		threeStack.push(2, 0);
+		threeStack.push(3, 0);
+		threeStack.push(4, 0);
+		threeStack.push(5, 0);
+		threeStack.push(6, 0);
+		System.out.println(threeStack.peek(0));
+		System.out.println(threeStack.pop(0));
+		threeStack.push(5, 0);
+		threeStack.push(6, 1);
+		threeStack.push(7, 1);
+		threeStack.push(8, 1);
+		threeStack.push(9, 1);
+		threeStack.push(10, 1);
+		threeStack.push(1, 1);
+		threeStack.push(1, 1);
+		threeStack.push(11, 2);
+		threeStack.push(12, 2);
+		threeStack.push(13, 2);
+		threeStack.push(14, 2);
+		threeStack.push(15, 2);
+		threeStack.push(16, 2);
+		threeStack.push(17, 2);
+	}
+
+}
