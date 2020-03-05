@@ -1,0 +1,31 @@
+package StacksAndQueues;
+
+import java.util.Stack;
+
+public class SortStack_5 {
+	public static void main(String args[]) {
+		Stack<Integer> st = new Stack<Integer>();
+		st.push(3);
+		st.push(5);
+		st.push(8);
+		st.push(1);
+		st.push(6);
+		st.push(2);
+		st.push(4);
+		st.push(7);
+		st = sort(st);
+		System.out.println(st);
+	}
+
+	private static Stack<Integer> sort(Stack<Integer> st) {
+		Stack<Integer> sorted = new Stack<Integer>();
+		while (!st.isEmpty()) {
+			int temp = st.pop();
+			while (!sorted.isEmpty() && sorted.peek() > temp) {
+				st.push(sorted.pop());
+			}
+			sorted.push(temp);
+		}
+		return sorted;
+	}
+}
