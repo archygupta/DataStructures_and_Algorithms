@@ -1,1 +1,48 @@
+package StacksAndQueues;
 
+import java.util.Stack;
+
+public class MinStack_2 extends Stack<Integer> {
+	public MinStack_2() {
+		min = new Stack<Integer>();
+	}
+
+	static Stack<Integer> min;
+
+	public static int min() {
+		if (min.isEmpty()) {
+			return Integer.MAX_VALUE;
+		} else
+			return min.peek();
+	}
+
+	public void push(int n) {
+		super.push(n);
+		if (min.isEmpty() || min.peek() > n) {
+			min.push(n);
+		}
+	}
+
+	public Integer pop() {
+		if (min.peek() == super.peek()) {
+			min.pop();
+		}
+		return super.pop();
+	}
+
+	public static void main(String args[]) {
+		MinStack_2 obj = new MinStack_2();
+		obj.push(5);
+		System.out.println("curr min: " + min());
+		obj.push(6);
+		System.out.println("curr min: " + min());
+		obj.push(3);
+		System.out.println("curr min: " + min());
+		obj.push(7);
+		System.out.println("curr min: " + min());
+		obj.pop();
+		System.out.println("curr min: " + min());
+		obj.pop();
+		System.out.println("curr min: " + min());
+	}
+}
