@@ -1,0 +1,140 @@
+package StacksAndQueues;
+
+import java.util.LinkedList;
+
+abstract class Animal {
+
+	private int order;
+	protected String name;
+
+	public Animal(String name) {
+		this.name = name;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	private int getOrder() {
+		return order;
+	}
+
+	public boolean isOlder(Animal a) {
+		return this.order < a.getOrder();
+	}
+
+}
+
+class AnimalQueue {
+	private int order = 0;
+	LinkedList<Dog> dogs = new LinkedList<Dog>();
+	LinkedList<Cat> cats = new LinkedList<Cat>();
+
+	public void enqueue(Animal a) {
+		a.setOrder(order);
+		order++;
+		if (a instanceof Dog) {
+			dogs.addLast((Dog) a);
+		} else if (a instanceof Cat) {
+			cats.addLast((Cat) a);
+
+		}
+	}
+
+	public Animal dequeueAny() {
+		if (dogs.size() == 0) {
+			return dogs.poll();
+		} else if (cats.size() == 0) {
+			return cats.poll();
+		}
+		Dog dog = dogs.peek();
+		Cat cat = cats.peek();
+		if (dog.isOlder(cat)) {
+			return dogs.poll();
+		} else {
+			return cats.poll();
+		}
+	}
+
+	public Animal dequeueDog() {
+		return dogs.poll();
+	}
+
+	public Animal dequeueCat() {
+		return cats.poll();
+	}
+
+	void printAnimalList() {
+		System.out.println();
+
+		if (dogs.size() > 0) {
+			System.out.print("Dogs: ");
+		}
+		for (int i = 0; i < dogs.size(); i++) {
+			System.out.print(dogs.get(i).name + " ");
+		}
+		System.out.println();
+
+		if (cats.size() > 0) {
+			System.out.print("Cats: ");
+		}
+		for (int i = 0; i < cats.size(); i++) {
+			System.out.print(cats.get(i).name + " ");
+		}
+		System.out.println();
+	}
+}
+
+class Dog extends Animal {
+	public Dog(String n) {
+		super(n);
+	}
+}
+
+class Cat extends Animal {
+	public Cat(String n) {
+		super(n);
+	}
+}
+
+public class AnimalShelter_6 {
+	public static void main(String args[]) {
+		AnimalQueue a = new AnimalQueue();
+		a.enqueue(new Dog("dog1"));
+		a.printAnimalList();
+		a.enqueue(new Cat("cat1"));
+		a.printAnimalList();
+		a.dequeueAny();
+		a.printAnimalList();
+		a.enqueue(new Dog("dog2"));
+		a.printAnimalList();
+		a.dequeueDog();
+		a.printAnimalList();
+		a.enqueue(new Dog("dog3"));
+		a.printAnimalList();
+		a.enqueue(new Cat("cat2"));
+		a.printAnimalList();
+		a.enqueue(new Dog("dog4"));
+		a.printAnimalList();
+		a.dequeueDog();
+		a.printAnimalList();
+		a.enqueue(new Dog("dog5"));
+		a.printAnimalList();
+		a.enqueue(new Cat("cat3"));
+		a.printAnimalList();
+		a.dequeueCat();
+		a.printAnimalList();
+		a.enqueue(new Dog("dog6"));
+		a.printAnimalList();
+		a.enqueue(new Dog("dog7"));
+		a.printAnimalList();
+		a.enqueue(new Cat("cat4"));
+		a.printAnimalList();
+		a.dequeueAny();
+		a.printAnimalList();
+		a.dequeueCat();
+		a.printAnimalList();
+		a.dequeueDog();
+		a.printAnimalList();
+	}
+}
