@@ -1,0 +1,53 @@
+package StacksAndQueues;
+
+import java.util.Stack;
+
+public class QueueViaStacks_4<T> {
+	public QueueViaStacks_4() {
+		newStack = new Stack<T>();
+		oldStack = new Stack<T>();
+	}
+
+	Stack<T> newStack, oldStack;
+
+	public int size() {
+		return newStack.size() + oldStack.size();
+	}
+
+	public T remove() {
+		shiftStacks();
+		return oldStack.pop();
+	}
+
+	public void add(T n) {
+		newStack.push(n);
+	}
+
+	public T peek() {
+		shiftStacks();
+		return oldStack.peek();
+	}
+
+	public void shiftStacks() {
+		if (oldStack.isEmpty()) {
+			while (!newStack.isEmpty()) {
+				oldStack.push(newStack.pop());
+			}
+		}
+	}
+
+	public static void main(String args[]) {
+		QueueViaStacks_4 obj = new QueueViaStacks_4();
+		obj.add(1);
+		obj.add(2);
+		obj.remove();
+		System.out.println(obj.peek());
+		obj.add(3);
+		obj.add(4);
+		obj.remove();
+		obj.add(5);
+		obj.add(6);
+		System.out.println(obj.peek());
+		obj.remove();
+	}
+}
