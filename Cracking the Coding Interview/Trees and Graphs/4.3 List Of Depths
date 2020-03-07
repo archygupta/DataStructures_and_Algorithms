@@ -1,1 +1,56 @@
 
+package TreesAndGraphs;
+
+import java.util.*;
+
+public class ListOfDepths_3 {
+	static Node root = null;
+
+	static class Node {
+		int data;
+		Node left, right;
+
+		Node(int data) {
+			this.data = data;
+		}
+	}
+
+	public static void main(String args[]) {
+		root = new Node(10);
+		root.left = new Node(2);
+		root.right = new Node(7);
+		root.left.left = new Node(8);
+		root.left.right = new Node(4);
+		root.right.left = new Node(3);
+		root.right.right = new Node(452);
+		ArrayList<LinkedList<Integer>> res = createLevelLinkedList(root);
+		for (LinkedList<Integer> list : res) {
+			for (int i : list) {
+				System.out.print(i + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	private static ArrayList<LinkedList<Integer>> createLevelLinkedList(Node root) {
+		ArrayList<LinkedList<Integer>> lists = new ArrayList<LinkedList<Integer>>();
+		createLevelLinkedList(root, lists, 0);
+		return lists;
+	}
+
+	private static void createLevelLinkedList(Node root, ArrayList<LinkedList<Integer>> lists, int level) {
+		if (root == null) {
+			return;
+		}
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		if (lists.size() == level) {
+			lists.add(list);
+		} else {
+			list = lists.get(level);
+
+		}
+		list.add(root.data);
+		createLevelLinkedList(root.left, lists, level + 1);
+		createLevelLinkedList(root.right, lists, level + 1);
+	}
+}
