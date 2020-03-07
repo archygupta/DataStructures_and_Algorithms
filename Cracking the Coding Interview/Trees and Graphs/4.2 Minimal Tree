@@ -1,0 +1,37 @@
+package TreesAndGraphs;
+
+class Node {
+	int data;
+	Node left, right;
+
+	Node(int data) {
+		this.data = data;
+	}
+}
+
+public class MinimalTree {
+	public static void main(String args[]) {
+		int arr[] = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		printTree(createMinimalTree(arr, 0, arr.length - 1));
+	}
+
+	static void printTree(Node root) {
+		if (root == null) {
+			return;
+		}
+		printTree(root.left);
+		System.out.print(root.data + " ");
+		printTree(root.right);
+	}
+
+	private static Node createMinimalTree(int[] arr, int start, int end) {
+		if (start > end) {
+			return null;
+		}
+		int mid = (start + end) / 2;
+		Node node = new Node(arr[mid]);
+		node.left = createMinimalTree(arr, start, mid - 1);
+		node.right = createMinimalTree(arr, mid + 1, end);
+		return node;
+	}
+}
