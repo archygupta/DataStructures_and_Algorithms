@@ -1,1 +1,71 @@
 
+package TreesAndGraphs;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Graph {
+	int v;
+	LinkedList<Integer> adjlist[];
+	Enum[] state;
+
+	enum State {
+		Visited, Unvisited, Visiting
+	}
+
+	public Graph(int v) {
+		this.v = v;
+		adjlist = new LinkedList[v];
+		for (int i = 0; i < v; i++) {
+			adjlist[i] = new LinkedList<Integer>();
+		}
+		state = new Enum[v];
+		for (int i = 0; i < v; i++) {
+			state[i] = State.Unvisited;
+		}
+
+	}
+
+	public void addEdge(int src, int dest) {
+		adjlist[src].add(dest);
+	}
+
+	public boolean isThereARoute(Graph g, int start, int end) {
+		if (start == end)
+			return true;
+		Queue<Integer> q = new LinkedList<Integer>();
+		q.add(start);
+		state[start] = State.Visiting;
+		while (!q.isEmpty()) {
+			int u = q.poll();
+			for (int i = 0; i < adjlist[u].size(); i++) {
+				int v = adjlist[u].get(i);
+				if (state[v] != State.Visited) {
+					if (v == end) {
+						return true;
+					} else {
+						state[v] = State.Visiting;
+						q.add(v);
+					}
+				}
+			}
+			state[u] = State.Visited;
+		}
+		return false;
+	}
+}
+
+public class RouteBetweenNodes_1 {
+	public static void main(String args[]) {
+		Graph g = new Graph(7);
+		g.addEdge(0, 1);
+		g.addEdge(0, 5);
+		g.addEdge(1, 2);
+		g.addEdge(2, 3);
+		g.addEdge(3, 1);
+		g.addEdge(4, 0);
+		g.addEdge(4, 6);
+		System.out.println(g.isThereARoute(g, 0, 3));
+		System.out.println(g.isThereARoute(g, 0, 6));
+	}
+}
