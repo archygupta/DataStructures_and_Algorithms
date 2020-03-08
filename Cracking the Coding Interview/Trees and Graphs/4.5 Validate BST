@@ -1,1 +1,42 @@
+package TreesAndGraphs;
 
+public class Validate_BST {
+	static class Node {
+		int data;
+		Node left, right;
+
+		public Node(int data) {
+			this.data = data;
+		}
+	}
+
+	static void printTree(Node root) {
+		if (root == null) {
+			return;
+		}
+		printTree(root.left);
+		System.out.print(root.data + " ");
+		printTree(root.right);
+	}
+
+	public static void main(String args[]) {
+		Node head = new Node(10);
+		head.left = new Node(6);
+		head.right = new Node(15);
+		head.left.left = new Node(4);
+		head.left.right = new Node(8);
+		head.right.left = new Node(13);
+		head.right.right = new Node(16);
+		printTree(head);
+		System.out.println(validateBST(head, Integer.MIN_VALUE, Integer.MAX_VALUE) ? "\nBinary Tree is BST"
+				: "\nBinary tree is not BST");
+	}
+
+	private static boolean validateBST(Node head, int minValue, int maxValue) {
+		if (head == null) {
+			return true;
+		}
+		return (head.data > minValue && head.data < maxValue) && validateBST(head.left, minValue, head.data)
+				&& validateBST(head.right, head.data, maxValue);
+	}
+}
