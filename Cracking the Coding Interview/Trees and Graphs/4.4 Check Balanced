@@ -1,1 +1,45 @@
 
+package TreesAndGraphs;
+
+public class CheckBalanced_4 {
+	static class Node {
+		int data;
+		Node left, right;
+
+		public Node(int data) {
+			this.data = data;
+		}
+	}
+
+	public static void main(String args[]) {
+		Node head = new Node(1);
+		head.left = new Node(2);
+		head.right = new Node(3);
+		head.left.left = new Node(4);
+		head.left.right = new Node(5);
+		head.right.left = new Node(4);
+		head.right.right = new Node(5);
+		head.left.left.left = new Node(4);
+		head.left.left.left.left = new Node(4);
+		System.out.println(checkBalanced(head) == Integer.MIN_VALUE ? "Not Balanced" : "Balanced");
+	}
+
+	private static int checkBalanced(Node head) {
+		if (head == null)
+			return -1;
+		int leftHeight = checkBalanced(head.left);
+		if (leftHeight == Integer.MIN_VALUE) {
+			return Integer.MIN_VALUE;
+		}
+		int rightHeight = checkBalanced(head.right);
+		if (rightHeight == Integer.MIN_VALUE) {
+			return Integer.MIN_VALUE;
+		}
+		int height = leftHeight - rightHeight;
+		if (Math.abs(height) > 1) {
+			return Integer.MIN_VALUE;
+		} else {
+			return Math.max(leftHeight, rightHeight) + 1;
+		}
+	}
+}
