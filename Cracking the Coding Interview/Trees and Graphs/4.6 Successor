@@ -1,1 +1,93 @@
 
+package TreesAndGraphs;
+
+public class Successor_6 {
+
+	static class Node {
+		int key;
+		Node left, right, parent;
+	}
+
+	static Node newNode(int item) {
+		Node temp = new Node();
+		temp.key = item;
+		temp.left = null;
+		temp.right = null;
+		temp.parent = null;
+		return temp;
+	}
+
+	static void inorder(Node root) {
+		if (root != null) {
+			inorder(root.left);
+			System.out.print("Node : " + root.key + " , ");
+			if (root.parent == null)
+				System.out.println("Parent : NULL");
+			else
+				System.out.println("Parent : " + root.parent.key);
+			inorder(root.right);
+		}
+	}
+
+	static Node insert(Node node, int key) {
+		if (node == null)
+			return newNode(key);
+		if (key < node.key) {
+			Node lchild = insert(node.left, key);
+			node.left = lchild;
+			lchild.parent = node;
+		} else if (key > node.key) {
+			Node rchild = insert(node.right, key);
+			node.right = rchild;
+			rchild.parent = node;
+		}
+		return node;
+	}
+
+public static void main(String[] args) 
+{ 
+	/* Let us create following BST 
+			50 
+		/	 \ 
+		30	 70 
+		/ \ / \ 
+	20 40 60 80 */
+	Node root = null; 
+	root = insert(root, 50); 
+	insert(root, 30); 
+	insert(root, 20); 
+	insert(root, 40); 
+	insert(root, 70); 
+	insert(root, 60); 
+	insert(root, 80); 
+	System.out.println(inorderSuccessor(root.left.left).key);
+	System.out.println(inorderSuccessor(root.right.right));
+	inorder(root); 
+}
+
+	private static Node inorderSuccessor(Node node) {
+		if (node == null)
+			return null;
+		if (node.right != null) {
+			return leftMostNode(node.right);
+		} else {
+			Node q = node;
+			Node x = q.parent;
+			while (x != null && x.left != q) {
+				q = x;
+				x = x.parent;
+			}
+			return x;
+		}
+	}
+
+	private static Node leftMostNode(Node node) {
+		if (node == null) {
+			return null;
+		}
+		while (node.left != null) {
+			node = node.left;
+		}
+		return node;
+	}
+}
