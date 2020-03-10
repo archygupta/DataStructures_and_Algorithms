@@ -1,1 +1,53 @@
+package TreesAndGraphs;
+
+public class FirstCommonAncestor_8 {
+
+	static class Node {
+		int key;
+		Node left, right;
+
+		public Node(int key) {
+			this.key = key;
+		}
+	}
+
+	static void inorder(Node root) {
+		if (root != null) {
+			inorder(root.left);
+			System.out.println("Node : " + root.key);
+			inorder(root.right);
+		}
+	}
+
+	private static Node commonAncestor(Node root, Node p, Node q) {
+		if (root == null)
+			return null;
+		Node x = commonAncestor(root.left, p, q);
+		if (x != null && x != p && x != q)
+			return x;
+		Node y = commonAncestor(root.right, p, q);
+		if (y != null && y != p && y != q)
+			return y;
+		if (x != null && y != null) {
+			return root;
+		}
+		if (root == p || root == q)
+			return root;
+		return x == null ? y : x;
+	}
+
+	public static void main(String[] args) {
+		Node root = new Node(5);
+		root.left = new Node(10);
+		root.right = new Node(15);
+		root.left.left = new Node(3);
+		root.left.right = new Node(12);
+		root.right.left = new Node(13);
+		root.right.right = new Node(167);
+		root.right.right.right = new Node(112);
+		System.out.println(commonAncestor(root, root.left.left, root.right.right.right).key);
+		System.out.println(commonAncestor(root, root.right.left, root.right.right.right).key);
+		inorder(root);
+	}
+}
 
