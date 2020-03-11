@@ -1,0 +1,63 @@
+package TreesAndGraphs;
+
+public class CheckSubTree_10 {
+
+	static class Node {
+		int data;
+		Node left, right;
+
+		public Node(int data) {
+			this.data = data;
+		}
+	}
+
+	private static boolean matchTree(Node head1, Node head2) {
+		if (head1 == null && head2 == null) {
+			return true;
+		}
+		if (head2 == null) {
+			return true;
+		}
+		if (head1 == null) {
+			return false;
+		}
+		return checkTree(head1, head2) || matchTree(head1.left, head2) || matchTree(head1.right, head2);
+	}
+
+	private static boolean checkTree(Node head1, Node head2) {
+		if (head1 == null && head2 == null) {
+			return true;
+		} else if (head1 == null || head2 == null) {
+			return false;
+		} else if (head1.data != head2.data) {
+			return false;
+		} else
+			return checkTree(head1.left, head2.left) && checkTree(head1.right, head2.right);
+	}
+
+	static void inorder(Node root) {
+		if (root != null) {
+			inorder(root.left);
+			System.out.println("Node : " + root.data);
+			inorder(root.right);
+		}
+	}
+
+	public static void main(String args[]) {
+		Node head1 = new Node(1);
+		head1.left = new Node(2);
+		head1.right = new Node(3);
+		head1.left.left = new Node(4);
+		head1.left.right = new Node(5);
+		head1.right.left = new Node(4);
+		head1.right.right = new Node(5);
+		head1.left.left.left = new Node(12);
+		head1.left.left.right = new Node(10);
+		inorder(head1);
+		Node head2 = new Node(4);
+		head2.left = new Node(12);
+		head2.right = new Node(10);
+		inorder(head2);
+		System.out.println(matchTree(head1, head2));
+	}
+}
