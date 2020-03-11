@@ -1,1 +1,66 @@
+package TreesAndGraphs;
 
+import java.util.HashMap;
+
+public class PathsWithSum_12 {
+
+	static class Node {
+		int data;
+		Node left, right;
+
+		public Node(int data) {
+			this.data = data;
+		}
+
+	}
+
+	static void inorder(Node root) {
+		if (root != null) {
+			inorder(root.left);
+			System.out.println("Node : " + root.data);
+			inorder(root.right);
+		}
+	}
+
+	public static int findPathsWithSum(Node root, int targetSum) {
+		return findPathsWithSum(root, targetSum, 0, new HashMap<Integer, Integer>());
+	}
+
+	private static int findPathsWithSum(Node root, int targetSum, int runningSum, HashMap<Integer, Integer> pathCount) {
+		if (root == null)
+			return 0;
+		runningSum += root.data;
+		int sum = runningSum - targetSum;
+		int totalPaths = pathCount.getOrDefault(sum, 0);
+		if (targetSum == runningSum)
+			totalPaths++;
+		IncrementHashTable(pathCount, runningSum, 1);
+		totalPaths += findPathsWithSum(root.left, targetSum, runningSum, pathCount);
+		totalPaths += findPathsWithSum(root.right, targetSum, runningSum, pathCount);
+		IncrementHashTable(pathCount, runningSum, -1);
+		return totalPaths;
+	}
+
+	private static void IncrementHashTable(HashMap<Integer, Integer> pathCount, int runningSum, int i) {
+		int newCount = pathCount.getOrDefault(runningSum, 0) + i;
+		if (newCount == 0)
+			pathCount.remove(runningSum);
+		else
+			pathCount.put(runningSum, newCount);
+
+	}
+
+	public static void main(String args[]) {
+		Node n = new Node(10);
+		n.left = new Node(5);
+		n.right = new Node(-3);
+		n.left.right = new Node(1);
+		n.left.right.right = new Node(2);
+		n.right.right = new Node(11);
+		n.left.left = new Node(3);
+		n.left.left.right = new Node(-2);
+		n.left.left.left = new Node(3);
+		inorder(n);
+		System.out.println(findPathsWithSum(n, 8));
+	}
+}
