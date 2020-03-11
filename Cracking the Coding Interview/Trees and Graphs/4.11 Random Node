@@ -1,0 +1,76 @@
+package TreesAndGraphs;
+
+import java.util.Random;
+
+public class RandomNode_11 {
+
+	static class Node {
+		int data;
+		Node left, right;
+		int size;
+
+		public Node(int data) {
+			this.data = data;
+			this.size = 1;
+		}
+
+		void insert(int data) {
+			if (data < this.data) {
+				if (this.left == null) {
+					this.left = new Node(data);
+				} else {
+					this.left.insert(data);
+				}
+			} else {
+				if (this.right == null) {
+					this.right = new Node(data);
+				} else
+					this.right.insert(data);
+			}
+			size++;
+		}
+
+		int getSize() {
+			return size;
+		}
+
+		public Node getRandom() {
+
+			Random r = new Random();
+			int random = r.nextInt(this.getSize());
+			return getIthNode(random);
+
+		}
+
+		private Node getIthNode(int random) {
+			int leftsize = this.left == null ? 0 : this.left.getSize();
+			if (random < leftsize) {
+				return this.left.getIthNode(random);
+			} else if (random == leftsize) {
+				return this;
+			} else {
+				return this.right.getIthNode(random - (leftsize + 1));
+			}
+		}
+	}
+
+	static void inorder(Node root) {
+		if (root != null) {
+			inorder(root.left);
+			System.out.println("Node : " + root.data);
+			inorder(root.right);
+		}
+	}
+
+	public static void main(String args[]) {
+		Node n = new Node(4);
+		n.insert(2);
+		n.insert(6);
+		n.insert(1);
+		n.insert(3);
+		n.insert(5);
+		n.insert(7);
+		inorder(n);
+		System.out.println(n.getRandom().data);
+	}
+}
