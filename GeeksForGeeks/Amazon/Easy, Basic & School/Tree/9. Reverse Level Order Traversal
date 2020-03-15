@@ -27,6 +27,8 @@
        
 Second Solution:
  
+class Tree
+{
  public static int height(Node node)
     {
         if(node==null){
@@ -65,3 +67,4 @@ Second Solution:
                 reversePrint(node, i);
             }
         }
+}
