@@ -1,0 +1,22 @@
+https://practice.geeksforgeeks.org/problems/print-common-nodes-in-bst/1
+
+public static void inorder(Node root, LinkedHashSet<Integer> hs)
+        {
+            if(root==null)
+                return;
+            inorder(root.left, hs);
+            hs.add(root.data);
+            inorder(root.right, hs);
+        }
+	public void printCommon(Node root1,Node root2)
+         {
+            LinkedHashSet<Integer> hs1 = new LinkedHashSet<Integer>();
+            inorder(root1, hs1);
+            LinkedHashSet<Integer> hs2 = new LinkedHashSet<Integer>();
+            inorder(root2, hs2);
+            hs1.retainAll(hs2);
+            for(int i: hs1)
+            {
+                System.out.print(i+" ");
+            }
+         }
