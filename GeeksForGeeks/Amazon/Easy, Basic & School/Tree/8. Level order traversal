@@ -1,0 +1,20 @@
+https://practice.geeksforgeeks.org/problems/level-order-traversal/1
+
+static void levelOrder(Node node) 
+    {
+        Queue<Node> q= new LinkedList<Node>();
+        q.add(node);
+        while(!q.isEmpty())
+        {
+            Node temp=q.poll();
+            System.out.print(temp.data+" ");
+            if(temp.left!=null)
+            {
+                q.add(temp.left);
+            }
+            if(temp.right!=null)
+            {
+                q.add(temp.right);
+            }
+        }
+    }
