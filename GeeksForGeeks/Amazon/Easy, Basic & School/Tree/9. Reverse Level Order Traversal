@@ -1,5 +1,32 @@
  https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1
  
+ First Solution:
+ 
+ class Tree
+{
+	public void reversePrint(Node node) 
+        {
+            Queue<Node> q= new LinkedList<Node>();
+            Stack<Integer> st=new Stack<Integer>();
+            q.add(node);
+            while(!q.isEmpty()){
+                Node temp=q.poll();
+                st.push(temp.data);
+                if(temp.right!=null){
+                    q.add(temp.right);
+                }
+                if(temp.left!=null){
+                    q.add(temp.left);
+                }
+            }
+            while(!st.isEmpty()){
+                System.out.print(st.pop()+" ");
+            }
+        }
+}      
+       
+Second Solution:
+ 
  public static int height(Node node)
     {
         if(node==null){
