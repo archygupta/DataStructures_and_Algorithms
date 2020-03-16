@@ -1,0 +1,11 @@
+https://practice.geeksforgeeks.org/problems/minimum-depth-of-a-binary-tree/1
+
+int minDepth(Node root)
+    {
+        // Your code here
+        if(root == null)
+            return 0;
+        int l = minDepth(root.left);
+        int r = minDepth(root.right);
+        return (Math.min(l,r)+1);
+    }
