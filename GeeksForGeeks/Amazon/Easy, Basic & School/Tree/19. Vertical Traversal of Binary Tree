@@ -1,1 +1,32 @@
 https://practice.geeksforgeeks.org/problems/print-a-binary-tree-in-vertical-order/1
+
+    static void getVertDist(Node root, TreeMap<Integer, ArrayList<Integer>> map, int hd){
+        if(root==null)
+            return;
+        ArrayList<Integer> list;
+        if(map.get(hd)==null)
+        {
+           list = new ArrayList<Integer>();
+        }
+        else{
+        list = map.get(hd);
+        }
+        list.add(root.data);
+        map.put(hd, list);
+        getVertDist(root.left, map, hd-1);
+        getVertDist(root.right, map, hd+1);
+        
+    }
+    static void verticalOrder(Node root)
+    {
+       TreeMap<Integer, ArrayList<Integer>> map = new TreeMap<Integer, ArrayList<Integer>>();
+       getVertDist(root,map,0);
+       for(Map.Entry<Integer, ArrayList<Integer>> e: map.entrySet())
+       {
+          ArrayList<Integer> list = e.getValue();
+          for(int i: list)
+          {
+              System.out.print(i+" ");
+          }
+       }
+    }
