@@ -1,1 +1,55 @@
 
+https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1
+
+Unoptimized Solution:
+
+static int height(Node root)
+    {
+        if(root==null)
+            return 0;
+        int lH=height(root.left);
+        int rH=height(root.right);
+        if(lH>rH)
+            return lH+1;
+        else
+            return rH+1;
+    }
+    boolean isBalanced(Node root)
+    {
+	    if(root==null)
+	        return true;
+	    int lH= height(root.left);
+	    int rH=height(root.right);
+	    return (Math.abs(lH-rH)<=1) && isBalanced(root.left) && isBalanced(root.right);
+    }
+    
+ Optimized Solution:
+ 
+ class Height{
+        int height=0;
+    }
+    boolean isBalanced(Node root)
+    {
+        Height h= new Height();
+        return isBalanced(root, h);
+    }
+    boolean isBalanced(Node root, Height h)
+    {
+        if(root==null)
+        {
+            h.height=0;
+            return true;
+        }
+        Height lH= new Height();
+        Height rH= new Height();
+        boolean left = isBalanced(root.left, lH);
+        boolean right = isBalanced(root.right, rH);
+        int l= lH.height;
+        int r= rH.height;
+        h.height= (l > r ? l:r)+1;
+        if(Math.abs(l-r)>=2)
+            return false;
+        else
+            return left&right;
+        
+    }
