@@ -1,0 +1,23 @@
+https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+public static Node reverse(Node node, int k)
+    {
+        Node prev=null;
+        Node curr=node;
+        Node next=null;
+        int count=k;
+        while(count>0 && curr!=null)
+        {
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+            count--;
+        }
+        if(next!=null)
+        {
+          node.next=  reverse(next, k);
+            
+        }
+        return prev;
+    }
