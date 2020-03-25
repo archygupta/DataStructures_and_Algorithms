@@ -1,1 +1,41 @@
+https://practice.geeksforgeeks.org/problems/maximum-path-sum/1
 
+Doesn't pass all test cases:
+
+1.
+public static int maxPathSum(Node root) {
+        if(root==null)
+            return 0;
+        int option1= maxSum(root.left)+maxSum(root.right)+root.data;
+        int option2= maxSum(root.left);
+        int option3= maxSum(root.right);
+        return Math.max(Math.max(option1,option2), option3);
+    }
+    
+    public static int maxSum(Node root){
+        if(root==null)
+            return 0;
+        return Math.max(maxPathSum(root.left), maxPathSum(root.right))+root.data;
+    }
+
+2.
+static int maxPathSum(Node root, Res res) {
+        if(root==null)
+            return 0;
+        int l = maxPathSum(root.left, res);
+        int r = maxPathSum(root.right, res);
+        int max_single = Math.max(Math.max(l,r)+root.data , root.data);
+        
+        int max_top = Math.max( l+r+root.data, max_single);
+        
+        res.val= Math.max(res.val, max_top);
+        
+        return max_single;
+    }
+        
+    public static int maxPathSum(Node root) {
+        Res res = new Res();
+        res.val=Integer.MIN_VALUE;
+        maxPathSum(root, res);
+        return res.val;
+    }
