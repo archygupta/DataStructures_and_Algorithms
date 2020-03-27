@@ -1,0 +1,13 @@
+https://practice.geeksforgeeks.org/problems/pairwise-swap-elements-of-a-linked-list-by-swapping-data/1
+
+Node* pairWiseSwap(struct Node* node) {
+    Node* temp=node;
+        while(temp!=NULL && temp->next!=NULL)
+        {
+            int swap=temp->data;
+            temp->data=temp->next->data;
+            temp->next->data=swap;
+            temp=temp->next->next;
+        }
+        return node;
+    }
