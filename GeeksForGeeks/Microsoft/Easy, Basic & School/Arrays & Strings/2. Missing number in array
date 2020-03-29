@@ -1,0 +1,24 @@
+https://practice.geeksforgeeks.org/problems/missing-number-in-array/0
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 Scanner sc=new Scanner(System.in);
+	 int t=sc.nextInt();
+	 for(int i=0;i<t;i++)
+	 {
+	     int n=sc.nextInt();
+	     int xor1=0, xor2=n;
+	     for(int j=1;j<n;j++)
+	     {
+	         xor1 ^= sc.nextInt();
+	         xor2 ^= j;
+	     }
+	     System.out.println(xor1^xor2);
+	 }
+	 }
+}
