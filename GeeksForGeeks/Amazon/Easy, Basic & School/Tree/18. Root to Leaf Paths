@@ -1,1 +1,29 @@
+https://practice.geeksforgeeks.org/problems/root-to-leaf-paths/1
 
+public void printPath(int[] path, int len)
+    {
+        for(int i=0; i<len ; i++)
+        {
+            System.out.print(path[i]+" ");
+        }
+        System.out.print("#");
+    }
+    public void printPaths(Node root, int[] path, int len){
+        if(root==null)
+            return;
+        path[len++]=root.data;
+        if(root.left==null && root.right==null)
+        {
+            printPath(path, len);
+        }
+        else
+        {
+            printPaths(root.left, path, len);
+            printPaths(root.right, path, len);
+        }
+        
+    }
+    public void printPaths(Node root){
+        int path[]=new int[1000];
+        printPaths(root, path, 0);
+    }
