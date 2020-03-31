@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
 
+Another approach: tushar roy: https://www.youtube.com/watch?v=nYFd7VHKyWQ
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
