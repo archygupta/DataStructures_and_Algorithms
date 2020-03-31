@@ -1,0 +1,43 @@
+https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+     static String swap(String a, int i, int j) 
+    { 
+        char temp; 
+        char[] charArray = a.toCharArray(); 
+        temp = charArray[i] ; 
+        charArray[i] = charArray[j]; 
+        charArray[j] = temp; 
+        return String.valueOf(charArray); 
+    } 
+    static void printPermutations(String s, int l, int r)
+    {
+        if(l==r)
+        {
+            System.out.print(s+" ");
+        }
+        else{
+            for(int i=l;i<r;i++){
+                s=swap(s, l, i);
+                printPermutations(s,l+1,r);
+                s=swap(s, l, i);
+            }
+            
+        }
+    }
+	public static void main (String[] args)
+	 {
+	    Scanner sc=new Scanner(System.in);
+	    int t=sc.nextInt();
+	    for(int i=0;i<t;i++)
+	    {
+	        String s=sc.next();
+	        printPermutations(s, 0, s.length());
+	        System.out.println();
+	    }
+	 }
+}
