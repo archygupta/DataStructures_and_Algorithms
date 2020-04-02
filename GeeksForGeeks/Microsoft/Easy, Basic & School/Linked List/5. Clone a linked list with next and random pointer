@@ -1,0 +1,24 @@
+https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1
+
+Node copyList(Node head) {
+        
+        Node origList=head;
+        Node cloneList;
+        
+        HashMap<Node, Node> hm= new HashMap<Node, Node>();
+        while(origList!=null)
+        {
+          cloneList = new Node(origList.data);
+          hm.put(origList, cloneList);
+          origList=origList.next;
+        }
+        origList=head;
+        while(origList!=null)
+        {
+            cloneList=hm.get(origList);
+            cloneList.next=hm.get(origList.next);
+            cloneList.arb = hm.get(origList.arb); 
+            origList = origList.next; 
+        }
+        return hm.get(head); 
+    }
