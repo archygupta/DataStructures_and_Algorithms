@@ -1,0 +1,101 @@
+https://www.geeksforgeeks.org/clockwise-spiral-traversal-of-binary-tree-set-2/?ref=rp
+
+import java.io.*;
+
+class GfG 
+{ 
+
+static class Node 
+{ 
+	Node left; 
+	Node right; 
+	int data; 
+
+	Node(int data) 
+	{ 
+		this.data = data; 
+		this.left = null; 
+		this.right = null; 
+	} 
+} 
+
+static int height(Node root) 
+{ 
+	if (root == null) 
+		return 0; 
+
+	int lheight = height(root.left); 
+	int rheight = height(root.right); 
+
+	return Math.max(1 + lheight, 1 + rheight); 
+} 
+
+
+
+static void leftToRight(Node root, int level)
+{
+    if(root==null)
+    {
+        return;
+    }
+    if(level==1)
+    {
+        System.out.print(root.data+" ");
+    }
+    else{
+        leftToRight(root.left, level-1);
+        leftToRight(root.right, level-1);
+    }
+}
+
+static void rightToLeft(Node root, int level)
+{
+     if(root==null)
+    {
+        return;
+    }
+    if(level==1)
+    {
+        System.out.print(root.data+" ");
+    }
+    else{
+        rightToLeft(root.right, level-1);
+        rightToLeft(root.left, level-1);
+    }
+}
+
+static void ClockWiseSpiral(Node root) 
+{ 
+    int flag=0;
+    int i=1;
+    int j=height(root);
+    while(i<=j)
+    {
+        if(flag==0){
+            leftToRight(root,i);
+            flag=1;
+            i++;
+        }
+        else{
+            rightToLeft(root,j);
+            flag=0;
+            j--;
+        }
+    }
+} 
+
+public static void main(String[] args) 
+{ 
+	Node root = new Node(10); 
+	root.left = new Node(12); 
+	root.right = new Node(13); 
+	root.right.left = new Node(14); 
+	root.right.right = new Node(15); 
+	root.right.left.left = new Node(21); 
+	root.right.left.right = new Node(22); 
+	root.right.right.left = new Node(23); 
+	root.right.right.right = new Node(24); 
+
+	ClockWiseSpiral(root); 
+} 
+} 
