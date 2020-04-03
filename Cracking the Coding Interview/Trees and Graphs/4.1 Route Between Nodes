@@ -2,6 +2,57 @@ https://wxx5433.gitbooks.io/interview-preparation/content/part_ii_leetcode_lintc
 
 https://www.geeksforgeeks.org/find-if-there-is-a-path-between-two-vertices-in-a-given-graph/
 
+//DFS
+
+public boolean hasRoute(ArrayList<DirectedGraphNode> graph, 
+      DirectedGraphNode s, DirectedGraphNode t) {
+    return dfs(s, t, new HashSet<DirectedGraphNode>());
+  }
+
+  private boolean dfs(DirectedGraphNode s, DirectedGraphNode t, 
+      Set<DirectedGraphNode> visited) {
+    if (s == t) {
+      return true;
+    }
+    visited.add(s);
+    for (DirectedGraphNode neighbor : s.neighbors) {
+      if (!visited.contains(neighbor)) {
+        if (dfs(neighbor, t, visited)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+//BFS
+
+public boolean hasRoute(ArrayList<DirectedGraphNode> graph, 
+      DirectedGraphNode s, DirectedGraphNode t) {
+    if (s == t) {
+      return true;
+    }
+    Queue<DirectedGraphNode> queue = new LinkedList<>();
+    Set<DirectedGraphNode> visited = new HashSet<DirectedGraphNode>();
+    queue.offer(s);
+    visited.add(s);
+    while (!queue.isEmpty()) {
+      DirectedGraphNode cur = queue.poll();
+      for (DirectedGraphNode neighbor : cur.neighbors) {
+        if (neighbor == t) {
+          return true;
+        }
+        if (!visited.contains(neighbor)) {
+          queue.offer(neighbor);
+          visited.add(neighbor);
+        }
+      }
+    }
+    return false;
+  }
+
+//Cracking the coding interview
+
 package TreesAndGraphs;
 
 import java.util.LinkedList;
