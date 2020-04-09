@@ -61,3 +61,40 @@ class Solution {
     return S.equals(T);      
     }
 }
+
+
+/*
+Follow up:
+Can you solve it in O(N) time and O(1) space?
+*/
+
+class Solution {
+  
+    static String removeBackSpaces(String str, int n)
+    {       
+      StringBuilder s= new StringBuilder(str);
+      for(int i=0;i<n;i++)
+      {
+        if(s.charAt(i)=='#')
+        {
+          if(i==0)
+          {
+            s=s.delete(0,1);
+            i--;
+          }
+          else
+          {
+            s=s.delete(i-1,i+1); 
+             i=i-2;
+          } 
+        } 
+        n=s.length();
+      }
+      return s.toString();
+    }
+    public boolean backspaceCompare(String S, String T) {
+    S= removeBackSpaces(S, S.length());
+    T= removeBackSpaces(T, T.length());
+    return S.equals(T);      
+    }
+}
