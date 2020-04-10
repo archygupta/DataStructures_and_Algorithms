@@ -1,1 +1,28 @@
 
+//recursive solution:
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    static int eggDroppingProblem(int n, int k) {
+        if (k == 0 || k == 1 || n == 1) {
+            return k;
+        }
+        int res = Integer.MAX_VALUE, min = 0;
+        for (int x = 1; x <= k; x++) {
+            min = Math.max(eggDroppingProblem(n - 1, x - 1), eggDroppingProblem(n, k - x));
+            if (res > min) {
+                res = min;
+            }
+        }
+        return 1 + res;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            System.out.println(eggDroppingProblem(sc.nextInt(), sc.nextInt()));
+        }
+    }
+}
