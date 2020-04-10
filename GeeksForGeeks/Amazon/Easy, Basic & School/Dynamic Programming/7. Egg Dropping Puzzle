@@ -1,3 +1,4 @@
+https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle/0
 
 //recursive solution:
 
@@ -17,6 +18,44 @@ class GFG {
             }
         }
         return 1 + res;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            System.out.println(eggDroppingProblem(sc.nextInt(), sc.nextInt()));
+        }
+    }
+}
+
+//DP Solution:
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    static int eggDroppingProblem(int n, int k) {
+        int[][] dp = new int[n + 1][k + 1];
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 0;
+            dp[i][1] = 1;
+        }
+        for (int i = 1; i <= k; i++) {
+            dp[1][i] = i;
+        }
+        int min;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 2; j <= k; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int x = 1; x <= j; x++) {
+                    min = 1 + Math.max(dp[i - 1][x - 1], dp[i][j - x]);
+                    if (min < dp[i][j]) {
+                        dp[i][j] = min;
+                    }
+                }
+            }
+        }
+        return dp[n][k];
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
