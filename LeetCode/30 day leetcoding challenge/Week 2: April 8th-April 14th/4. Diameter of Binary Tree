@@ -23,7 +23,7 @@ Note: The length of path between two nodes is represented by the number of edges
  * }
  */
  
- //Non-Optimal
+ //Non-Optimal Solution
  
 class Solution {
 
@@ -44,5 +44,44 @@ class Solution {
         int rheight = height(root.right);
         return Math.max(Math.max(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)), lheight + rheight);
 
+    }
+}
+
+//Optimal Solution
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Height {
+    int h;
+}
+class Solution {
+
+    public int diameterOfBinaryTree(TreeNode root, Height height) {
+
+        if (root == null) {
+            height.h = 0;
+            return 0;
+        }
+
+        Height lh = new Height();
+        Height rh = new Height();
+
+        int ldiameter = diameterOfBinaryTree(root.left, lh);
+        int rdiameter = diameterOfBinaryTree(root.right, rh);
+
+        height.h = lh.h > rh.h ? lh.h + 1 : rh.h + 1;
+
+        return Math.max(rh.h + lh.h, Math.max(ldiameter, rdiameter));
+    }
+    
+    public int diameterOfBinaryTree(TreeNode root) {
+        return diameterOfBinaryTree(root, new Height());
     }
 }
