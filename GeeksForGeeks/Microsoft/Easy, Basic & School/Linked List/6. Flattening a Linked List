@@ -1,1 +1,27 @@
 https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
+
+class GfG {
+    Node merge(Node a, Node b) {
+        Node result = null;
+        if (a == null) {
+            return b;
+        }
+        if (b == null) {
+            return a;
+        }
+        if (a.data < b.data) {
+            result = a;
+            result.bottom = merge(a.bottom, b);
+        } else {
+            result = b;
+            result.bottom = merge(a, b.bottom);
+        }
+        result.next = null;
+        return result;
+    }
+    Node flatten(Node root) {
+        if (root == null)
+            return root;
+        return merge(root, flatten(root.next));
+    }
+}
