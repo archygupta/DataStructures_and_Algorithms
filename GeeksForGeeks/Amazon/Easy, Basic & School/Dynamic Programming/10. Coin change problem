@@ -1,6 +1,6 @@
 https://practice.geeksforgeeks.org/problems/coin-change/0
 
-/*package whatever //do not write package name here */
+//Optimal solution
 
 import java.util.*;
 import java.lang.*;
@@ -16,6 +16,40 @@ class GFG {
             }
         }
         return dp[k];
+    }
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        int n = kb.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            int size = kb.nextInt();
+            int arr[] = new int[size];
+            for (int j = 0; j < size; j++) {
+                arr[j] = kb.nextInt();
+            }
+            int k = kb.nextInt();
+            System.out.println(findMaxInK(arr, size, k));
+        }
+    }
+}
+
+//Recursive solution
+
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    static int findMaxInK(int[] arr, int size, int k) {
+        if (k == 0)
+            return 1;
+        if (k < 0)
+            return 0;
+        if (size == 0 && k >= 1)
+            return 0;
+        return findMaxInK(arr, size - 1, k) + findMaxInK(arr, size, k - arr[size - 1]);
     }
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
