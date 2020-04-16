@@ -1,1 +1,34 @@
+https://practice.geeksforgeeks.org/problems/sorted-insert-for-circular-linked-list/1
 
+class GfG {
+    public static void insert(Node head, int value, int n) {
+        if (head == null) {
+            return;
+        }
+        Node temp;
+        if (head.data > value) {
+            temp = head;
+            while (temp.next != head) {
+                temp = temp.next;
+            }
+            temp.next = new Node(value);
+            temp.next.next = head;
+            head = temp.next;
+        } else {
+            temp = head;
+            while (temp.next.data <= value) {
+                temp = temp.next;
+            }
+            Node temp2 = temp.next;
+            temp.next = new Node(value);
+            temp.next.next = temp2;
+        }
+        temp = head;
+        System.out.print(temp.data + " ");
+        temp = temp.next;
+        while (temp != head) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
