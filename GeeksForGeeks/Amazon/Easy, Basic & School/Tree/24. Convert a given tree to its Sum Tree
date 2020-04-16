@@ -1,0 +1,14 @@
+https://practice.geeksforgeeks.org/problems/transform-to-sum-tree/1
+
+class Tree {
+    int toSumTreeNew(Node root) {
+        if (root == null)
+            return 0;
+        int old = root.data;
+        root.data = toSumTreeNew(root.left) + toSumTreeNew(root.right);
+        return old + root.data;
+    }
+    public void toSumTree(Node root) {
+        int ans = toSumTreeNew(root);
+    }
+}
