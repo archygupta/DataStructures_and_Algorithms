@@ -34,3 +34,19 @@ class Solution {
         return new ArrayList < > (res);
     }
 }
+
+//Recursive 2
+
+class Solution {
+    public List < String > generateParenthesis(int n) {
+        if (n == 1)
+            return new ArrayList < String > (Arrays.asList("()"));
+        HashSet < String > hs = new HashSet < String > ();
+        for (String s: generateParenthesis(n - 1)) {
+            for (int i = 0; i < s.length(); i++) {
+                hs.add(s.substring(0, i + 1) + "()" + s.substring(i + 1));
+            }
+        }
+        return new ArrayList < String > (hs);
+    }
+}
