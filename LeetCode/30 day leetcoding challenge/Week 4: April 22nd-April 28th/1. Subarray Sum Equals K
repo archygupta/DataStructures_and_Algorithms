@@ -16,3 +16,18 @@ What about storing sum frequencies in a hash table? Will it be useful?
    Hide Hint #4  
 sum(i,j)=sum(0,j)-sum(0,i), where sum(i,j) represents the sum of all the elements from index i to j-1. Can we use this property to optimize it.
 */
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int sum = 0, count = 0;
+        HashMap < Integer, Integer > hm = new HashMap < Integer, Integer > ();
+        hm.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            int n = hm.getOrDefault(sum - k, 0);
+            count += n;
+            hm.put(sum, hm.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+}
