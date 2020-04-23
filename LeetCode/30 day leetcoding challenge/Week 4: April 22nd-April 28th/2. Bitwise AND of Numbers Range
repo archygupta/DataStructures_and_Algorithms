@@ -11,3 +11,13 @@ Input: [0,1]
 Output: 0
 */
 
+
+class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+     while(n>m)
+     {
+      n=n&n-1;
+     }
+      return n&m;
+    }
+}
