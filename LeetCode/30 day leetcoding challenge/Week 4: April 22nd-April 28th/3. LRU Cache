@@ -1,0 +1,40 @@
+class LRUCache {
+    HashMap < Integer, Integer > hm;
+    LinkedList < Integer > q;
+    int max;
+
+    public LRUCache(int capacity) {
+        max = capacity;
+        q = new LinkedList < Integer > ();
+        hm = new HashMap < Integer, Integer > ();
+    }
+
+    public int get(int key) {
+        if (!hm.containsKey(key))
+            return -1;
+        q.remove((Integer) key);
+        q.addFirst(key);
+        return hm.get(key);
+    }
+
+    public void put(int key, int value) {
+        hm.put(key, value);
+        if (q.contains(key)) {
+            q.remove((Integer) key);
+            q.addFirst(key);
+        } else {
+            if (q.size() >= max) {
+                hm.remove(q.pollLast());
+            }
+            q.addFirst(key);
+        }
+    }
+}
+
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
