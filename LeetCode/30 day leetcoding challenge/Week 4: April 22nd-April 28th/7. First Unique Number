@@ -7,7 +7,6 @@ FirstUnique(int[] nums) Initializes the object with the numbers in the queue.
 int showFirstUnique() returns the value of the first unique integer of the queue, and returns -1 if there is no such integer.
 void add(int value) insert value to the queue.
  
-
 Example 1:
 
 Input: 
@@ -58,19 +57,20 @@ firstUnique.showFirstUnique(); // return 809
 firstUnique.add(809);          // the queue is now [809,809]
 firstUnique.showFirstUnique(); // return -1
 
- 
-
 Constraints:
 
 1 <= nums.length <= 10^5
 1 <= nums[i] <= 10^8
 1 <= value <= 10^8
 At most 50000 calls will be made to showFirstUnique and add.
-   Hide Hint #1  
+   
+Hide Hint #1  
 Use doubly Linked list with hashmap of pointers to linked list nodes. add unique number to the linked list. When add is called check if the added number is unique then it have to be added to the linked list and if it is repeated remove it from the linked list if exists. When showFirstUnique is called retrieve the head of the linked list.
-   Hide Hint #2  
+
+Hide Hint #2  
 Use queue and check that first element of the queue is always unique.
-   Hide Hint #3  
+
+Hide Hint #3  
 Use set or heap to make running time of each function O(logn).
 */
 
