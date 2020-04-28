@@ -1,0 +1,19 @@
+https://leetcode.com/problems/remove-duplicates-from-sorted-array/solution/
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+      if(nums.length==0 || nums.length==1)
+        return nums.length;
+      TreeSet<Integer> ts = new TreeSet<Integer>();
+      for(int i: nums)
+      {
+        ts.add(i);
+      }
+      int j=0;
+      for(int i : ts)
+      {
+        nums[j++] = i;
+      }
+      return ts.size();
+    }
+}
