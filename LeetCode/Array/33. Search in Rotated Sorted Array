@@ -21,6 +21,27 @@ Your function should return length = 5, with the first five elements of nums bei
 It doesn't matter what values are set beyond the returned length.
 */
 
+//Optimized:
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+      if(nums.length==0 || nums.length==1)
+        return nums.length;
+      int i=0;
+      for(int j=1;j<nums.length;j++)
+      {
+        if(nums[i]!=nums[j])
+        {
+          i++;
+          nums[i]=nums[j];
+        }
+      }
+      return i+1;
+    }
+}
+
+//With extra space
+
 class Solution {
     public int removeDuplicates(int[] nums) {
       if(nums.length==0 || nums.length==1)
