@@ -1,1 +1,23 @@
 
+//Time limit exceeded
+
+public class Solution extends VersionControl {
+
+    public int findPos(int n, int start, int end) {
+        if (start > end)
+            return -1;
+        int mid = (start + end) / 2;
+        if (isBadVersion(mid) == true) {
+            if (mid - 1 < 0 || (isBadVersion(mid - 1) == false)) {
+                return mid;
+            } else {
+                return findPos(n, start, mid - 1);
+            }
+        } else
+            return findPos(n, mid + 1, end);
+    }
+    public int firstBadVersion(int n) {
+        return findPos(n, 1, n);
+
+    }
+}
