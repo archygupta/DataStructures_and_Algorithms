@@ -1,0 +1,22 @@
+https://leetcode.com/problems/binary-tree-maximum-path-sum/
+
+class Solution {
+   static int res=Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+      maxPathSumHelper(root);
+      return res;      
+    }
+  public int maxPathSumHelper(TreeNode root) 
+  {
+    if (root == null)
+        return 0;
+      int l = maxPathSumHelper(root.left);
+      int r = maxPathSumHelper(root.right) ;
+      int maxlr = Math.max(l, r);
+    
+      int maxsingle = Math.max(maxlr+root.val, root.val);
+      int maxAll = Math.max(maxsingle, root.val+l+r);
+      res = Math.max(res, maxAll);
+      return maxsingle;
+  }
+}
