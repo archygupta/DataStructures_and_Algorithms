@@ -2,6 +2,29 @@ https://practice.geeksforgeeks.org/problems/maximum-path-sum/1
 
 0.
 
+https://www.youtube.com/watch?v=peyO-Nu1jGc
+ 
+class Solution {
+    static int res = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        maxPathSumHelper(root);
+        return res;
+    }
+    public int maxPathSumHelper(TreeNode root) {
+        if (root == null)
+            return 0;
+        int l = maxPathSumHelper(root.left);
+        int r = maxPathSumHelper(root.right);
+        int maxlr = Math.max(l, r);
+        int maxsingle = Math.max(maxlr + root.val, root.val);
+        int maxAll = Math.max(maxsingle, root.val + l + r);
+        res = Math.max(res, maxAll);
+        return maxsingle;
+    }
+}
+
+1.
+
 class Solution {
     int res = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
@@ -21,7 +44,7 @@ class Solution {
 
 Doesn't pass all test cases:
 
-1.
+2.
 public static int maxPathSum(Node root) {
         if(root==null)
             return 0;
