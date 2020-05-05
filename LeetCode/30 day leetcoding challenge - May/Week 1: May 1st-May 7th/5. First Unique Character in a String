@@ -1,0 +1,31 @@
+class Solution {
+    public int firstUniqChar(String str) {
+        if (str.length() == 1)
+            return 0;
+        int i;
+        char[] ch = str.toCharArray();
+        Arrays.sort(ch);
+        String s = new String(ch);
+        ArrayList < Character > li = new ArrayList < Character > ();
+        for (i = 0; i < s.length(); i++) {
+            if (i == 0) {
+                if (s.charAt(i) != s.charAt(i + 1)) {
+                    li.add(s.charAt(i));
+                }
+            } else if (i == s.length() - 1) {
+                if (s.charAt(i) != s.charAt(i - 1)) {
+                    li.add(s.charAt(i));
+                }
+            } else if (s.charAt(i) != s.charAt(i - 1) && s.charAt(i) != s.charAt(i + 1)) {
+                li.add(s.charAt(i));
+            }
+        }
+        if (li.size() == 0)
+            return -1;
+        int index = str.indexOf(li.get(0));
+        for (int e: li) {
+            index = Math.min(index, str.indexOf(e));
+        }
+        return index;
+    }
+}
