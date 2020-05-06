@@ -38,3 +38,47 @@ class GFG {
         }
     }
 }
+
+
+//2. Recursion with Memoization
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+
+
+    static int knapsack(int[] wt, int val[], int[][] dp, int w, int n) {
+        if (w == 0 || n == 0) {
+            return 0;
+        }
+        if (dp[n][w] != -1)
+            return dp[n][w];
+        if (w >= wt[n - 1]) {
+            return dp[n][w] = Math.max(val[n - 1] + knapsack(wt, val, dp, w - wt[n - 1], n - 1), knapsack(wt, val, dp, w, n - 1));
+        } else {
+            return dp[n][w] = knapsack(wt, val, dp, w, n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for (int j = 0; j < t; j++) {
+            int n = sc.nextInt();
+            int w = sc.nextInt();
+            int val[] = new int[n];
+            int wt[] = new int[n];
+            for (int i = 0; i < n; i++) {
+                val[i] = sc.nextInt();
+            }
+            for (int i = 0; i < n; i++) {
+                wt[i] = sc.nextInt();
+            }
+            int dp[][] = new int[n + 1][w + 1];
+            for (int i = 0; i < dp.length; i++)
+                Arrays.fill(dp[i], -1);
+            System.out.println(knapsack(wt, val, dp, w, n));
+        }
+    }
+}
