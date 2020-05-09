@@ -1,13 +1,14 @@
-static boolean isSubsetSum(int set[],
- int n, int sum) {
- if (sum == 0) {
-  return true;
- }
- if (n == 0)
-  return false;
+https://www.youtube.com/watch?v=_gPcYovP7wc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=7
 
- if (sum >= set[n - 1]) {
-  return isSubsetSum(set, n - 1, sum - set[n - 1]) || isSubsetSum(set, n - 1, sum);
- } else
+static boolean isSubsetSum(int set[], int n, int sum) {
+	if (sum == 0) {
+		return true;
+	}
+	if (n == 0) 
+  return false;
+	if (sum >= set[n - 1]) {
+		return isSubsetSum(set, n - 1, sum - set[n - 1]) || isSubsetSum(set, n - 1, sum);
+	} 
+ else 
   return isSubsetSum(set, n - 1, sum);
 }
