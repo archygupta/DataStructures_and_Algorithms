@@ -1,4 +1,11 @@
-https://www.youtube.com/watch?v=_gPcYovP7wc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=7
+https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+
+Aditya verma: https://www.youtube.com/watch?v=_gPcYovP7wc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=7
+
+Tushar Roy: https://www.youtube.com/watch?v=s6FhG--P7z0
+
+
+//1. Recursion
 
 static boolean isSubsetSum(int set[], int n, int sum) {
 	if (sum == 0) {
