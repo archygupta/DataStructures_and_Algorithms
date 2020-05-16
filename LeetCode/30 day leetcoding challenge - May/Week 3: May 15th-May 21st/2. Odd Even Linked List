@@ -17,19 +17,49 @@ The relative order inside both the even and odd groups should remain as it was i
 The first node is considered odd, the second node even and so on ...
 */
 
+//Easier
+
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode p1 = head, p2 = head.next, connect = head.next;
+        while (p1 != null && p2 != null) {
+            ListNode t = p2.next;
+            if (t == null)
+                break;
+            p1.next = p2.next;
+            p1 = p1.next;
+
+            p2.next = p1.next;
+            p2 = p2.next;
+        }
+        p1.next = connect;
+        return head;
+    }
+}
+
 class Solution {
     public ListNode oddEvenList(ListNode head) {
         if (head == null)
             return head;
         ListNode slow = head, fast = head, first = head;
+        
+        //finding last to append even nodes
+        
         while (fast.next != null && fast.next.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }
         ListNode last;
         ListNode lastForEnd;
+        
+        //if list is even , adjusting last
         last = fast.next == null ? fast : fast.next;
         latForEnd = last;
+        
+        //appending even nodes to the end
         while (first != fast && first.next != fast) {
             last.next = first.next;
             first.next = first.next.next;
@@ -37,6 +67,7 @@ class Solution {
             last = last.next;
             last.next = null;
         }
+        //appending last node to end if the list was even
         if (fast != lastForEnd) {
             fast = fast.next;
             last.next = fast;
