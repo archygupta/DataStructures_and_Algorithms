@@ -1,1 +1,123 @@
 
+
+//fails for 10 test cases 
+class Solution{
+public int maxSubarraySumCircular(int[] A) {
+      int curr=A[0];
+      int max = A[0];
+     
+      HashSet<Integer> hs = new HashSet<Integer>();
+      
+      boolean flag= false;
+      int currIndex = 0;
+      hs.add(currIndex);
+        for(int i=1 ; i<A.length ; i++)
+      {
+        //after rotation
+        if(flag==true)
+        {
+          if(currIndex ==0)
+          {
+            break;
+          }
+          if(currIndex==i)
+            break;
+        }
+        
+        if(curr+A[i]<= A[i])
+        {
+          currIndex=i;
+          if(hs.contains(i))
+            break;
+          hs.add(currIndex);
+        }
+        
+        // main logic
+        curr = Math.max(curr+A[i], A[i]);
+        max = Math.max(curr, max);
+        
+        //setting i again
+        if(i==A.length-1)
+        { i=-1;
+         flag=true;
+        }
+      }
+       int m=0 ;
+     
+        m= A[A.length-1];
+        int now  = A[A.length-1];
+        for(int i=0;i<A.length-1;i++)
+        {
+          now = Math.max(now+A[i], A[i]);
+        m = Math.max(now, m);
+        }
+        
+      return Math.max(m,max);
+     }
+ }
+ 
+ //Correct
+ 
+ class Solution {
+    public int maxSubarraySumCircular(int[] A) {
+
+        int min = Integer.MIN_VALUE;
+        boolean positive = false;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] >= 0) {
+                positive = true;
+                break;
+            } else {
+                if (A[i] > min) {
+                    min = A[i];
+                }
+            }
+        }
+        if (!positive) {
+            return min;
+        }
+        for (int i = 0; i < A.length; i++) {
+            A[i] = -A[i];
+        }
+
+        // run Kadane's algorithm on modified array
+        int negMaxSum = Kadane(A);
+
+        // restore the array
+        for (int i = 0; i < A.length; i++) {
+            A[i] = -A[i];
+        }
+        int sum = 0;
+        for (int i: A) {
+            sum += i;
+        }
+        return Math.max(Kadane(A), sum + negMaxSum);
+    }
+
+    static int Kadane(int[] a) {
+        int sum = 0;
+        int maxSum = 0;
+        int firstIndex = -1;
+
+        for (int i = 0; i < a.length; i++) {
+            sum += a[i];
+            if (sum < 0) {
+                sum = 0;
+            } else {
+                maxSum = Math.max(sum, maxSum);
+                if (firstIndex == -1)
+                    firstIndex = i;
+            }
+        }
+        // starting again from 0 till firstIndex.
+        for (int i = 0; i < firstIndex; i++) {
+            sum += a[i];
+            if (sum < 0) {
+                sum = 0;
+            } else {
+                maxSum = Math.max(sum, maxSum);
+            }
+        }
+        return maxSum;
+    }
+}
