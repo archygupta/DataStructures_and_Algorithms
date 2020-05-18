@@ -1,0 +1,54 @@
+//Runtime Exception - Time limit exceeded for one input
+
+class Solution {
+    public List < Integer > findAnagrams(String s, String p) {
+        //result list
+        ArrayList < Integer > res = new ArrayList < Integer > ();
+        
+        //checking boundary case
+        if (p.length() > s.length())
+            return res;
+            
+        //storing unique characters in hashset
+        HashSet < Character > hs = new HashSet < Character > ();
+        char ch[] = p.toCharArray();
+        for (char c: ch) {
+            hs.add(c);
+        }
+        Arrays.sort(ch);
+        
+        //sorting p;
+        p = String.valueOf(ch);
+        int flag;
+        
+        for (int i = 0; i <= s.length() - p.length(); i++) {
+
+             //hs contains element then going forward
+            if (hs.contains(s.charAt(i))) {
+                flag = 0;
+                
+                //checking all next n elemets contains character of p or not
+                for (int j = i; j < i + p.length(); j++) {
+                    if (!hs.contains(s.charAt(j))) {
+                        i=j;
+                        flag = 1;
+                        break;
+                    }
+                }
+                
+                //if not, continue;
+                if (flag == 1)
+                    continue;
+                    
+                //sorting p length substring and checking
+                ch = (s.substring(i, i + p.length())).toCharArray();
+                Arrays.sort(ch);
+                if (p.equals(String.valueOf(ch))) {
+
+                    res.add(i);
+                }
+            }
+        }
+        return res;
+    }
+}
