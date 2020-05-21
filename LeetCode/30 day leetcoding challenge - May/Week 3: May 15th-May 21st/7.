@@ -1,0 +1,46 @@
+class Solution {
+
+    //Calculate result by adding all squares and adding counts of higher square numbers too, because if a block can make a square of 3, 
+    it will make a square of 1 and 2 also.
+    
+    static int findResult(int maxVal, HashMap < Integer, Integer > hm) {
+        if (maxVal == 0)
+            return maxVal;
+        int res = 0;
+        res += hm.get(maxVal);
+        maxVal--;
+        while (maxVal > 0) {
+            int val = hm.getOrDefault(maxVal, 0);
+            hm.put(maxVal, val + hm.get(maxVal + 1));
+            res += hm.get(maxVal);
+            maxVal--;
+        }
+        return res;
+    }
+    public int countSquares(int[][] matrix) {
+        HashMap < Integer, Integer > hm = new HashMap < Integer, Integer > ();
+        int maxVal = 0;
+        
+        //Modify matrix elements as per the squares they can make and store values in a hashmap
+        
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == 0 || j == 0) {
+                    if (matrix[i][j] == 1) {
+                        int val = hm.getOrDefault(1, 0);
+                        hm.put(1, val + 1);
+                    }
+                } else if (matrix[i][j] != 0) {
+                    int newVal = Math.min(matrix[i - 1][j], Math.min(matrix[i][j - 1], matrix[i - 1][j - 1])) + 1;
+                    matrix[i][j] = newVal;
+
+                    int val = hm.getOrDefault(newVal, 0);
+                    hm.put(newVal, val + 1);
+
+                }
+                maxVal = Math.max(maxVal, matrix[i][j]);
+            }
+        }
+        return findResult(maxVal, hm);
+    }
+}
