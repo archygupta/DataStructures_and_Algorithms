@@ -1,8 +1,35 @@
+https://leetcode.com/problems/degree-of-an-array/submissions/
+
+/*
+Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.
+
+Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
+
+Example 1:
+Input: [1, 2, 2, 3, 1]
+Output: 2
+Explanation: 
+The input array has a degree of 2 because both elements 1 and 2 appear twice.
+Of the subarrays that have the same degree:
+[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
+The shortest length is 2. So return 2.
+
+Example 2:
+Input: [1,2,2,3,1,4,2]
+Output: 6
+
+Note:
+nums.length will be between 1 and 50,000.
+nums[i] will be an integer between 0 and 49,999.
+*/
+
 class Solution {
 
+
+    //Getting a list of elements having highest number of frequencies.
+    
     public static ArrayList < Integer > getHigestFrequencyNumbers(int[] nums) {
         ArrayList < Integer > arr = new ArrayList < > ();
-
         HashMap < Integer, Integer > hm = new HashMap < Integer, Integer > ();
         int max = -1;
         int oldVal = 0;
@@ -24,24 +51,29 @@ class Solution {
     }
 
     public int findShortestSubArray(int[] nums) {
+    
+        //If array has a single element, return 1.
+        
         if (nums.length == 1)
             return 1;
-
+            
+        //List having ints having highest frequencies
+        
         ArrayList < Integer > li = getHigestFrequencyNumbers(nums);
         int res = Integer.MAX_VALUE;
+        
+        //Calculating element with minimum width subarray and returning the minimum width.
+        
         for (int ele: li) {
-
             int left = 0;
             for (; left < nums.length; left++) {
                 if (nums[left] == ele)
                     break;
-
             }
             int right = nums.length - 1;
             for (; right >= 0; right--) {
                 if (nums[right] == ele)
                     break;
-
             }
             res = Math.min(res, right - left + 1);
         }
