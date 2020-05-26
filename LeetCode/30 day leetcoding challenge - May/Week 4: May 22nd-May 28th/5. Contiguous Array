@@ -11,3 +11,25 @@ Output: 2
 Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
 Note: The length of the given binary array will not exceed 50,000.
 */
+
+class Solution {
+    public int findMaxLength(int[] nums) {
+        HashMap < Integer, Integer > hm = new HashMap < Integer, Integer > ();
+        int maxlength = 0;
+        hm.put(0, -1);
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                sum += -1;
+            } else {
+                sum += 1;
+            }
+            if (hm.containsKey(sum)) {
+                maxlength = Math.max(maxlength, i - hm.get(sum));
+            } else {
+                hm.put(sum, i);
+            }
+        }
+        return maxlength;
+    }
+}
