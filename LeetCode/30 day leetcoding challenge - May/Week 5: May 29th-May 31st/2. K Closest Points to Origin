@@ -2,6 +2,9 @@ class Solution {
     public int[][] kClosest(int[][] points, int K) {
         HashMap < Integer, ArrayList < int[] >> hm = new HashMap < Integer, ArrayList < int[] >> ();
         ArrayList < int[] > li;
+        
+        //Making hashMap for all distances available
+        
         for (int i = 0; i < points.length; i++) {
             int key = points[i][0] * points[i][0] + points[i][1] * points[i][1];
             li = hm.containsKey(key) ? hm.get(key) : new ArrayList < int[] > ();
@@ -9,11 +12,15 @@ class Solution {
             hm.put(key, li);
         }
         
+        //Adding distances in heap for finding k smallest efficiently
+        
         PriorityQueue < Integer > pq = new PriorityQueue < Integer > ();
         for (Map.Entry < Integer, ArrayList < int[] >> m: hm.entrySet()) {
             pq.add(m.getKey());
         }
 
+        //Adding k smallest in the result array to return
+        
         int result[][] = new int[K][2];
         int index = 0;
         while (K > 0) {
