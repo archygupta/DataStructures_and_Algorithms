@@ -37,3 +37,48 @@ class GFG {
         }
     }
 }
+
+//DP:
+
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+
+    public static int coinChangeRecursive(int[] arr, int size, int k) {
+        int dp[][] = new int[size + 1][k + 1];
+        for (int i = 0; i <= k; i++) {
+            dp[0][i] = 0;
+        }
+        for (int i = 0; i <= size; i++) {
+            dp[i][0] = 1;
+        }
+        for (int i = 1; i <= size; i++) {
+            for (int j = 1; j <= k; j++) {
+                if (j >= arr[i - 1]) {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - arr[i - 1]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        return dp[size][k];
+    }
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        int n = kb.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            int size = kb.nextInt();
+            int arr[] = new int[size];
+            for (int j = 0; j < size; j++) {
+                arr[j] = kb.nextInt();
+            }
+            int k = kb.nextInt();
+            System.out.println(coinChangeRecursive(arr, size, k));
+        }
+    }
+}
