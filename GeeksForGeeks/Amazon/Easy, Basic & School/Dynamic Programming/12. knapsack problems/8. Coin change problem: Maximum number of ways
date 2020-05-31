@@ -1,0 +1,39 @@
+https://www.geeksforgeeks.org/coin-change-dp-7/
+
+Aditya verma: https://www.youtube.com/watch?v=I4UR2T6Ro3w
+
+back to back SWE: https://www.youtube.com/watch?v=DJ4a7cmjZY0
+
+//Recursive:
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+
+    public static int coinChangeRecursive(int[] arr, int size, int k) {
+        if (k == 0)
+            return 1;
+        else if (k < 0)
+            return 0;
+        else if (size <= 0 && k >= 1)
+            return 0;
+        return coinChangeRecursive(arr, size - 1, k) +
+            coinChangeRecursive(arr, size, k - arr[size - 1]);
+    }
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        int n = kb.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            int size = kb.nextInt();
+            int arr[] = new int[size];
+            for (int j = 0; j < size; j++) {
+                arr[j] = kb.nextInt();
+            }
+            int k = kb.nextInt();
+            System.out.println(coinChangeRecursive(arr, size, k));
+        }
+    }
+}
