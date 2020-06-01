@@ -1,10 +1,29 @@
  https://practice.geeksforgeeks.org/problems/number-of-coins/0
  
- clear understanding: https://www.youtube.com/watch?v=jgiZlGzXMBw
+ Recursive: https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/
+ 
+ DP & clear understanding: https://www.youtube.com/watch?v=jgiZlGzXMBw
  
  Aditya Verma: https://www.youtube.com/watch?v=I-l6PBeERuc&t=7s 
+ 
+ //Recursive:
 
- //Dynamic programming
+static int findMinNumberOfCoins(int[] arr, int k, int n) {
+        if (k == 0)
+            return 0;
+        int res = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (k >= arr[i]) {
+                int subRes = findMinNumberOfCoins(arr, k - arr[i], n);
+
+                if (subRes != Integer.MAX_VALUE && subRes + 1 < res)
+                    res = subRes + 1;
+            }
+        }
+        return res;
+}
+
+ //Dynamic programming:
  
  static int findMinNumberOfCoins(int[] arr, int k, int n) {
      int[] dp = new int[k + 1];
