@@ -1,0 +1,22 @@
+ https://practice.geeksforgeeks.org/problems/number-of-coins/0
+ 
+ clear understanding: https://www.youtube.com/watch?v=jgiZlGzXMBw
+ 
+ Aditya Verma: https://www.youtube.com/watch?v=I-l6PBeERuc&t=7s 
+
+ //Dynamic programming
+ 
+ static int findMinNumberOfCoins(int[] arr, int k, int n) {
+     int[] dp = new int[k + 1];
+     Arrays.fill(dp, Integer.MAX_VALUE);
+     dp[0] = 0;
+     for (int i = 1; i <= k; i++) {
+         for (int j = 0; j < n; j++) {
+             if (i >= arr[j]) {
+                 if (dp[i - arr[j]] != Integer.MAX_VALUE)
+                     dp[i] = Math.min(dp[i - arr[j]] + 1, dp[i]);
+             }
+         }
+     }
+     return dp[k] == Integer.MAX_VALUE ? -1 : dp[k];
+ }
