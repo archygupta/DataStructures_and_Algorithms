@@ -14,3 +14,13 @@ Output: ["h","a","n","n","a","H"]
 Hide Hint #1  
 The entire logic for reversing a string is based on using the opposite directional two-pointer approach!
 */
+
+class Solution {
+    public void reverseString(char[] s) {
+        for (int i = 0, j = s.length - 1; i < j; i++, j--) {
+            char temp = s[i];
+            s[i] = s[j];
+            s[j] = temp;
+        }
+    }
+}
