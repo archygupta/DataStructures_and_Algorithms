@@ -1,3 +1,10 @@
+Problem link: https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/
+
+18. https://www.youtube.com/watch?v=4dMlCZTONj8&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=18
+19. https://www.youtube.com/watch?v=4Urd0a0BNng&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=19
+20. https://www.youtube.com/watch?v=g_hIx4yn9zg&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=20
+21. https://www.youtube.com/watch?v=hR3s9rGlMTU&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=21
+
 //Recursive
 
 import java.util.*;
@@ -59,3 +66,35 @@ class GFG {
 }
 
 //DP: Top down
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    static int longestCommonSubsequence(String A, String B, int a, int b) {
+        int dp[][] = new int[a + 1][b + 1];
+        for (int i = 0; i <= a; i++) {
+            for (int j = 0; j <= b; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                } else if (A.charAt(i - 1) == B.charAt(j - 1)) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[a][b];
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            String A = sc.next();
+            String B = sc.next();
+            System.out.println(longestCommonSubsequence(A, B, a, b));
+        }
+    }
+}
