@@ -1,0 +1,61 @@
+//Recursive
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    public static int longestCommonSubsequence(String A, String B, int a, int b) {
+        if (a == 0 || b == 0)
+            return 0;
+        else if (A.charAt(a - 1) == B.charAt(b - 1))
+            return 1 + longestCommonSubsequence(A, B, a - 1, b - 1);
+        return Math.max(longestCommonSubsequence(A, B, a - 1, b),
+            longestCommonSubsequence(A, B, a, b - 1));
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            String A = sc.next();
+            String B = sc.next();
+            System.out.println(longestCommonSubsequence(A, B, a, b));
+        }
+    }
+}
+
+//DP: Memoization - Bottom up
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    static int longestCommonSubsequence(String A, String B, int a, int b, int dp[][]) {
+        if (a == 0 || b == 0)
+            dp[a][b] = 0;
+        if (dp[a][b] != -1)
+            return dp[a][b];
+        else if (A.charAt(a - 1) == B.charAt(b - 1))
+            return dp[a][b] = 1 + longestCommonSubsequence(A, B, a - 1, b - 1, dp);
+        return dp[a][b] = Math.max(longestCommonSubsequence(A, B, a - 1, b, dp),
+            longestCommonSubsequence(A, B, a, b - 1, dp));
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            String A = sc.next();
+            String B = sc.next();
+            int dp[][] = new int[a + 1][b + 1];
+            for (int[] j: dp) {
+                Arrays.fill(j, -1);
+            }
+            System.out.println(longestCommonSubsequence(A, B, a, b, dp));
+        }
+    }
+}
+
+//DP: Top down
