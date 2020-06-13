@@ -1,0 +1,66 @@
+https://www.geeksforgeeks.org/longest-common-substring-dp-29/
+
+https://www.youtube.com/watch?v=HrybPYpOvz0&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=22
+
+//Recursive
+
+import java.lang.*;
+import java.io.*;
+class GFG {
+    public static int longestCommonSubstring(int l1, int l2, String s1, String s2, int count) {
+        if (l1 == 0 || l2 == 0)
+            return count;
+        if (s1.charAt(l1 - 1) == s2.charAt(l2 - 1)) {
+            count = longestCommonSubstring(l1 - 1, l2 - 1, s1, s2, count + 1);
+        }
+        count = Math.max(count, Math.max(longestCommonSubstring(l1, l2 - 1, s1, s2, 0), longestCommonSubstring(l1 - 1, l2, s1, s2, 0)));
+        return count;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int l1 = sc.nextInt();
+            int l2 = sc.nextInt();
+            String s1 = sc.next();
+            String s2 = sc.next();
+            System.out.println(longestCommonSubstring(l1, l2, s1, s2, 0));
+        }
+    }
+}
+
+//Dp
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    public static int longestCommonSubstring(int l1, int l2, String s1, String s2) {
+        int result = 0;
+        int dp[][] = new int[l1 + 1][l2 + 1];
+        for (int i = 0; i <= l1; i++) {
+            for (int j = 0; j <= l2; j++) {
+                if (i == 0 || j == 0)
+                    dp[i][j] = 0;
+                else if (s1.charAt(i - 1) == s2.charAt(j - 1))
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else {
+                    dp[i][j] = 0;
+                }
+                result = Math.max(result, dp[i][j]);
+            }
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            int l1 = sc.nextInt();
+            int l2 = sc.nextInt();
+            String s1 = sc.next();
+            String s2 = sc.next();
+            System.out.println(longestCommonSubstring(l1, l2, s1, s2));
+        }
+    }
+}
