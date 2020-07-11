@@ -18,3 +18,22 @@ Output:
   []
 ]
 */
+
+class Solution {
+    public List < List < Integer >> subsets(int[] nums) {
+        List < List < Integer >> result = new ArrayList();
+        int n = nums.length;
+        for (int i = (int) Math.pow(2, n); i < Math.pow(2, n + 1); i++) {
+            String Bits = Integer.toBinaryString(i).substring(1);
+            List < Integer > li = new ArrayList < Integer > ();
+
+            for (int j = 0; j < Bits.length(); j++) {
+                if (Bits.charAt(j) == '1') {
+                    li.add(nums[j]);
+                }
+            }
+            result.add(li);
+        }
+        return result;
+    }
+}
