@@ -20,3 +20,23 @@ In Java, the compiler represents the signed integers using 2's complement notati
 Follow up:
 If this function is called many times, how would you optimize it?
 */
+
+public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        List < Integer > li = new ArrayList();
+        int res = 0;
+        int times = 32;
+        while (times > 0) {
+            int t = n & 1;
+            li.add(t);
+            n = n >> 1;
+            times--;
+        }
+        for (int i: li) {
+            res = res << 1;
+            res = res | i;
+        }
+        return res;
+    }
+}
