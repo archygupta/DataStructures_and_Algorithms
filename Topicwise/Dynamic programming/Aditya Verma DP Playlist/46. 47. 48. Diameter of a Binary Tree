@@ -1,1 +1,25 @@
 https://www.youtube.com/watch?v=zmPj_Ee3B8c&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=48
+
+https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
+
+class result {
+    int res;
+}
+class Tree {
+    int diameter(Node root, result res) {
+        if (root == null)
+            return 0;
+        int left = diameter(root.left, res);
+        int right = diameter(root.right, res);
+        int temp = 1 + Math.max(left, right);
+        int ans = Math.max(left + right + 1, temp);
+        res.res = Math.max(res.res, ans);
+        return temp;
+    }
+    int diameter(Node root) {
+        result r = new result();
+        r.res = Integer.MIN_VALUE;
+        diameter(root, r);
+        return r.res;
+    }
+}
