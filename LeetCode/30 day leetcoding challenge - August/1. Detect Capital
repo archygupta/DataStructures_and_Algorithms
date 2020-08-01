@@ -8,3 +8,19 @@ All letters in this word are not capitals, like "leetcode".
 Only the first letter in this word is capital, like "Google".
 Otherwise, we define that this word doesn't use capitals in a right way.
 */
+
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        if (word.length() == 1)
+            return true;
+        if (word.charAt(0) == Character.toUpperCase(word.charAt(0))) {
+            if (word.charAt(1) == Character.toUpperCase(word.charAt(1))) {
+                return word.substring(1).equals(word.substring(1).toUpperCase());
+            } else {
+                return word.substring(1).equals(word.substring(1).toLowerCase());
+            }
+        } else {
+            return word.equals(word.toLowerCase());
+        }
+    }
+}
