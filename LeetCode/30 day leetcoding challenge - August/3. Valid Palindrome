@@ -1,0 +1,18 @@
+class Solution {
+    public boolean isAlphaNumeric(char c) {
+        return Character.isDigit(c) || Character.isLetter(c);
+    }
+    public boolean isPalindrome(String s) {
+        s = s.toLowerCase();
+        for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
+            while (i < s.length() - 1 && !(isAlphaNumeric(s.charAt(i))))
+                i++;
+            while (j > 0 && !(isAlphaNumeric(s.charAt(j))))
+                j--;
+            if (i < j && isAlphaNumeric(s.charAt(i)) &&
+                isAlphaNumeric(s.charAt(j)) && s.charAt(i) != s.charAt(j))
+                return false;
+        }
+        return true;
+    }
+}
