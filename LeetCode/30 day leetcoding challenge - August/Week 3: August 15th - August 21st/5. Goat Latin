@@ -1,0 +1,33 @@
+class Solution {
+
+    public boolean startsWithVowel(String s) {
+        return s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u' || s.charAt(0) == 'A' || s.charAt(0) == 'E' || s.charAt(0) == 'I' || s.charAt(0) == 'O' || s.charAt(0) == 'U';
+    }
+    
+    public String toGoatLatin(String S) {
+        if (S == null || S.length() == 0)
+            return S;
+        String[] str = S.split("\\s+");
+        int count = 1;
+        for (int i = 0; i < str.length; i++) {
+            String s = str[i];
+            if (startsWithVowel(str[i])) {
+                s = s + "ma";
+            } else {
+                s = s.substring(1) + s.charAt(0) + "ma";
+            }
+            int temp = count;
+            while (temp > 0) {
+                s += "a";
+                temp--;
+            }
+            str[i] = s;
+            count++;
+        }
+        String result = "";
+        for (String sr: str) {
+            result += " " + sr;
+        }
+        return result.trim();
+        }
+}
