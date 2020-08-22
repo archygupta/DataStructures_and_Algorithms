@@ -28,3 +28,57 @@ Explanation of Input Syntax:
 
 The input is two lists: the subroutines called and their arguments. Solution's constructor has one argument, the array of rectangles rects. pick has no arguments. Arguments are always wrapped with a list, even if there aren't any.
 /*
+
+Solution 1:
+
+Solution 2:
+
+//Not working for 3 test case:
+
+Concept: https://www.youtube.com/watch?v=8kwPXbTMSnk
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(rects);
+ * int[] param_1 = obj.pick();
+ */
+ 
+class Solution {
+
+    int numPoint = 0;
+    List < Integer > li = new ArrayList();
+    List < int[] > re = new ArrayList();
+    public Solution(int[][] rects) {
+
+        for (int[] rect: rects) {
+            re.add(rect);
+            numPoint += (rect[2] - rect[0]) + 1 * (rect[3] - rect[1]) + 1;
+            li.add(numPoint);
+        }
+    }
+
+    public int[] pick() {
+        int rand = (int) Math.random() % numPoint;
+        int l = 0, r = li.size() - 1;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (li.get(mid) <= rand) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        int[] pt = re.get(l);
+        int x = pt[2] - pt[0] + 1;
+        int y = pt[3] - pt[1] + 1;
+        int ptsInRect = x * y;
+        int ptStart = li.get(l) - ptsInRect;
+        int offset = rand - ptStart;
+        return new int[] {
+            pt[0] + offset % x, pt[1] + offset / x
+        };
+    }
+}
+
+
+ 
