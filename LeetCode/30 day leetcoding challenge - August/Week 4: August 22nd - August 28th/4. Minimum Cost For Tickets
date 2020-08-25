@@ -38,3 +38,37 @@ days is in strictly increasing order.
 costs.length == 3
 1 <= costs[i] <= 1000
 */
+
+class Solution {
+
+    int[] costs;
+    int memo[];
+    HashSet < Integer > hs = new HashSet < > ();
+
+    public int findRes(int i) {
+        if (i <= 0)
+            return 0;
+        if (memo[i - 1] != 0)
+            return memo[i - 1];
+        int ans;
+        if (hs.contains(i)) {
+            int one = findRes(i - 1) + costs[0];
+            int two = findRes(i - 7) + costs[1];
+            int three = findRes(i - 30) + costs[2];
+            ans = Math.min(one, Math.min(two, three));
+        } else {
+            ans = findRes(i - 1);
+        }
+        memo[i - 1] = ans;
+        return ans;
+    }
+    
+    public int mincostTickets(int[] days, int[] costs) {
+        this.costs = costs;
+        memo = new int[days[days.length - 1]];
+        for (int i: days) {
+            hs.add(i);
+        }
+        return findRes(days[days.length - 1]);
+    }
+}
