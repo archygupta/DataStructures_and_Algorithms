@@ -1,0 +1,39 @@
+
+class Solution {
+
+    public void flip(int[] A, int j, int find) {
+        if (j != 0)
+            for (int i = 0, k = j; i < k; i++, k--) {
+                int temp = A[i];
+                A[i] = A[k];
+                A[k] = temp;
+            }
+
+        for (int i = 0, k = find - 1; i < k; i++, k--) {
+            int temp = A[i];
+            A[i] = A[k];
+            A[k] = temp;
+        }
+    }
+
+    public List < Integer > pancakeSort(int[] A) {
+        int n = A.length;
+        List < Integer > result = new ArrayList();
+        for (int i = 0; i < n; i++) {
+            int find = n - i;
+            for (int j = 0; j < n - i; j++) {
+                if (A[j] == find) {
+                    flip(A, j, find);
+                    for (int m: A) {}
+                    if (j != 0)
+                        result.add(j + 1);
+                    result.add(n - i);
+                    if (find == 1)
+                        return result;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+}
