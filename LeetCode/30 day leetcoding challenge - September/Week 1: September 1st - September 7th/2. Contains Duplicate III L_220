@@ -1,0 +1,35 @@
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        HashMap < Integer, ArrayList < Integer >> hm = new HashMap < > ();
+        int sorted[] = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            sorted[i] = nums[i];
+            ArrayList < Integer > li = hm.getOrDefault(nums[i], new ArrayList < Integer > ());
+            li.add(i);
+            hm.put(nums[i], li);
+        }
+
+
+        Arrays.sort(sorted);
+        for (int i = 0; i < sorted.length - 1; i++) {
+            for (int j = i + 1; j < sorted.length; j++) {
+                long m = sorted[j];
+                long n = sorted[i];
+                if (m - n <= t) {
+                    ArrayList < Integer > temp = hm.get(sorted[j]);
+                    ArrayList < Integer > temp2 = hm.get(sorted[i]);
+                    for (int indj: temp) {
+                        for (int indi: temp2) {
+                            if (indi != indj && Math.abs(indj - indi) <= k) {
+                                return true;
+                            }
+                        }
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+        return false;
+    }
+}
