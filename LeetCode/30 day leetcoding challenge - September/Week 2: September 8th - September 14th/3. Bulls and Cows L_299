@@ -1,0 +1,27 @@
+class Solution {
+    public String getHint(String secret, String guess) {
+        List < Character > s = new ArrayList();
+        List < Character > g = new ArrayList();
+
+        int a = 0, b = 0;
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                a++;
+            } else {
+                s.add(secret.charAt(i));
+                g.add(guess.charAt(i));
+            }
+        }
+        for (int i = 0; i < g.size();) {
+            char n = g.get(i);
+            if (s.contains(n)) {
+
+                g.remove((Character) n);
+                s.remove((Character) n);
+                b++;
+            } else
+                i++;
+        }
+        return a + "A" + b + "B";
+    }
+}
