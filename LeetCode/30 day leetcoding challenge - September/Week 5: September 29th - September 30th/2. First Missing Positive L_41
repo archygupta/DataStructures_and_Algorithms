@@ -1,1 +1,40 @@
 https://leetcode.com/problems/first-missing-positive/discuss/871770/JAVA-Easy-or-Both-bruteForce-and-Optimize-Solution-or-0ms-(100)
+
+class Solution {
+
+    public int firstMissingPositive(int[] nums) {
+        boolean oneExist = false;
+        for (int i: nums) {
+            if (i == 1) {
+                oneExist = true;
+            }
+        }
+        if (!oneExist) {
+            return 1;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= 0 || nums[i] > nums.length) {
+                nums[i] = 1;
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int n = Math.abs(nums[i]);
+            if (n == nums.length) {
+                nums[0] = -1 * Math.abs(nums[0]);
+            } else {
+                nums[n] = -1 * Math.abs(nums[n]);
+            }
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                return i;
+            }
+        }
+        if (nums[0] > 0) return nums.length;
+
+        return nums.length + 1;
+    }
+}
