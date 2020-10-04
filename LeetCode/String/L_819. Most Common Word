@@ -1,0 +1,23 @@
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        paragraph = paragraph.replaceAll("\\p{Punct}", " ");
+        paragraph = paragraph.toLowerCase();
+        HashSet < String > hs = new HashSet < String > ();
+        for (String str: banned) {
+            hs.add(str);
+        }
+        Map < String, Integer > wordcount = new HashMap < > ();
+        int result = 0;
+        String currentStr = "";
+        for (String str: paragraph.split("\\s+")) {
+            if (!hs.contains(str)) {
+                wordcount.put(str, wordcount.getOrDefault(str, 0) + 1);
+                if (result < wordcount.get(str)) {
+                    result = wordcount.get(str);
+                    currentStr = str;
+                }
+            }
+        }
+        return currentStr;
+    }
+}
