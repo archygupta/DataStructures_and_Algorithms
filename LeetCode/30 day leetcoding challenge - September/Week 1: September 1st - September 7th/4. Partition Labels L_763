@@ -13,3 +13,20 @@ Note:
 S will have length in range [1, 500].
 S will consist of lowercase English letters ('a' to 'z') only.
 */
+
+class Solution {
+    public List < Integer > partitionLabels(String S) {
+        int indx = 0, cnt = 0, max = 0;
+        List < Integer > result = new ArrayList();
+        for (int i = 0; i < S.length(); i++) {
+            indx = S.lastIndexOf(S.charAt(i));
+            max = indx > max ? indx : max;
+            cnt++;
+            if (max == i && indx == max) {
+                result.add(cnt);
+                cnt = 0;
+            }
+        }
+        return result;
+    }
+}
