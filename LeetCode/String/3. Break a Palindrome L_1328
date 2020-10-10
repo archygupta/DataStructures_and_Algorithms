@@ -1,0 +1,18 @@
+class Solution {
+    public String breakPalindrome(String palindrome) {
+        if (palindrome.length() == 1)
+            return "";
+        int li = -1;
+        li = palindrome.length() / 2;
+
+       for (char c: palindrome.toCharArray()) {
+            if (c != 'a') {
+                int index = palindrome.indexOf(c + "");
+                if (index != li) {
+                    return palindrome.substring(0, index) + "a" + palindrome.substring(index + 1);
+                }
+            }
+        }
+        return palindrome.substring(0, palindrome.length() - 1) + "b";
+    }
+}
