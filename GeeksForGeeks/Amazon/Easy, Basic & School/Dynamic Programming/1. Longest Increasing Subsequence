@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0
 
+https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
