@@ -2,6 +2,46 @@ https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence/0
 
 https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/
 
+
+Recursive:
+
+Approach:
+
+// Every single character is a palindrome of length 1
+L(i, i) = 1 for all indexes i in given sequence
+
+// IF first and last characters are not same
+If (X[i] != X[j])  L(i, j) =  max{L(i + 1, j),L(i, j - 1)} 
+
+// If there are only 2 characters and both are same
+Else if (j == i + 1) L(i, j) = 2  
+
+// If there are more than two characters, and first and last 
+// characters are same
+Else L(i, j) =  L(i + 1, j - 1) + 2 
+
+static int lps(char seq[], int i, int j) { 
+    // Base Case 1: If there is only 1 character  
+        if (i == j) { 
+            return 1; 
+        } 
+  
+    // Base Case 2: If there are only 2 characters and both are same  
+        if (seq[i] == seq[j] && i + 1 == j) { 
+            return 2; 
+        } 
+  
+    // If the first and last characters match  
+        if (seq[i] == seq[j]) { 
+            return lps(seq, i + 1, j - 1) + 2; 
+        } 
+  
+    // If the first and last characters do not match  
+        return max(lps(seq, i, j - 1), lps(seq, i + 1, j)); 
+    } 
+    
+DP:
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
