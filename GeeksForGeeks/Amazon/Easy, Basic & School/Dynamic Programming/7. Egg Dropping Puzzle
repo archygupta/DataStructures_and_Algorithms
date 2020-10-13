@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle/0
 
+https://www.geeksforgeeks.org/egg-dropping-puzzle-dp-11/
+
 //recursive solution:
 
 import java.util.*;
