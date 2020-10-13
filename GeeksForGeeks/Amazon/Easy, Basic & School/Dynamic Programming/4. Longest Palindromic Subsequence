@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence/0
 
+https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
