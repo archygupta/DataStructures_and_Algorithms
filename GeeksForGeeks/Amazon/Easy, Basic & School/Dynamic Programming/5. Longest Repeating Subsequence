@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence/0
 
+https://www.geeksforgeeks.org/longest-repeating-subsequence/
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
