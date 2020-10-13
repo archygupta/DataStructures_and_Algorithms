@@ -1,5 +1,7 @@
 https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/
 
+https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
