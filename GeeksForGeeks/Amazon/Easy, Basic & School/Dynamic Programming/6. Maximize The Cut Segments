@@ -2,6 +2,24 @@ https://practice.geeksforgeeks.org/problems/cutted-segments/0
 
 https://www.geeksforgeeks.org/maximize-the-number-of-segments-of-length-p-q-and-r/
 
+
+// do it with below approach like longest common increasing subsequence
+
+l = 11, p = 2, q = 3, r = 5
+Analysing lengths from 1 to 11:
+
+Not possible to cut->0
+Possible cut is of lengths 2->1 (2)
+Possible cut is of lengths 3->1 (3)
+Possible cuts are of lengths max(arr[4-2],arr[4-3])+1->2 (2,2)
+Possible cuts are of lengths max(arr[5-2],arr[5-3])+1->2 (2,3)
+Possible cuts are of lengths max(arr[6-2],arr[6-3],arr[6-5])+1->3 (2,2,2)
+Possible cuts are of lengths max(arr[7-2],arr[7-3],arr[7-5])+1->3 (2,3,2) or (2,2,3)
+Possible cuts are of lengths max(arr[8-2],arr[8-3],arr[8-5])+1->4 (2,2,2,2)
+Possible cuts are of lengths max(arr[9-2],arr[9-3],arr[9-5])+1->4 (2,3,2,2) or (2,2,3,2) or (2,2,2,3)
+Possible cuts are of lengths max(arr[10-2],arr[10-3],arr[10-5])+1->5 (2,2,2,2,2)
+Possible cuts are of lengths max(arr[11-2],arr[11-3],arr[11-5])+1->5 (2,3,2,2,2) or (2,2,3,2,2) or (2,2,2,3,2) or (2,2,2,2,3)
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
