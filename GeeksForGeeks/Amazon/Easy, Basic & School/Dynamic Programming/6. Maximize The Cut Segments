@@ -1,5 +1,7 @@
 https://practice.geeksforgeeks.org/problems/cutted-segments/0
 
+https://www.geeksforgeeks.org/maximize-the-number-of-segments-of-length-p-q-and-r/
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
