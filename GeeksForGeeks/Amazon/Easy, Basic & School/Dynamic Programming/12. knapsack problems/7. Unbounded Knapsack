@@ -4,6 +4,36 @@ https://www.geeksforgeeks.org/unbounded-knapsack-repetition-items-allowed/
 
 https://www.youtube.com/watch?v=aycn9KO8_Ls&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=13
 
+Recursive:
+
+class Solution {
+    static int knapSack(int n, int W, int val[], int wt[]) {
+        {
+            // Base Case 
+            if (n == 0 || W == 0)
+                return 0;
+
+            // If weight of the nth item is 
+            // more than Knapsack capacity W, 
+            // then this item cannot be included 
+            // in the optimal solution 
+            if (wt[n - 1] > W)
+                return knapSack(n - 1, W, val, wt);
+
+            // Return the maximum of two cases: 
+            // (1) nth item included 
+            // (2) not included 
+            else
+                return Math.max(
+                    val[n - 1] + knapSack(n, W - wt[n - 1],
+                        val, wt),
+                    knapSack(n - 1, W, val, wt));
+        }
+    }
+}
+
+Dynamic programming:
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
