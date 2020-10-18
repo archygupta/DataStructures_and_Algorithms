@@ -1,5 +1,7 @@
 https://www.interviewbit.com/problems/merge-overlapping-intervals/
 
+https://www.geeksforgeeks.org/merging-intervals/
+
 /*
 Given a collection of intervals, merge all overlapping intervals.
 
