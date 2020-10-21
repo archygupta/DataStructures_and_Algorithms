@@ -30,3 +30,38 @@ Constraints:
 -1000 <= asteroids[i] <= 1000
 asteroids[i] != 0
 */
+
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack < Integer > st = new Stack < Integer > ();
+        for (int ast: asteroids) {
+            if (st.isEmpty() || ast > 0) {
+                st.push(ast);
+            } else {
+                while (true) {
+                    int peek = st.peek();
+                    if (peek < 0) {
+                        st.push(ast);
+                        break;
+                    } else if (peek == -ast) {
+                        st.pop();
+                        break;
+                    } else if (peek > (-ast)) {
+                        break;
+                    } else {
+                        st.pop();
+                        if (st.isEmpty()) {
+                            st.push(ast);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        int[] res = new int[st.size()];
+        for (int i = st.size() - 1; i >= 0; i--) {
+            res[i] = st.pop();
+        }
+        return res;
+    }
+}
