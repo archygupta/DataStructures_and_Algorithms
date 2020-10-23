@@ -25,3 +25,26 @@ n == nums.length
 1 <= n <= 104
 -109 <= nums[i] <= 109
 */
+
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        if (nums.length < 3)
+            return false;
+        int[] minj = new int[nums.length];
+        minj[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            minj[i] = Math.min(minj[i - 1], nums[i]);
+        }
+        Stack < Integer > st = new Stack < Integer > ();
+        for (int i = nums.length - 1; i >= 0; i--) {
+            while (!st.isEmpty() && st.peek() <= minj[i]) {
+                st.pop();
+            }
+            while (!st.isEmpty() && st.peek() < nums[i]) {
+                return true;
+            }
+            st.push(nums[i]);
+        }
+        return false;
+    }
+}
