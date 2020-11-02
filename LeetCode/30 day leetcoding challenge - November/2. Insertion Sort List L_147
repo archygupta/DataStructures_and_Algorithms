@@ -17,3 +17,53 @@ Example 2:
 Input: -1->5->3->4->0
 Output: -1->0->3->4->5
 */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode prev = null, next = null, curr = head.next, root = head;
+        while (curr != null) {
+    
+            while (root.next!=null && curr.val >= root.val && root != curr) {
+                prev = root;
+                root = root.next;
+
+            }
+            if (root != curr) {
+                if (prev == null) {
+                    next = curr.next;
+                    root.next = root.next.next;
+                    curr.next = head;
+                    head = curr;
+                } else {
+                    next = curr.next;
+                    prev.next = curr;
+                    root.next = root.next.next;
+                    curr.next = root;
+                }
+
+                curr = next;
+            } else {
+                curr = curr.next;
+            }
+          //System.out.println(curr.val);
+            root = head;
+            prev = null;
+            next = null;
+
+        }
+       
+    return head;
+}
+}
