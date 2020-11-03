@@ -18,6 +18,53 @@ Input: -1->5->3->4->0
 Output: -1->0->3->4->5
 */
 
+
+//working : https://www.geeksforgeeks.org/insertion-sort-for-singly-linked-list/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+
+    ListNode sorted = new ListNode();
+    public ListNode insertionSortList(ListNode head) {
+        sorted = null;
+
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            insert(curr);
+            curr = next;
+        }
+        return sorted;
+    }
+
+    public void insert(ListNode head) {
+        if (sorted == null || sorted.val >= head.val) {
+            head.next = sorted;
+            sorted = head;
+        } else {
+            ListNode c = sorted;
+            while (c.next != null && c.next.val < head.val) {
+                c = c.next;
+            }
+            head.next = c.next;
+            c.next = head;
+
+        }
+    }
+
+}
+
+//mine-non working
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
