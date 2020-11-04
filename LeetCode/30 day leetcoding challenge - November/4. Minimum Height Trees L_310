@@ -1,0 +1,75 @@
+class Solution {
+    Stack < Integer > st = new Stack < Integer > ();
+    Stack < Integer > fi = new Stack < Integer > ();
+    int size = 0;
+    int next = 0;
+
+    public void findFarthest(int i, boolean[] visited, List < List < Integer >> g) {
+        visited[i] = true;
+        st.push(i);
+        List < Integer > li = g.get(i);
+        for (int ele: li) {
+            if (visited[ele] == false) {
+                //st.push(ele);
+                findFarthest(ele, visited, g);
+            }
+        }
+        if (size < st.size()) {
+            next = st.peek();
+            System.out.println(st);
+            fi = (Stack < Integer > ) st.clone();
+
+            size = fi.size();
+        }
+        st.pop();
+    }
+
+    public List < Integer > findResult() {
+        List < Integer > result = new ArrayList();
+        int size = fi.size();
+        if (fi.size() % 2 == 0) {
+            for (int i = 0; i < size; i++) {
+                if (i == size / 2 - 1) {
+                    result.add(fi.pop());
+                    result.add(fi.pop());
+                    break;
+                } else {
+                    fi.pop();
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (i == size / 2) {
+                    result.add(fi.pop());
+                    break;
+                } else {
+                    fi.pop();
+                }
+            }
+        }
+        return result;
+    }
+
+    public void createGraph(List < List < Integer >> g, int[][] edges, int n) {
+        for (int i = 0; i < n; i++) {
+            g.add(new ArrayList < Integer > ());
+        }
+        for (int i = 0; i < edges.length; i++) {
+            g.get(edges[i][0]).add(edges[i][1]);
+            g.get(edges[i][1]).add(edges[i][0]);
+        }
+    }
+
+    public List < Integer > findMinHeightTrees(int n, int[][] edges) {
+        List < List < Integer >> g = new ArrayList();
+        createGraph(g, edges, n);
+        boolean visited[] = new boolean[n];
+        findFarthest(0, visited, g);
+        visited = new boolean[n];
+        st = new Stack < Integer > ();
+        size = 0;
+        findFarthest(next, visited, g);
+        List < Integer > result = findResult();
+        return result;
+    }
+}
