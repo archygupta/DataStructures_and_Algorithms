@@ -1,0 +1,13 @@
+class Solution {
+    public int minCostToMoveChips(int[] position) {
+        int evn_count = 0, odd_count = 0;
+        for (int i = 0; i < position.length; i++) {
+            if (position[i] % 2 == 0) {
+                evn_count++;
+            } else {
+                odd_count++;
+            }
+        }
+        return Math.min(evn_count, odd_count);
+    }
+}
