@@ -1,0 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    static int ans = 0;
+    public static int findAns(TreeNode root) {
+        if (root == null)
+            return 0;
+        int left = findAns(root.left);
+        int right = findAns(root.right);
+        ans += Math.abs(left - right);
+        return left + right + root.val;
+    }
+    public int findTilt(TreeNode root) {
+        ans = 0; //very crucial, so that static variable reinitializes on calling the code for new test case
+        findAns(root);
+        return ans;
+    }
+}
