@@ -17,7 +17,6 @@ Output:
 class Solution {
     public List < List < Integer >> generate(int numRows) {
         List < List < Integer >> al = new ArrayList < List < Integer >> ();
-        //int arr[][]=new int[numRows][numRows];
         for (int i = 0; i < numRows; i++) {
             List < Integer > li = new ArrayList();
             for (int j = 0; j <= i; j++) {
