@@ -1,0 +1,64 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches {
+    public static void main(String args[]) {
+
+        // String to be scanned to find the pattern.
+        String line = "This order was placed for QT3000! OK?";
+        String pattern = "(.*)(\\d+)(.*)";
+
+        // Create a Pattern object
+        Pattern r = Pattern.compile(pattern);
+
+        // Now create matcher object.
+        Matcher m = r.matcher(line);
+        if (m.find()) {
+            System.out.println("Found value: " + m.group(0));
+            System.out.println("Found value: " + m.group(1));
+            System.out.println("Found value: " + m.group(2));
+        } else {
+            a
+            /**
+             * Definition for a binary tree node.
+             * public class TreeNode {
+             *     int val;
+             *     TreeNode left;
+             *     TreeNode right;
+             *     TreeNode() {}
+             *     TreeNode(int val) { this.val = val; }
+             *     TreeNode(int val, TreeNode left, TreeNode right) {
+             *         this.val = val;
+             *         this.left = left;
+             *         this.right = right;
+             *     }
+             * }
+             */
+            class Solution {
+                public int rob(TreeNode root) {
+                    HashMap < TreeNode, Integer > hm = new HashMap < TreeNode, Integer > ();
+                    return memoize(root, hm);
+                }
+                public int memoize(TreeNode root, HashMap < TreeNode, Integer > hm) {
+                    if (root == null)
+                        return 0;
+                    if (hm.containsKey(root) && hm.get(root) > 0)
+                        return hm.get(root);
+                    int without = memoize(root.left, hm) + memoize(root.right, hm);
+
+                    int with = root.val;
+                    if (root.left != null) {
+                        with += memoize(root.left.left, hm) + memoize(root.left.right, hm);
+                    }
+                    if (root.right != null) {
+                        with += memoize(root.right.left, hm) + memoize(root.right.right, hm);
+                    }
+
+                    hm.put(root, Math.max(with, without));
+                    return hm.get(root);
+
+                }
+            }
+        }
+    }
+}
