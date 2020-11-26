@@ -22,6 +22,8 @@ Output: false
 
 Constraints:
 -231 <= x <= 231 - 1
+
+Hint: Beware of overflow when you reverse the integer.
 */
 
 class Solution {
