@@ -1,0 +1,39 @@
+https://www.youtube.com/watch?v=MW4lJ8Y0xXk&list=PL_z_8CaSLPWeM8BDJmIYDaoQ5zuwyxnfj&index=5
+
+https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92007/Sliding-Window-algorithm-template-to-solve-all-the-Leetcode-substring-search-problem.
+
+class Solution {
+    public List < Integer > findAnagrams(String s, String p) {
+        List < Integer > res = new ArrayList();
+        if (p.length() > s.length())
+            return res;
+        int begin = 0, end = 0;
+        Map < Character, Integer > m = new HashMap < > ();
+        for (char c: p.toCharArray()) {
+            m.put(c, m.getOrDefault(c, 0) + 1);
+        }
+        int counter = m.size();
+        while (end < s.length()) {
+            char c = s.charAt(end);
+            if (m.containsKey(c)) {
+                m.put(c, m.getOrDefault(c, 0) - 1);
+                if (m.get(c) == 0)
+                    counter--;
+            }
+            end++;
+            while (counter == 0) {
+                char temp = s.charAt(begin);
+                if (m.containsKey(temp)) {
+                    m.put(temp, m.getOrDefault(temp, 0) + 1);
+                    if (m.get(temp) > 0)
+                        counter++;
+                }
+                if (end - begin == p.length())
+                    res.add(begin);
+                begin++;
+            }
+        }
+        return res;
+
+    }
+}
