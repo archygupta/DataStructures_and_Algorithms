@@ -1,1 +1,15 @@
 https://www.geeksforgeeks.org/delete-leaf-nodes-value-x/
+
+static Node deleteLeaves(Node root, int x)  
+{  
+    if (root == null)  
+        return null;  
+    root.left = deleteLeaves(root.left, x);  
+    root.right = deleteLeaves(root.right, x);  
+  
+    if (root.data == x && root.left == null && root.right == null) {  
+  
+        return null;  
+    }  
+    return root;  
+}  
