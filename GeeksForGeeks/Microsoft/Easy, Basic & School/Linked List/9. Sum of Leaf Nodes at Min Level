@@ -1,0 +1,35 @@
+https://www.geeksforgeeks.org/sum-leaf-nodes-minimum-level/
+
+class GfG {
+    public int minLeafSum(Node root) {
+        if (root == null)
+            return 0;
+        if (root.left == null && root.right == null)
+            return root.data;
+        Queue < Node > q = new LinkedList < > ();
+        q.add(root);
+        int sum = 0;
+        while (!q.isEmpty()) {
+
+            int count = q.size();
+            while (count > 0) {
+                Node temp = q.poll();
+                if (temp.left == null && temp.right == null) {
+                    sum += temp.data;
+                } else {
+                    if (temp.left != null) {
+                        q.add(temp.left);
+                    }
+                    if (temp.right != null) {
+                        q.add(temp.right);
+                    }
+                }
+                count--;
+            }
+            if (sum != 0)
+                return sum;
+        }
+        return 0;
+    }
+
+}
