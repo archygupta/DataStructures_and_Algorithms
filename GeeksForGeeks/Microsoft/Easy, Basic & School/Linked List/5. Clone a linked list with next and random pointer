@@ -1,5 +1,102 @@
 https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1
 
+Solution 1:
+
+package LinkedList;
+
+public class RandomPointer {
+    Node head;
+
+    static class Node {
+        Node next;
+        Node random;
+        int data;
+
+        public Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
+
+    public static Node copyRandomList(Node head) {
+        if (head == null)
+            return head;
+        Node newList = new Node(head.data);
+        Node curr = head;
+        Node newL = newList;
+
+        while (curr.next != null) {
+            newList.next = new Node(curr.next.data);
+            newList = newList.next;
+            curr = curr.next;
+        }
+        curr = head;
+        newList = newL;
+
+        while (curr != null && newList != null) {
+            if (curr.random != null)
+                newList.random = curr.random;
+            curr = curr.next;
+            newList = newList.next;
+        }
+
+        curr = head;
+        newList = newL;
+
+        while (curr != null && newList != null) {
+            Node temp = curr.next;
+            curr.next = newList;
+            curr = temp;
+            newList = newList.next;
+        }
+        curr = head;
+
+        curr = head;
+        newList = newL;
+
+        curr = head;
+        newList = newL;
+        while (newList != null) {
+            if (newList.random != null)
+                newList.random = newList.random.next;
+            newList = newList.next;
+        }
+
+        newList = newL;
+        while (newList != null) {
+
+            System.out.print(newList.data + " ");
+            if (newList.random != null)
+                System.out.println(newList.random.data);
+            else {
+                System.out.println("null");
+            }
+            newList = newList.next;
+        }
+        return newL;
+    }
+
+    public static void main(String args[]) {
+        Node n = new Node(7);
+        n.next = new Node(13);
+        n.next.next = new Node(11);
+        n.next.next.next = new Node(10);
+        n.next.next.next.next = new Node(1);
+
+        n.next.random = n;
+        n.next.next.random = n.next.next.next.next;
+        n.next.next.next.random = n.next.next;
+        n.next.next.next.next.random = n;
+
+        copyRandomList(n);
+    }
+}
+
+
+===================================================================
+
+Solution 2:
+
 Node copyList(Node head) {
         
         Node origList=head;
