@@ -19,3 +19,28 @@ Constraints:
 The number of nodes in the tree is in the range [1, 104].
 -231 <= Node.val <= 231 - 1
 */
+
+class Solution {
+  boolean ans = true;
+  boolean first = true;
+  int prev = Integer.MIN_VALUE;
+  void inOrder(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    inOrder(root.left);
+    if (first) {
+      first = false;
+    }
+    else if (prev >= root.val) {
+      ans = false;
+    }
+    prev = root.val;
+    inOrder(root.right);
+  }
+
+  public boolean isValidBST(TreeNode root) {
+    inOrder(root);
+    return ans;
+  }
+}
