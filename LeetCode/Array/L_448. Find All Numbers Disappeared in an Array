@@ -1,0 +1,35 @@
+class Solution {
+    public List < Integer > findDisappearedNumbers(int[] nums) {
+        List < Integer > res = new ArrayList();
+
+        //if input is blank
+        if (nums.length == 0)
+            return res;
+
+        Arrays.sort(nums);
+
+        //add all elements from 1 to nums[0] in res and the missing numbers in the sorted array
+        int start = nums[0];
+        int i = 1;
+        while (i < start)
+            res.add(i++);
+        for (int j = 0; j < nums.length - 1; j++) {
+            if (nums[j] == nums[j + 1] || nums[j] == nums[j + 1] - 1)
+                continue;
+            i = nums[j] + 1;
+            start = nums[j + 1];
+            while (i < start)
+                res.add(i++);
+        }
+
+        //add numbers from nums[nums.length-1] to size of sorted array
+        if (nums[nums.length - 1] < nums.length) {
+            i = nums[nums.length - 1] + 1;
+            start = nums.length;
+            while (i <= start)
+                res.add(i++);
+        }
+
+        return res;
+    }
+}
