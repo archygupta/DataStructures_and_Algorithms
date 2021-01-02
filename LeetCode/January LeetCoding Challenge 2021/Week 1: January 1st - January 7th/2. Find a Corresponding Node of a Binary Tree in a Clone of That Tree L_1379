@@ -50,3 +50,25 @@ class Solution {
         return found;
     }
 }
+
+===============================================================
+
+//leetcode solution
+
+class Solution {
+    public TreeNode found;
+    public void inorder(final TreeNode original, final TreeNode cloned, final TreeNode target){
+      if(original==null)
+        return;
+      inorder(original.left, cloned.left, target);
+      if(original.val==target.val){
+        found = cloned;
+        return;
+      }
+      inorder(original.right, cloned.right, target);
+    }
+    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
+        inorder(original, cloned, target);
+        return found;
+    }
+}
