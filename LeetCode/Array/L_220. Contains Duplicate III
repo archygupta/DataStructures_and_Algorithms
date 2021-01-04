@@ -1,0 +1,19 @@
+https://leetcode.com/problems/contains-duplicate-iii/discuss/61655/Java-O(N-lg-K)-solution
+
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        TreeSet < Long > ts = new TreeSet < > ();
+        for (int i = 0; i < nums.length; i++) {
+
+            Long floor = ts.floor((long) nums[i] + t);
+            Long ceil = ts.ceiling((long) nums[i] - t);
+            if (floor != null && floor >= nums[i] || ceil != null && ceil <= nums[i])
+                return true;
+            ts.add((long) nums[i]);
+            if (i >= k) {
+                ts.remove((long) nums[i - k]);
+            }
+        }
+        return false;
+    }
+}
