@@ -1,3 +1,5 @@
+https://leetcode.com/problems/kth-missing-positive-number/discuss/876751/Java-1-liner-O(n)-simplest-easy-to-understand-beats-100
+
 /*
 Given an array arr of positive integers sorted in a strictly increasing order, and an integer k.
 Find the kth positive integer that is missing from this array.
@@ -42,5 +44,18 @@ class Solution {
                 curr = arr[i];
         }
         return arr.length + k;
+    }
+}
+
+========================================================================================================================================
+
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        for(int i:arr){
+          if(i<=k)
+            k++;
+          else break;
+        }
+      return k;
     }
 }
