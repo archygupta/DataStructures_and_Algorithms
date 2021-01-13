@@ -17,3 +17,15 @@ Since the list has two middle nodes with values 3 and 4, we return the second on
 Note:
 The number of nodes in the given list will be between 1 and 100.
 */
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+      ListNode fast=head, slow=head;
+      while(fast!=null && fast.next!=null)
+      {
+        fast=fast.next.next;
+        slow=slow.next;
+      }
+      return slow;        
+    }
+}
