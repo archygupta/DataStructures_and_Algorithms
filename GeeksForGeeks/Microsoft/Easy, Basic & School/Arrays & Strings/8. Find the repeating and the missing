@@ -1,0 +1,36 @@
+https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/
+
+/*
+Given an unsorted array of size n. Array elements are in the range from 1 to n. One number from set {1, 2, …n} is missing and one number occurs twice in the array. Find these two numbers.
+
+Examples: 
+
+Input: arr[] = {3, 1, 3}
+Output: Missing = 2, Repeating = 3
+Explanation: In the array, 
+2 is missing and 3 occurs twice 
+
+Input: arr[] = {4, 3, 6, 2, 1, 1}
+Output: Missing = 5, Repeating = 1
+*/
+
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+        int sumN = (n * (n + 1)) / 2;
+        int sumN2 = (n * (n + 1) * (2 * n + 1)) / 6;
+        int sum = 0, sum2 = 0;
+        for (int i: arr) {
+            sum += i;
+            sum2 += i * i;
+        }
+        int xMINUSy = sumN - sum;
+        int xPLUSy = (sumN2 - sum2) / xMINUSy;
+        int missing = (xMINUSy + xPLUSy) / 2;
+        int repeating = xPLUSy - missing;
+        System.out.println(missing + " " + repeating);
+        return new int[] {
+            missing,
+            repeating
+        };
+    }
+}
