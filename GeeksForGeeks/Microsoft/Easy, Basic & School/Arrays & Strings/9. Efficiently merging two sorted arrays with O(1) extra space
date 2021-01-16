@@ -35,7 +35,7 @@ class MergeSort
                 if(arr1[i] > arr1[i+gap]){
                     int temp = arr1[i];
                     arr1[i] = arr1[i+gap];
-                    arr1[i+gap] = arr1[i];
+                    arr1[i+gap] = temp;
                 }
             } 
             
