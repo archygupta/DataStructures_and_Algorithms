@@ -1,0 +1,25 @@
+class Solution {
+
+    public boolean isInt(char ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
+    public int myAtoi(String s) {
+        s = s.trim();
+        if (s.length() == 0)
+            return 0;
+
+        int i = (s.charAt(0) == '-' || s.charAt(0) == '+') ? 1 : 0;
+        int sign = i == 1 && s.charAt(0) != '+' ? -1 : 1;
+        long result = 0;
+
+        for (; i < s.length() && isInt(s.charAt(i)); i++) {
+            int num = (s.charAt(i) - '0');
+            result = result * 10 + num;
+            if (result > Integer.MAX_VALUE) {
+                return sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+        }
+        return (int) result * sign;
+    }
+}
