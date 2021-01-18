@@ -65,3 +65,47 @@ class Solution {
         return res;
     }
 }
+
+
+===============================================================================================
+
+
+class Solution {
+
+    public void addBasedOnFlag(List < List < Integer >> res, boolean flag, Queue < TreeNode > q) {
+        ArrayList < Integer > li = new ArrayList();
+            for (TreeNode i: q) {
+                li.add(i.val);
+            }
+          if(!flag){
+            Collections.reverse(li);
+            }
+          res.add(li);
+    }
+
+    public List < List < Integer >> zigzagLevelOrder(TreeNode root) {
+       List < List < Integer >> res = new ArrayList();
+        if (root == null)
+            return res;
+        Queue < TreeNode > q = new LinkedList < > ();
+        q.add(root);
+        boolean flag = true;
+        while (!q.isEmpty()) {
+            addBasedOnFlag(res, flag, q);
+            int count = q.size();
+            while (count > 0) {
+                TreeNode temp = q.poll();
+                if (temp.left != null) {
+                    q.add(temp.left);
+                }
+                if (temp.right != null) {
+                    q.add(temp.right);
+                }
+                count--;
+            }
+            flag = !flag;
+
+        }
+      return res;
+    }
+}
