@@ -38,3 +38,31 @@ class Solution {
         }
     }
 }
+
+======================================================================================
+
+//Doesn't pass 1 test case
+
+Input: 2.00000
+-2147483648
+Output: 1.00000
+Expected: 0.00000
+
+class Solution {
+    public double myPow(double x, int n) {
+        double result = 1.0;
+        long nn = n<0?-1*n:n;
+        while(nn>0){
+          if(nn%2 ==1){
+            result =result*x;
+            nn--;
+          }
+          else{
+            x = x*x;
+            nn/=2;
+          }
+        }
+      return n<0? (double)1.0/result : result;
+      
+    }
+}
