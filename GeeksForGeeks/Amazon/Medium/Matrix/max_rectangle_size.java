@@ -7,8 +7,7 @@
 // 1 1 0 0
 
 // Output :
-// 1 1 1 1
-// 1 1 1 1
+// 8
 
 // Explanation : 
 // The largest rectangle with only 1's is from 
