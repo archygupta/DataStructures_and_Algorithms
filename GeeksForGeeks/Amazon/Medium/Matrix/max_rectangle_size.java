@@ -1,3 +1,4 @@
+
 // https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/
 
 // Find Maximum size rectangle binary sub-matrix with all 1's in a matrix
@@ -58,6 +59,7 @@ class Java {
             }
         }
         // if Stack is not empty
+
         while (!st.empty()) {
             int i, top = st.pop(); // Top element in stack
             i = idx;
@@ -65,7 +67,17 @@ class Java {
                 i = idx - st.peek() - 1;
             }
             max_area = Math.max(max_area, a[top] * i);// Calculate Max Area
+
+            while (!st.empty()) {
+                int i, top = st.pop(); // Top element in stack
+                i = idx;
+                if (!st.empty()) {
+                    i = idx - st.peek() - 1;
+                }
+                max_area = Math.max(max_area, a[top] * i);// Calculate Max Area
+
+            }
+            return max_area;
         }
-        return max_area;
     }
 }
