@@ -1,3 +1,4 @@
+// https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/ Question Link
 // Find Maximum size rectangle binary sub-matrix with all 1's in a matrix
 //
 //Input:
@@ -14,12 +15,6 @@
 // (1, 0) to (2, 3) which is
 // 1 1 1 1
 // 1 1 1 1 
-
-
-
-
-
-
 
 class Java {
     public int maxArea(int matrix[][], int row, int col) {
@@ -38,11 +33,8 @@ class Java {
             area = Math.max(maxx,area); //Update area if it is smaller than maxx
         }
         
-        return area; //Retuen answer
-        
-        
+        return area; //Retuen answer  
     }
-    
     public int maxRectHist(int row,int col,int[] a){
         
         Stack<Integer> st = new Stack<Integer>();// Create Stack
@@ -63,9 +55,7 @@ class Java {
                 max_area = Math.max(max_area,a[top]*i);// Calculate Max Area
             }
         }
-
         // if Stack is not empty
-        
         while(!st.empty()){
             int i,top = st.pop(); //Top element in stack
                 i = idx;
@@ -74,12 +64,6 @@ class Java {
                 }
                 max_area = Math.max(max_area,a[top]*i);// Calculate Max Area
         }
-        
         return max_area;
-        
-        
-        
-        
-        
     }
 }
