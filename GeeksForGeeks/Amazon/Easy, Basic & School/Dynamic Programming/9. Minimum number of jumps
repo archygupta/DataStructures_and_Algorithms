@@ -2,6 +2,55 @@ https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0
 
 https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
 
+
+// { Driver Code Starts
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        int t = Integer.parseInt(br.readLine()); 
+
+        while(t-- > 0){
+            int size = Integer.parseInt(br.readLine());
+            String[] arrStr = ((String)br.readLine()).split("\\s+");
+            int[] arr= new int[size];
+            for(int i = 0;i<size;i++){
+                arr[i] = Integer.parseInt(arrStr[i]);
+            }
+            System.out.println(new solve().minJumps(arr));
+        }
+	 }
+	 
+}
+// } Driver Code Ends
+
+
+class solve{
+    static int minJumps(int[] arr){
+        if(arr.length==0 || arr[0]<=0)
+            return -1;
+        int n= arr.length;
+        int dp[] = new int[n];
+        Arrays.fill(dp, -1);
+        dp[0]=0;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1; j<n && j<=i+arr[i]; j++){
+                if(dp[j]==-1 || dp[j]>dp[i]+1){
+                    dp[j]=dp[i]+1;
+                }
+            } 
+        }
+        return dp[n-1];
+    }
+}
+
+=================================================================================================================================
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
