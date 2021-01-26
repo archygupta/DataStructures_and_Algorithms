@@ -1,0 +1,22 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length==0)
+          return 0;
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for(int num: nums){
+          hs.add(num);
+        }
+        int longestSteak=0;
+        for(int num: hs){
+          if(!hs.contains(num-1)){
+            int currSteak=0;
+            while(hs.contains(num++)){
+              currSteak++;
+            }
+            
+            longestSteak = Math.max(longestSteak, currSteak);
+          }
+        }
+      return longestSteak;
+    }
+}
