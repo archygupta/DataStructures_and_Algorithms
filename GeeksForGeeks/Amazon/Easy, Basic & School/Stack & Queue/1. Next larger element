@@ -1,5 +1,30 @@
 https://practice.geeksforgeeks.org/problems/next-larger-element/0
 
+https://www.youtube.com/watch?v=NXOOYYwpbg4&list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd&index=2
+
+
+=========================================================================
+
+class solve {
+    public static long[] nextLargerElement(long[] arr, int n) {
+        Stack < Long > st = new Stack < Long > ();
+        long[] res = new long[n];
+        for (int i = n - 1; i >= 0; i--) {
+            if (st.empty()) {
+                res[i] = -1;
+            } else {
+                while (!st.isEmpty() && st.peek() <= arr[i]) {
+                    st.pop();
+                }
+                res[i] = st.isEmpty() ? -1 : st.peek();
+            }
+            st.push(arr[i]);
+        }
+        return res;
+    }
+}
+
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
