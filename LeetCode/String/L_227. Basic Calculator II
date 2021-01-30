@@ -1,0 +1,60 @@
+https://leetcode.com/problems/basic-calculator-ii/
+
+/*
+Given a string s which represents an expression, evaluate this expression and return its value. 
+The integer division should truncate toward zero.
+ 
+Example 1:
+Input: s = "3+2*2"
+Output: 7
+
+Example 2:
+Input: s = " 3/2 "
+Output: 1
+
+Example 3:
+Input: s = " 3+5 / 2 "
+Output: 5
+
+Constraints:
+1 <= s.length <= 3 * 105
+s consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.
+s represents a valid expression.
+All the integers in the expression are non-negative integers in the range [0, 231 - 1].
+The answer is guaranteed to fit in a 32-bit integer.
+*/
+
+class Solution {
+    public int calculate(String s) {
+        if (s == null || s.isEmpty())
+            return 0;
+        int len = s.length();
+        Stack < Integer > st = new Stack < Integer > ();
+        int currNumber = 0;
+        char operation = '+';
+        for (int i = 0; i < s.length(); i++) {
+            char currChar = s.charAt(i);
+            if (Character.isDigit(s.charAt(i))) {
+                currNumber = (currNumber * 10) + (currChar - '0');
+            }
+            if (!Character.isDigit(currChar) && !Character.isWhitespace(currChar) || i == s.length() - 1) {
+                if (operation == '-') {
+                    st.push(-currNumber);
+                } else if (operation == '+') {
+                    st.push(currNumber);
+                } else if (operation == '*') {
+                    st.push(st.pop() * currNumber);
+                } else {
+                    st.push(st.pop() / currNumber);
+                }
+                operation = currChar;
+                currNumber = 0;
+            }
+        }
+        int res = 0;
+        while (!st.isEmpty()) {
+            res += st.pop();
+        }
+        return res;
+    }
+}
