@@ -1,0 +1,47 @@
+class Solution {
+
+    public boolean findCourseSchedule(int i, boolean[] visited, boolean[] recStack, Stack < Integer > res, ArrayList < ArrayList < Integer >> li) {
+        if (recStack[i])
+            return false;
+        if (visited[i])
+            return true;
+        recStack[i] = true;
+        visited[i] = true;
+        ArrayList < Integer > currt = li.get(i);
+        for (int curr: currt) {
+            if (findCourseSchedule(curr, visited, recStack, res, li) == false)
+                return false;
+        }
+        res.add(i);
+        recStack[i] = false;
+        return true;
+    }
+
+    public ArrayList < ArrayList < Integer >> makeGraph(int numCourses, int[][] prerequisites) {
+        ArrayList < ArrayList < Integer >> li = new ArrayList();
+        for (int i = 0; i < numCourses; i++) {
+            li.add(new ArrayList < Integer > ());
+        }
+        for (int[] curr: prerequisites) {
+            li.get(curr[1]).add(curr[0]);
+        }
+        return li;
+    }
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        ArrayList < ArrayList < Integer >> li = makeGraph(numCourses, prerequisites);
+        Stack < Integer > res = new Stack < Integer > ();
+        boolean[] visited = new boolean[numCourses];
+        boolean[] recStack = new boolean[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (!findCourseSchedule(i, visited, recStack, res, li)) {
+                return new int[] {};
+            }
+        }
+        int[] result = new int[numCourses];
+        int i = 0;
+        while (!res.isEmpty()) {
+            result[i++] = res.pop();
+        }
+        return result;
+    }
+}
