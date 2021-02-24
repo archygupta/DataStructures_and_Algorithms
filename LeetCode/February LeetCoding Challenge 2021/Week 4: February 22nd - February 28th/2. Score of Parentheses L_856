@@ -1,0 +1,70 @@
+/*
+Given a balanced parentheses string S, compute the score of the string based on the following rule:
+
+() has score 1
+AB has score A + B, where A and B are balanced parentheses strings.
+(A) has score 2 * A, where A is a balanced parentheses string.
+ 
+Example 1:
+Input: "()"
+Output: 1
+
+Example 2:
+Input: "(())"
+Output: 2
+
+Example 3:
+Input: "()()"
+Output: 2
+
+Example 4:
+Input: "(()(()))"
+Output: 6
+
+Note:
+S is a balanced parentheses string, containing only ( and ).
+2 <= S.length <= 50
+*/
+
+class Solution {
+
+    public boolean isNumeric(String someString) {
+        boolean isNumeric = someString.chars().allMatch(Character::isDigit);
+        return isNumeric;
+    }
+    
+    public int scoreOfParentheses(String S) {
+        int result = 0;
+        Stack < String > st = new Stack < String > ();
+        for (char c: S.toCharArray()) {
+            if (c == '(') {
+                st.push(String.valueOf(c));
+            } else if (c == ')') {
+                int temp;
+                if (st.peek().equals(String.valueOf('('))) {
+                    temp = 1;
+                    st.pop();
+                    if (!st.isEmpty() && isNumeric(st.peek())) {
+                        while (!st.isEmpty() && isNumeric(st.peek())) {
+                            temp += Integer.parseInt(st.pop());
+                        }
+                    }
+
+                } else {
+                    temp = 0;
+                    while (!st.isEmpty() && isNumeric(st.peek())) {
+                        temp += Integer.parseInt(st.pop());
+                    }
+                    temp *= 2;
+                    st.pop();
+                }
+                st.push(String.valueOf(temp));
+            }
+        }
+        
+        while (!st.isEmpty()) {
+            result += Integer.parseInt(st.pop());
+        }
+        return result;
+    }
+}
