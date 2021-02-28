@@ -37,3 +37,37 @@ The total number of FreqStack.push calls will not exceed 10000 in a single test 
 The total number of FreqStack.pop calls will not exceed 10000 in a single test case.
 The total number of FreqStack.push and FreqStack.pop calls will not exceed 150000 across all test cases.
 */
+
+class FreqStack {
+    Map < Integer, Integer > freqMap;
+    Map < Integer, Stack < Integer >> stackMap;
+    int maxFreq;
+    public FreqStack() {
+        freqMap = new HashMap < > ();
+        stackMap = new HashMap < > ();
+        maxFreq = 0;
+    }
+
+    public void push(int x) {
+        int f = freqMap.getOrDefault(x, 0);
+        freqMap.put(x, f + 1);
+        if (f > maxFreq)
+            maxFreq = f;
+        stackMap.computeIfAbsent(f, z - > new Stack()).push(x);
+    }
+
+    public int pop() {
+        int x = stackMap.get(maxFreq).pop();
+        freqMap.put(x, freqMap.get(x) - 1);
+        if (stackMap.get(maxFreq).size() == 0)
+            maxFreq--;
+        return x;
+    }
+}
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack obj = new FreqStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ */
