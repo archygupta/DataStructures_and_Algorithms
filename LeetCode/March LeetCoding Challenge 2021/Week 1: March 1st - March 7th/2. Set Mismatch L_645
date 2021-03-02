@@ -1,0 +1,49 @@
+https://leetcode.com/problems/set-mismatch/solution/
+
+/*
+You have a set of integers s, which originally contains all the numbers from 1 to n. Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+You are given an integer array nums representing the data status of this set after the error.
+Find the number that occurs twice and the number that is missing and return them in the form of an array.
+
+Example 1:
+Input: nums = [1,2,2,4]
+Output: [2,3]
+
+Example 2:
+Input: nums = [1,1]
+Output: [1,2]
+ 
+Constraints:
+2 <= nums.length <= 104
+1 <= nums[i] <= 104
+*/
+
+/*
+We can save the space used in the last approach, if we can somehow, include the information regarding the duplicacy of an element or absence of an element in the numsnums array. Let's see how this can be done.
+
+We know that all the elements in the given numsnums array are positive, and lie in the range 11 to nn only. Thus, we can pick up each element ii from numsnums. For every number ii picked up, we can invert the element at the index \left|i\right|∣i∣. By doing so, if one of the elements jj occurs twice, when this number is encountered the second time, the element nums[\left|i\right|]nums[∣i∣] will be found to be negative. Thus, while doing the inversions, we can check if a number found is already negative, to find the duplicate number.
+
+After the inversions have been done, if all the elements in numsnums are present correctly, the resultant numsnums array will have all the elements as negative now. But, if one of the numbers, jj is missing, the element at the j^{th}j 
+th
+index will be positive. This can be used to determine the missing number.
+
+*/
+
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int dup = -1, missing = 1;
+        for (int n: nums) {
+            if (nums[Math.abs(n) - 1] < 0) {
+                dup = Math.abs(n);
+            } else {
+                nums[Math.abs(n) - 1] *= -1;
+            }
+        }
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                missing = i + 1;
+            }
+        }
+        return new int[] {dup, missing};
+    }
+}
