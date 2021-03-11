@@ -1,0 +1,196 @@
+/*
+Design the CombinationIterator class:
+
+CombinationIterator(string characters, int combinationLength) Initializes the object with a string characters of sorted distinct lowercase English letters and a number combinationLength as arguments.
+next() Returns the next combination of length combinationLength in lexicographical order.
+hasNext() Returns true if and only if there exists a next combination.
+ 
+
+Example 1:
+
+Input
+["CombinationIterator", "next", "hasNext", "next", "hasNext", "next", "hasNext"]
+[["abc", 2], [], [], [], [], [], []]
+Output
+[null, "ab", true, "ac", true, "bc", false]
+
+Explanation
+CombinationIterator itr = new CombinationIterator("abc", 2);
+itr.next();    // return "ab"
+itr.hasNext(); // return True
+itr.next();    // return "ac"
+itr.hasNext(); // return True
+itr.next();    // return "bc"
+itr.hasNext(); // return False
+ 
+
+Constraints:
+
+1 <= combinationLength <= characters.length <= 15
+All the characters of characters are unique.
+At most 104 calls will be made to next and hasNext.
+It's guaranteed that all calls of the function next are valid.
+*/
+
+class CombinationIterator {
+    public Deque < String > combinations = new ArrayDeque < String > ();
+    String characters;
+    int n, k;
+
+    public void backtrack(int first, StringBuilder curr) {
+        // if the combination is done
+        if (curr.length() == k) {
+            combinations.push(curr.toString());
+            // speed up by non-constructing combinations 
+            // with more than k elements  
+            return;
+        }
+
+        for (int i = first; i < n; ++i) {
+            // add i into the current combination
+            curr.append(characters.charAt(i));
+            // use next integers to complete the combination
+            backtrack(i + 1, curr);
+            // backtrack
+            curr.deleteCharAt(curr.length() - 1);
+        }
+    }
+
+    public CombinationIterator(String characters, int combinationLength) {
+        this.n = characters.length();
+        this.k = combinationLength;
+        this.characters = characters;
+        backtrack(0, new StringBuilder());
+    }
+
+    public String next() {
+        return combinations.removeLast();
+    }
+
+    public boolean hasNext() {
+        return (!combinations.isEmpty());
+    }
+}
+
+===============================================
+
+
+class CombinationIterator {
+    public Deque < String > combinations = new ArrayDeque < String > ();
+
+    public CombinationIterator(String characters, int combinationLength) {
+        int n = characters.length();
+        int k = combinationLength;
+
+        // generate bitmasks from 0..00 to 1..11  
+        for (int bitmask = 0; bitmask < 1 << n; bitmask++) {
+            // use bitmasks with k 1-bits
+            if (Integer.bitCount(bitmask) == k) {
+                // convert bitmask into combination
+                // 111 --> "abc", 000 --> ""
+                // 110 --> "ab", 101 --> "ac", 011 --> "bc"
+                StringBuilder curr = new StringBuilder();
+                for (int j = 0; j < n; j++) {
+                    if ((bitmask & (1 << n - j - 1)) != 0) {
+                        curr.append(characters.charAt(j));
+                    }
+                }
+                combinations.push(curr.toString());
+            }
+        }
+    }
+
+    public String next() {
+        return combinations.pop();
+    }
+
+    public boolean hasNext() {
+        return (!combinations.isEmpty());
+    }
+}
+
+
+=============================================
+
+
+class CombinationIterator {
+    int bitmask, n, k;
+    String chars;
+
+    public CombinationIterator(String characters, int combinationLength) {
+        n = characters.length();
+        k = combinationLength;
+        chars = characters;
+
+        // generate first bitmask 1(k)0(n - k)
+        bitmask = (1 << n) - (1 << n - k);
+    }
+
+    public String next() {
+        // convert bitmask into combination
+        // 111 --> "abc", 000 --> ""
+        // 110 --> "ab", 101 --> "ac", 011 --> "bc"
+        StringBuilder curr = new StringBuilder();
+        for (int j = 0; j < n; j++) {
+            if ((bitmask & (1 << n - j - 1)) != 0) {
+                curr.append(chars.charAt(j));
+            }
+        }
+
+        // generate next bitmask
+        bitmask--;
+        while (bitmask > 0 && Integer.bitCount(bitmask) != k) {
+            bitmask--;
+        }
+
+        return curr.toString();
+    }
+
+    public boolean hasNext() {
+        return bitmask > 0;
+    }
+}
+
+==============================================
+
+class CombinationIterator {
+    public Deque < String > combinations = new ArrayDeque < String > ();
+
+    public CombinationIterator(String characters, int combinationLength) {
+        int n = characters.length(), k = combinationLength;
+
+        // init the first combination
+        int[] nums = new int[k + 1];
+        for (int i = 0; i < k; ++i) {
+            nums[i] = i;
+        }
+        nums[k] = n;
+
+        int j = 0;
+        while (j < k) {
+            // add current combination
+            StringBuilder sb = new StringBuilder();
+            for (int i = k - 1; i > -1; i--) {
+                sb.append(characters.charAt(n - 1 - nums[i]));
+            }
+            combinations.push(sb.toString());
+            // Generate next combination.
+            // Find the first j such that nums[j] + 1 != nums[j + 1].
+            // Increase nums[j] by one.
+            j = 0;
+            while ((j < k) && (nums[j + 1] == nums[j] + 1)) {
+                nums[j] = j;
+                j++;
+            }
+            nums[j]++;
+        }
+    }
+
+    public String next() {
+        return combinations.pop();
+    }
+
+    public boolean hasNext() {
+        return (!combinations.isEmpty());
+    }
+}
