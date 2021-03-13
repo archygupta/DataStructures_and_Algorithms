@@ -69,3 +69,23 @@ class Solution {
         return answer;
     }
 }
+
+===============================================================================
+
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        int need = (int) Math.pow(2, k);
+        HashSet < String > got = new HashSet < String > ();
+        for (int i = 0; i <= s.length() - k; i++) {
+            String str = s.substring(i, i + k);
+            if (!got.contains(str)) {
+                got.add(str);
+                if (need == got.size())
+                    return true;
+            }
+        }
+        if (got.size() < need)
+            return false;
+        return true;
+    }
+}
