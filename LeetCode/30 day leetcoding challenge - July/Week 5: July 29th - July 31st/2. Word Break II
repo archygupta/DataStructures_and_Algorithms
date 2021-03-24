@@ -59,3 +59,48 @@ class Solution {
         return result;
     }
 }
+
+//Ola Interview
+
+package xyz;
+import java.util.*;
+
+public class Interview {
+	
+
+	public static void generateSentence(String s , int start, String result, HashSet<String> dict, ArrayList<String> ans){
+	if(start == s.length())
+		{
+			ans.add(result);
+			return;
+		}
+	
+	for(int i=start ; i< s.length(); i++){
+		 String temp = s.substring(start, i+1);
+		 if(dict.contains(temp)) {
+			 if(start == 0)
+				 result = "";
+			 result += result.isEmpty() ?  temp  : " "+temp;
+			 generateSentence(s, i+1, result, dict, ans);
+		 }
+	}
+}
+
+	public static void main(String args[]) {
+		HashSet<String> dict = new HashSet<>();
+		makeDictionary(dict);
+		ArrayList<String> ans = new ArrayList<String>();
+		generateSentence("catsanddog", 0, "", dict, ans);
+		for(String s: ans) {
+			System.out.println(s);
+		}
+	}
+
+	private static void makeDictionary(HashSet<String> dict) {
+		dict.add("cat");
+		dict.add("cats");
+		dict.add("and");
+		dict.add("sand");
+		dict.add("dog");
+	}
+}
