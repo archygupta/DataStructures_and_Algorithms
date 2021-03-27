@@ -1,3 +1,5 @@
+https://leetcode.com/problems/word-subsets/discuss/175854/JavaC%2B%2BPython-Straight-Forward
+
 /*
 We are given two arrays A and B of words.  Each word is a string of lowercase letters.
 Now, say that word b is a subset of word a if every letter in b occurs in a, including multiplicity.  For example, "wrr" is a subset of "warrior", but is not a subset of "world".
@@ -58,3 +60,42 @@ class Solution {
         return result;
     }
 }
+
+=====================================================================================
+
+https://leetcode.com/problems/word-subsets/discuss/175854/JavaC%2B%2BPython-Straight-Forward
+
+class Solution {
+    public List < String > wordSubsets(String[] A, String[] B) {
+        int count[] = new int[26];
+        int temp[] = new int[26];
+        for (String b: B) {
+            temp = counter(b);
+            for (int i = 0; i < 26; i++) {
+                count[i] = Math.max(temp[i], count[i]);
+            }
+        }
+        ArrayList < String > result = new ArrayList < String > ();
+        for (String a: A) {
+            temp = counter(a);
+            int i;
+            for (i = 0; i < 26; i++) {
+                if (temp[i] < count[i]) {
+                    break;
+                }
+            }
+            if (i == 26)
+                result.add(a);
+        }
+        return result;
+    }
+
+    public int[] counter(String s) {
+        int[] count = new int[26];
+        for (char c: s.toCharArray()) {
+            count[c - 'a']++;
+        }
+        return count;
+    }
+}
+
