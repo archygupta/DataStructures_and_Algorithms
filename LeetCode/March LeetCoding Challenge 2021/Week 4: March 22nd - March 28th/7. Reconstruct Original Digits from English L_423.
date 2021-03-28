@@ -1,0 +1,122 @@
+/*
+Given a non-empty string containing an out-of-order English representation of digits 0-9, output the digits in ascending order.
+
+Note:
+Input contains only lowercase English letters.
+Input is guaranteed to be valid and can be transformed to its original digits. That means invalid inputs such as "abc" or "zerone" are not permitted.
+Input length is less than 50,000.
+
+Example 1:
+Input: "owoztneoer"
+Output: "012"
+
+Example 2:
+Input: "fviefuro"
+Output: "45"
+*/
+
+//13 tests passed
+
+class Pair {
+    String number;
+    String num;
+    Pair(String number, String num) {
+        this.number = number;
+        this.num = num;
+    }
+}
+
+class Solution {
+
+    public void buildHashmap(HashMap < Character, ArrayList < Pair >> hm) {
+        ArrayList < Pair > pairs = new ArrayList();
+
+        pairs.add(new Pair("zero", "0"));
+        hm.put('z', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("one", "1"));
+        hm.put('o', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("two", "2"));
+        pairs.add(new Pair("three", "3"));
+        hm.put('t', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("four", "4"));
+        pairs.add(new Pair("five", "5"));
+        hm.put('f', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("seven", "7"));
+        pairs.add(new Pair("six", "6"));
+        hm.put('s', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("eight", "8"));
+        hm.put('e', pairs);
+        pairs = new ArrayList();
+
+        pairs.add(new Pair("nine", "9"));
+        hm.put('n', pairs);
+        pairs = new ArrayList();
+    }
+
+    public void buildCountMap(String s, HashMap < Character, Integer > cm) {
+        for (char c: s.toCharArray()) {
+            cm.put(c, cm.getOrDefault(c, 0) + 1);
+        }
+    }
+
+    public String originalDigits(String s) {
+        StringBuilder result = new StringBuilder();
+        HashMap < Character, ArrayList < Pair >> hm = new HashMap < > ();
+        HashMap < Character, Integer > cm = new HashMap < > ();
+        HashSet < String > hs = new HashSet < > ();
+        HashMap < Character, Integer > currM;
+        buildHashmap(hm);
+        buildCountMap(s, cm);
+
+
+
+
+        for (char c: s.toCharArray()) {
+            if (hm.containsKey(c)) {
+                ArrayList < Pair > pairs = hm.get(c);
+                for (Pair p: pairs) {
+                    if (!hs.contains(p.number)) {
+                        String curr = p.number;
+                        System.out.println(curr);
+                        boolean exist = true;
+                        currM = new HashMap < > ();
+                        buildCountMap(curr, currM);
+
+                        for (Map.Entry < Character, Integer > m: currM.entrySet()) {
+
+                            if (!cm.containsKey(m.getKey()) || !((int) m.getValue() <= (int)(cm.get(m.getKey())))) {
+                                System.out.print("cm: " + m.getValue() + " " + m.getKey());
+                                hs.add(curr);
+                                exist = false;
+                                break;
+                            }
+                        }
+                        if (exist) {
+                            for (char ch: curr.toCharArray()) {
+                                System.out.println(ch);
+                                cm.put(ch, (int)(cm.get(ch) - 1));
+                            }
+                            result.append(p.num);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        char res[] = new char[result.length()];
+        res = result.toString().toCharArray();
+        Arrays.sort(res);
+        return new String(res);
+    }
+}
