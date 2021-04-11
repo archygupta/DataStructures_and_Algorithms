@@ -4,3 +4,4 @@
 4. L_1773. Count Items Matching a Rule : https://leetcode.com/discuss/topic/1133250
 5. L_575. Distribute Candies : https://leetcode.com/discuss/topic/1088585
 6. L_1302. Deepest Leaves Sum : https://leetcode.com/discuss/topic/1153902
+7. L_1539. Kth Missing Positive Number : https://leetcode.com/problems/kth-missing-positive-number/discuss/1004969/Java-or-Easy-to-understand-or-commented-code-with-explanation-or-O(n)
