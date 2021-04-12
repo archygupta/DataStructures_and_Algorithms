@@ -1,1 +1,26 @@
-
+class Solution {
+  
+    public int findHeight(TreeNode root){
+      if(root == null){
+        return 0;
+      }
+      int left = findHeight(root.left);
+      int right = findHeight(root.right);
+      return left< right ? right+1 : left+1;      
+    }
+  
+    public int sumDeepestLeaves (TreeNode root, int level){
+      if(root==null)
+        return 0;
+      
+      if(level == 1)
+        return root.val;
+      
+      return sumDeepestLeaves(root.left, level-1) + sumDeepestLeaves(root.right, level -1);
+    }
+  
+    public int deepestLeavesSum(TreeNode root) {
+        int height = findHeight(root);
+        return sumDeepestLeaves(root, height);
+    }
+}
