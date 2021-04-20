@@ -6,3 +6,4 @@
 6. L_1302. Deepest Leaves Sum : https://leetcode.com/discuss/topic/1153902
 7. L_1539. Kth Missing Positive Number : https://leetcode.com/problems/kth-missing-positive-number/discuss/1004969/Java-or-Easy-to-understand-or-commented-code-with-explanation-or-O(n)
 8. L_153. Find Minimum in Rotated Sorted Array : https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/discuss/1157052/Java-or-O(logn)-time-or-O(1)-space-or-Simple-or-Easy-or-Commented-or-Binary-Search
+9. L_273. Integer to English Words https://leetcode.com/problems/integer-to-english-words/discuss/1036368/java-easy-to-understand-hashmap/909941
