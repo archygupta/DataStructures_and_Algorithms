@@ -39,21 +39,35 @@ chars[i] is a lower-case English letter, upper-case English letter, digit, or sy
 
 class Solution {
     public int compress(char[] chars) {
+	
+		//Maintaining index to store compressed string in input array
         int index = 0;
+		
+		//Linearly traversig the input array
         for(int i=0 ; i<chars.length ; i++){
+		
+		//Maintaining start and end index for each char and incrementing end untill chars[start] == chars[end]
           int start = i, end = i+1;
           while(end<chars.length && chars[start]==chars[end]){
             end++;
           }
+		  
+		  //Storing current char in input array itself
           chars[index++]=chars[start];
+		  
+		  //If curr char occurs continuously more than once, converting occurance count to string and storing in input array
           if(end - start > 1){
             String temp = String.valueOf(end-start);
             for(char c : temp.toCharArray()){
               chars[index++] = c;
             }
           }
+		  
+		  //Updating outer loop variable as we have traversed some part of chars array in inner loop as well
           i=end-1;
         }
+		
+	//Returning the index untill where we stored our compressed string in input array as it gives us output/result
       return index;
     }
 }
