@@ -1,0 +1,73 @@
+/*
+Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
+
+Example 1:
+Input: n = 12
+Output: 21
+
+Example 2:
+Input: n = 21
+Output: -1
+ 
+Constraints:
+1 <= n <= 231 - 1
+*/
+
+class Solution {
+  public int nextGreaterElement(int n) {
+  
+  //make int array
+    char c[] = String.valueOf(n).toCharArray();
+    int[] arr = new int[c.length];
+    for (int i = 0; i < c.length; i++) {
+      arr[i] = c[i] - '0';
+    }
+    
+    //find first non inreasing pair from right
+    int i = arr.length - 1;
+    for (; i > 0; i--) {
+      if (arr[i] > arr[i - 1]) {
+        break;
+      }
+      if (i == 1)
+        return -1;
+    }
+    
+    //swap i-1 th element with the element just larger than it
+    int idx = i - 1;
+    for (i = arr.length - 1; i > 0; i--) {
+      if (arr[i] > arr[idx]) {
+        int temp = arr[i];
+        arr[i] = arr[idx];
+        arr[idx] = temp;
+        break;
+      }
+    }
+  
+    //reverse the arr from idx+1 to end
+    reverse(arr, idx + 1);
+    
+    //convert array to int and check if answer is within 32 bit integer range and return
+    int ans = 0;
+    for (i = 0; i < arr.length; i++) {
+      if (ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE / 10 && arr[i] > 7))
+        return -1;
+      if (ans < Integer.MIN_VALUE / 10 || (ans == Integer.MIN_VALUE / 10 && arr[i] < -8))
+        return -1;
+      ans = ans * 10 + arr[i];
+    }
+    //If the same integer is formed then return -1
+    return ans == n ? -1 : ans;
+  }
+
+  //helper reverse function
+  public void reverse(int[] arr, int start) {
+    for (int i = start, j = arr.length - 1; i < j; i++, j--) {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+
+    }
+  }
+}
