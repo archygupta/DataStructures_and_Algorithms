@@ -10,4 +10,4 @@
 10. L_443. String Compression https://leetcode.com/problems/string-compression/discuss/1170284/Easy-or-Java-or-Commented-or-1ms-or-O(1)-space-or-Linear
 11. L_48. Rotate Image : https://leetcode.com/problems/rotate-image/discuss/1175776/Java-or-Easy-to-understand-or-Commented-or-double-traversal-or-In-place
 12. L_34. Find First and Last Position of Element in Sorted Array : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/discuss/1182165/Java-or-Binary-Search-or-Commented-or-log(n)-or-Easy-to-understand
-L_1832. Check if the Sentence Is Pangram : https://leetcode.com/problems/check-if-the-sentence-is-pangram/discuss/1184371/Java-or-Easy-or-O(n)-or-Commented
+13. L_1832. Check if the Sentence Is Pangram : https://leetcode.com/problems/check-if-the-sentence-is-pangram/discuss/1184371/Java-or-Easy-or-O(n)-or-Commented
