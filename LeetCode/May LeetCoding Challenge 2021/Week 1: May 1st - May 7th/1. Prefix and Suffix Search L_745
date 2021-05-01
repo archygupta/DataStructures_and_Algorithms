@@ -1,1 +1,24 @@
+https://www.youtube.com/watch?v=3JVlE66WxW0
 
+class WordFilter {
+
+    HashMap < String, Integer > hs = null;
+    public WordFilter(String[] words) {
+        hs = new HashMap < > ();
+        int index = 0;
+        for (String word: words) {
+            for (int i = 0; i <= word.length(); i++) {
+                for (int j = 0; j <= word.length(); j++) {
+                    String PreAndSuff = word.substring(0, i) + "#" + word.substring(j);
+                    hs.put(PreAndSuff, index);
+                }
+            }
+            index++;
+        }
+    }
+
+    public int f(String prefix, String suffix) {
+        String qry = prefix + "#" + suffix;
+        return hs.getOrDefault(qry, -1);
+    }
+}
