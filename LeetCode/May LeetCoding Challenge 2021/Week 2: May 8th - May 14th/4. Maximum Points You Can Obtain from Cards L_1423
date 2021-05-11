@@ -39,3 +39,23 @@ Let the sum of all points be total_pts. You need to remove a sub-array from card
 Hint #2  
 Keep a window of size n - k over the array. The answer is max(answer, total_pts - sumOfCurrentWindow)
 */
+
+//Brute-force
+
+class Solution {
+  
+    int res = 0;
+    public int maxScore(int[] cardPoints, int k) {
+       return max(cardPoints, k, 0, cardPoints.length-1);
+    }
+  
+    public int max(int[] cardPoints, int k, int l , int r){
+      if(k==0)
+        return 0;
+      
+      int left = cardPoints[l] + max(cardPoints, k-1, l+1, r);
+      int right = cardPoints[r] + max(cardPoints, k-1, l, r-1);
+      
+      return Math.max(left, right);
+    }
+}
