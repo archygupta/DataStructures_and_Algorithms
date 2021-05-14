@@ -1,0 +1,42 @@
+class Solution {
+    public List < String > ambiguousCoordinates(String s) {
+        s = s.substring(1, s.length() - 1);
+        List < String > result = new ArrayList < > ();
+
+        for (int i = 1; i < s.length(); i++) {
+            List < String > left = helper(s.substring(0, i));
+            List < String > right = helper(s.substring(i));
+            for (String li: left) {
+                for (String ri: right) {
+                    result.add("(" + li + ", " + ri + ")");
+                }
+
+            }
+        }
+        return result;
+    }
+
+    public List < String > helper(String s) {
+        int l = s.length();
+        char ch[] = s.toCharArray();
+        List < String > result = new ArrayList < > ();
+        if (ch[0] == '0' && ch[l - 1] == '0') {
+            if (l == 1)
+                result.add("0");
+            return result;
+        }
+        if (ch[0] == '0') {
+            result.add("0." + s.substring(1));
+            return result;
+        }
+        if (ch[l - 1] == '0') {
+            result.add(s);
+            return result;
+        }
+        result.add(s);
+        for (int i = 1; i < l; i++) {
+            result.add(s.substring(0, i) + "." + s.substring(i));
+        }
+        return result;
+    }
+}
