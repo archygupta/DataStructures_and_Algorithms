@@ -1,0 +1,10 @@
+class Solution {
+    public String truncateSentence(String s, int k) {
+        int start = 0;
+        while(k>1){
+          start = s.indexOf(' ', start)+1;
+          k--;
+        }
+        return s.indexOf(' ', start) == -1 ? s : s.substring(0, s.indexOf(' ', start));
+    }
+}
