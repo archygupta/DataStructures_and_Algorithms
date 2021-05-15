@@ -13,3 +13,4 @@
 13. L_1832. Check if the Sentence Is Pangram : https://leetcode.com/problems/check-if-the-sentence-is-pangram/discuss/1184371/Java-or-Easy-or-O(n)-or-Commented
 14. L_304. Range Sum Query 2D - Immutable : https://leetcode.com/problems/range-sum-query-2d-immutable/discuss/1204259/Java-or-Easy-or-Easy-to-understand
 15. L_101. Symmetric Tree:  https://leetcode.com/problems/symmetric-tree/discuss/1206699/Java-or-Easy-or-Commented-or-O(n)-or-0ms-or-Faster-than-100
+16. L_1816. Truncate Sentence : https://leetcode.com/problems/truncate-sentence/discuss/1210496/Java-or-Easy-or-O(n)-or-0ms-or-100-faster
