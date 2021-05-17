@@ -1,0 +1,27 @@
+
+
+//821 tests out of 992
+
+class Solution {
+    public int divide(int dividend, int divisor) {
+        int result = 0;
+        boolean sign = true;
+        if(dividend<0 && divisor<0){
+          sign = true;
+        }
+        else if(dividend <0 || divisor <0){
+          sign = false;
+        }
+        dividend = Math.abs(dividend);
+        divisor = Math.abs(divisor);
+        while(dividend > 0 ){
+          if(divisor > dividend)
+            return sign == true ?  result : -result ;
+          dividend -= divisor;
+          result++;
+          if(result == Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+        }
+      return sign == true ?  result : -result ;
+    }
+}
