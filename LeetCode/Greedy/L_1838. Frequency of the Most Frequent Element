@@ -29,8 +29,12 @@ Constraints:
 
 class Solution {
     public int maxFrequency(int[] nums, int k) {
+	
+		//sort array
         Arrays.sort(nums);
         int maxFreq = 0;
+		
+		//start from end of array and see how many elements can be made equal to it and update maxfreq if required
         for(int i=nums.length-1 ; i>=0 ;i--){
           int curr = k;
           int freq= 1;
@@ -43,6 +47,8 @@ class Solution {
               break;
           }
           maxFreq = Math.max(maxFreq, freq);
+		  
+		  //if current maxfreq is greater or equal to remaining elements in array, we can never get a better maxFreq, so return maxFreq
           if(maxFreq >= i+1)
             return maxFreq;
         }
