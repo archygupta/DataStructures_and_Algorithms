@@ -1,3 +1,7 @@
+https://leetcode.com/problems/divide-two-integers/discuss/1213715/simple-without-bitwise
+
+https://leetcode.com/problems/divide-two-integers/discuss/1178532/Java-Solution -> explanation
+
 /*
 Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
 Return the quotient after dividing dividend by divisor.
@@ -46,5 +50,34 @@ class Solution {
             return Integer.MAX_VALUE;
         }
       return sign == true ?  result : -result ;
+    }
+}
+
+//Workng
+
+class Solution {
+    public int divide(int dividend, int divisor) {
+
+        if (dividend == 0) return 0;
+        if (dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
+
+        int result = 0;
+        boolean sign = true;
+        if ((dividend < 0 && divisor < 0) || (divisor > 0 && dividend > 0)) {
+            sign = false;
+        }
+
+        if (dividend > 0) dividend = -dividend;
+        if (divisor > 0) divisor = -divisor;
+
+
+        while (dividend <= divisor) {
+            dividend = dividend - divisor;
+            result++;
+        }
+
+        if (sign && result > 0) return 0 - result;
+
+        else return result;
     }
 }
