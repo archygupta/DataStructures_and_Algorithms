@@ -27,3 +27,13 @@ Constraints:
 s consists only of lowercase English letters and digits.
 shift(s[i-1], s[i]) <= 'z' for all odd indices i.
 */
+
+class Solution {
+    public String replaceDigits(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        for(int i = 1 ; i< sb.length(); i+=2){
+          sb.setCharAt(i,  (char)((int)s.charAt(i-1)+(int)(s.charAt(i)-'0')));
+        }
+      return sb.toString();
+    }
+}
