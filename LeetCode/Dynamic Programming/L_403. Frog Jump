@@ -1,0 +1,40 @@
+https://www.youtube.com/watch?v=kqI5GulPqRE
+
+class Solution {
+  public boolean canCross(int[] stones) {
+    if (stones[1] != 1)
+      return false;
+    ConcurrentHashMap < Integer, HashSet < Integer >> hm = new ConcurrentHashMap < > ();
+    for (int stone: stones) {
+      hm.put(stone, new HashSet < Integer > ());
+    }
+
+    hm.get(0).add(0);
+    hm.get(1).add(1);
+
+    int len = stones.length;
+    for (int i = 1; i < len - 1; i++) {
+      int curr = stones[i];
+      HashSet < Integer > hs = hm.get(curr);
+      for (int k: hs) {
+
+        if (k - 1 > 0 && hm.containsKey(curr + k - 1)) {
+
+          hm.get(curr + k - 1).add(k - 1);
+        }
+        if (hm.containsKey(curr + k)) {
+
+          hm.get(curr + k).add(k);
+        }
+        if (hm.containsKey(curr + k + 1)) {
+
+          hm.get(curr + k + 1).add(k + 1);
+        }
+        if (hm.get(stones[len - 1]).size() > 0)
+          return true;
+      }
+    }
+    return hm.get(stones[len - 1]).size() > 0;
+  }
+
+}
