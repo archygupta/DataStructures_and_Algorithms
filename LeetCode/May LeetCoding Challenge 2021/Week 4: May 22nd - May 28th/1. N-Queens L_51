@@ -1,13 +1,35 @@
+/*
+The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+
+Example 1:
+Input: n = 4
+Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above
+
+Example 2:
+Input: n = 1
+Output: [["Q"]]
+ 
+Constraints:
+1 <= n <= 9
+*/
+
 class Solution {
 
+  //Create result variable to return
   List < List < String >> res = new ArrayList();
 
   public List < List < String >> solveNQueens(int n) {
+
+    //Create an array to place queens
     int[][] arr = new int[n][n];
     nQueens(0, arr, n, new ArrayList < String > ());
     return res;
   }
 
+  //Function to check, if another queen exist in same row, same column or same diagonal, is yes return false, else return true
   public boolean isSafe(int[][] arr, int row, int col) {
     int n = arr.length;
 
@@ -38,13 +60,17 @@ class Solution {
   }
 
   public boolean nQueens(int row, int[][] arr, int n, List < String > s) {
+    //If we placed queens in all rows, it means we have a answer , so just add that to res variable
     if (row >= n) {
       res.add(new ArrayList < String > (s));
       return true;
     }
 
+    //For current row, try to place queen in all columns 
     for (int col = 0; col < n; col++) {
+
       if (isSafe(arr, row, col)) {
+        //If it is safe to place queen in this col in current row,add this to List s
 
         String temp = new String();
         for (int i = 0; i < n; i++) {
@@ -56,7 +82,10 @@ class Solution {
         }
         s.add(temp);
         arr[row][col] = 1;
+
+        //If it is safe to place queen in this col in current row, try to place queen in next row
         if (nQueens(row + 1, arr, n, s)) {}
+        //When all rows are done, remove the Queen in last row,last String from Lst s and try for other combinations
         s.remove(s.size() - 1);
         arr[row][col] = 0;
       }
