@@ -1,0 +1,40 @@
+class Solution {
+
+  private int calOpration(int a, int b, String op) {
+    if (op.equals("+")) {
+      return a + b;
+    } else if (op.equals("-")) {
+      return a - b;
+    } else if (op.equals("*")) {
+      return a * b;
+    } else {
+      return a / b;
+    }
+  }
+
+  private boolean isOperator(String s) {
+    return s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*");
+  }
+
+  public int evalRPN(String[] tokens) {
+    Stack < String > st = new Stack < > ();
+    for (int i = tokens.length - 1; i >= 0; i--) {
+      if (isOperator(tokens[i]) || (!st.isEmpty() && isOperator(st.peek()))) {
+        st.push(tokens[i]);
+      } else {
+        int curr = Integer.parseInt(tokens[i]);
+        while (!st.isEmpty() && !isOperator(st.peek())) {
+          int temp = Integer.parseInt(st.pop());
+          curr = calOpration(curr, temp, st.pop());
+        }
+        st.push(String.valueOf(curr));
+      }
+    }
+    if (st.size() > 1) {
+      int temp = Integer.parseInt(st.pop());
+      int temp2 = Integer.parseInt(st.pop());
+      return calOpration(temp, temp2, st.pop());
+    }
+    return Integer.parseInt(st.pop());
+  }
+}
