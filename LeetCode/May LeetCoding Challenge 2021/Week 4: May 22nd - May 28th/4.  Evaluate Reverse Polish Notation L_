@@ -32,6 +32,7 @@ tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the ran
 
 class Solution {
 
+//Function to calculate an operation
   private int calOpration(int a, int b, String op) {
     if (op.equals("+")) {
       return a + b;
@@ -44,24 +45,33 @@ class Solution {
     }
   }
 
+//Funtion to check if a string is an operator
   private boolean isOperator(String s) {
     return s.equals("+") || s.equals("-") || s.equals("/") || s.equals("*");
   }
 
   public int evalRPN(String[] tokens) {
     Stack < String > st = new Stack < > ();
+	
+	//Going through array from right to left
     for (int i = tokens.length - 1; i >= 0; i--) {
+	
+	//If current token is an operator or top of stack is an operator, push the token to stack
       if (isOperator(tokens[i]) || (!st.isEmpty() && isOperator(st.peek()))) {
         st.push(tokens[i]);
       } else {
+	  
+		//If we have an int on top of stack and current token is also int, we pop one int from top and one operator(second pop will give an operator guaranteed) , do the operation, do it while the top is an int ( example -> curr token = 9, stack (3, +, -11, *))
         int curr = Integer.parseInt(tokens[i]);
         while (!st.isEmpty() && !isOperator(st.peek())) {
           int temp = Integer.parseInt(st.pop());
           curr = calOpration(curr, temp, st.pop());
         }
+		//When stack top doesn't have int anymore, push the current calculated value
         st.push(String.valueOf(curr));
       }
     }
+	//In end, we can either have stack size either 3 or 1, calculate the result accordingly and return
     if (st.size() > 1) {
       int temp = Integer.parseInt(st.pop());
       int temp2 = Integer.parseInt(st.pop());
