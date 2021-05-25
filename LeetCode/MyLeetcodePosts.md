@@ -17,3 +17,4 @@
 17. L_1838. Frequency of the Most Frequent Element : https://leetcode.com/problems/frequency-of-the-most-frequent-element/discuss/1214053/Java-or-Easy-or-Sort-or-Two-pointers-or-Commented
 18. L_1844. Replace All Digits with Characters : https://leetcode.com/problems/replace-all-digits-with-characters/discuss/1218453/Java-or-Easy-or-One-liner-loop-or-0ms-or-Faster-than-100-or-Commented
 19. L_51. N-Queens : https://leetcode.com/problems/n-queens/discuss/1223315/Java-or-Easy-or-Commented-or-Backtracking
+L_150. Evaluate Reverse Polish Notation : 20. https://leetcode.com/problems/evaluate-reverse-polish-notation/discuss/1230445/Java-or-Easy-to-understand-or-commented-or-O(n)-or-6ms
