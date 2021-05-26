@@ -28,3 +28,13 @@ If the input has multiple digits, then you can solve for each digit independentl
    Hide Hint #3  
 Thus the answer is equal to the max digit.
 */
+
+class Solution {
+    public int minPartitions(String n) {
+        int res=0;
+        for(char i : n.toCharArray()){
+          res = Math.max(res, i-'0');
+        }
+      return res;
+    }
+}
