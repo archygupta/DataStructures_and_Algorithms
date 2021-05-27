@@ -1,0 +1,24 @@
+class Solution {
+  public int maxProduct(String[] words) {
+    int res = 0;
+    for (int i = 0; i < words.length - 1; i++) {
+      HashSet < Character > hs = new HashSet < Character > ();
+      for (char c: words[i].toCharArray()) {
+        hs.add(c);
+      }
+      for (int j = i + 1; j < words.length; j++) {
+        int k = 0;
+        for (; k < words[j].length(); k++) {
+          if (hs.contains(words[j].charAt(k))) {
+            break;
+          }
+        }
+        if (k == words[j].length()) {
+          res = Math.max(res, words[j].length() * words[i].length());
+        }
+
+      }
+    }
+    return res;
+  }
+}
