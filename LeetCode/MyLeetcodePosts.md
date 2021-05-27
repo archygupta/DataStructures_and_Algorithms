@@ -18,3 +18,4 @@
 18. L_1844. Replace All Digits with Characters : https://leetcode.com/problems/replace-all-digits-with-characters/discuss/1218453/Java-or-Easy-or-One-liner-loop-or-0ms-or-Faster-than-100-or-Commented
 19. L_51. N-Queens : https://leetcode.com/problems/n-queens/discuss/1223315/Java-or-Easy-or-Commented-or-Backtracking
 20. L_150. Evaluate Reverse Polish Notation : https://leetcode.com/problems/evaluate-reverse-polish-notation/discuss/1230445/Java-or-Easy-to-understand-or-commented-or-O(n)-or-6ms
+21. L_318. Maximum Product of Word Lengths https://leetcode.com/problems/maximum-product-of-word-lengths/discuss/1234273/Java-or-Simple-or-Brute-force-or-Commented
