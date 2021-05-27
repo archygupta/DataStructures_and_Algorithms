@@ -25,24 +25,37 @@ words[i] consists only of lowercase English letters.
 class Solution {
   public int maxProduct(String[] words) {
     int res = 0;
+	
+	//Go throgh array
     for (int i = 0; i < words.length - 1; i++) {
       HashSet < Character > hs = new HashSet < Character > ();
+	  
+	  //Keep curr string chars in hashset 
       for (char c: words[i].toCharArray()) {
         hs.add(c);
       }
+	  
+	  //Traverse next elements
       for (int j = i + 1; j < words.length; j++) {
         int k = 0;
+		
+		//Compare the elements if they have any common char or not
         for (; k < words[j].length(); k++) {
           if (hs.contains(words[j].charAt(k))) {
             break;
           }
         }
+		
+		//If no common char, update res if greater than exixting res
         if (k == words[j].length()) {
           res = Math.max(res, words[j].length() * words[i].length());
         }
 
       }
     }
+	
+	//Return res
     return res;
   }
 }
+
