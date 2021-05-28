@@ -20,3 +20,5 @@
 20. L_150. Evaluate Reverse Polish Notation : https://leetcode.com/problems/evaluate-reverse-polish-notation/discuss/1230445/Java-or-Easy-to-understand-or-commented-or-O(n)-or-6ms
 21. L_318. Maximum Product of Word Lengths https://leetcode.com/problems/maximum-product-of-word-lengths/discuss/1234273/Java-or-Simple-or-Brute-force-or-Commented
 22. L_1791. Find Center of Star Graph : https://leetcode.com/problems/find-center-of-star-graph/discuss/1236473/Java-or-Two-liner-or-Intuition-based-or-100-faster-or-0-ms-or-commented
+23. L_1374. Generate a String With Characters That Have Odd Counts : https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/discuss/1136387/java-optimal-2-solutions-verbose-1-liner-easy
+24. L_575. Distribute Candies : https://leetcode.com/problems/distribute-candies/discuss/1088585/java-easy-simple-on-time
