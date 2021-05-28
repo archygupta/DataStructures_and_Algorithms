@@ -23,3 +23,4 @@
 23. L_1374. Generate a String With Characters That Have Odd Counts : https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/discuss/1136387/java-optimal-2-solutions-verbose-1-liner-easy
 24. L_575. Distribute Candies : https://leetcode.com/problems/distribute-candies/discuss/1088585/java-easy-simple-on-time
 25. L_1557. Minimum Number of Vertices to Reach All Nodes ; https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/discuss/1236621/Java-or-HashSet-or-Easy-to-understand-or-commented
+26. L_1315. Sum of Nodes with Even-Valued Grandparent : https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/discuss/1236751/Java-or-Easy-or-Commented-or-1ms-or-O(n)
