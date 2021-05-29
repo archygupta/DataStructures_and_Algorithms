@@ -27,3 +27,4 @@
 27. L_1695. Maximum Erasure Value : https://leetcode.com/problems/maximum-erasure-value/discuss/1237729/Java-or-Sliding-window-or-HashMap-or-Easy-or-Commented
 28. L_52. N-Queens II : https://leetcode.com/problems/n-queens-ii/discuss/1238937/Java-or-Easy-to-understand-or-Backtracking-or-Commented
 29. L_1038. Binary Search Tree to Greater Sum Tree : https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/discuss/1239023/Java-or-Commented-or-0ms-or-Faster-than-100
+30. L_1448. Count Good Nodes in Binary Tree : https://leetcode.com/problems/count-good-nodes-in-binary-tree/discuss/1239114/Java-or-Easy-or-Commented-or-2ms-or-98-faster
