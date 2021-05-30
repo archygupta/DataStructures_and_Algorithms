@@ -29,3 +29,36 @@ Constraints:
 1 <= arr.length <= 10^5
 0 <= arr[i] <= 10^9
 */
+
+class Solution {
+  public int findLengthOfShortestSubarray(int[] arr) {
+    int peak = 0, ans = 0;
+    int n = arr.length;
+    while (peak < n - 1 && arr[peak] <= arr[peak + 1]) {
+      peak++;
+    }
+
+    if (peak == n - 1)
+      return 0;
+
+    int valley = n - 1;
+    while (valley > peak && arr[valley] >= arr[valley - 1]) {
+      valley--;
+    }
+
+    ans = Math.min(n - peak - 1, valley);
+
+    int i = 0, j = valley;
+    while (i <= peak && j < n) {
+      if (arr[j] >= arr[i]) {
+        ans = Math.min(j - i - 1, ans);
+        i++;
+      } else {
+        j++;
+      }
+    }
+
+    return ans;
+
+  }
+}
