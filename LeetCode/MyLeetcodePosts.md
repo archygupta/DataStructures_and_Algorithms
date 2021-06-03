@@ -29,3 +29,4 @@
 29. L_1038. Binary Search Tree to Greater Sum Tree : https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/discuss/1239023/Java-or-Commented-or-0ms-or-Faster-than-100
 30. L_1448. Count Good Nodes in Binary Tree : https://leetcode.com/problems/count-good-nodes-in-binary-tree/discuss/1239114/Java-or-Easy-or-Commented-or-2ms-or-98-faster
 31. L_1325. Delete Leaves With a Given Value : https://leetcode.com/problems/delete-leaves-with-a-given-value/discuss/1239171/Java-or-Easy-or-Commented-or-0ms-or-100-Faster
+32. L_965. Univalued Binary Tree : https://leetcode.com/problems/univalued-binary-tree/discuss/1249658/Java-or-Easy-or-Commented-or-O(n)-or-0ms-or-100-Faster
