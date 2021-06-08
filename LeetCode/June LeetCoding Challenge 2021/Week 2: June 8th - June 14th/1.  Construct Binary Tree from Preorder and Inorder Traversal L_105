@@ -1,3 +1,5 @@
+https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/
+
 /*
 Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
 
@@ -18,3 +20,29 @@ Each value of inorder also appears in preorder.
 preorder is guaranteed to be the preorder traversal of the tree.
 inorder is guaranteed to be the inorder traversal of the tree.
 */
+
+class Solution {
+    int preOrderIndex;
+    HashMap<Integer, Integer> hm = new HashMap<>();
+    
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+      preOrderIndex = 0;
+        for(int i = 0 ; i<inorder.length; i++){
+          hm.put(inorder[i], i);
+        }
+      return toTree(preorder, 0, preorder.length-1);
+    }
+  
+    public TreeNode toTree(int[] preorder, int start, int end){
+      if(start>end)
+        return null;
+      
+      int rootVal = preorder[preOrderIndex++];
+      TreeNode root = new TreeNode(rootVal);
+      
+      root.left = toTree(preorder, start, hm.get(root.val)-1);
+      root.right = toTree(preorder, hm.get(root.val)+1, end);
+      
+      return root;
+    }
+}
