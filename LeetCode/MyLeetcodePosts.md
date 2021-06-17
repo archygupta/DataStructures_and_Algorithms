@@ -31,3 +31,4 @@
 31. L_1325. Delete Leaves With a Given Value : https://leetcode.com/problems/delete-leaves-with-a-given-value/discuss/1239171/Java-or-Easy-or-Commented-or-0ms-or-100-Faster
 32. L_965. Univalued Binary Tree : https://leetcode.com/problems/univalued-binary-tree/discuss/1249658/Java-or-Easy-or-Commented-or-O(n)-or-0ms-or-100-Faster
 33. L_1800. Maximum Ascending Subarray Sum : https://leetcode.com/problems/maximum-ascending-subarray-sum/discuss/1267878/Java-or-Easy-or-0ms-or-Faster-than-100-or-O(n)-or-Commented
+L_257. Binary Tree Paths : https://leetcode.com/problems/binary-tree-paths/discuss/1279656/Java-or-Simple-or-Easy-or-DFS-or-Recursive
