@@ -1,0 +1,38 @@
+/*
+Given a string s, return the "reversed" string where all characters that are not a letter stay in the same place, and all letters reverse their positions.
+
+Example 1:
+Input: s = "ab-cd"
+Output: "dc-ba"
+
+Example 2:
+Input: s = "a-bC-dEf-ghIj"
+Output: "j-Ih-gfE-dCba"
+
+Example 3:
+Input: s = "Test1ng-Leet=code-Q!"
+Output: "Qedo1ct-eeLg=ntse-T!"
+ 
+Note:
+s.length <= 100
+33 <= s[i].ASCIIcode <= 122 
+s doesn't contain \ or "
+*/
+
+class Solution {
+    public String reverseOnlyLetters(String S) {
+        StringBuilder ans = new StringBuilder();
+        int j = S.length() - 1;
+        for (int i = 0; i < S.length(); ++i) {
+            if (Character.isLetter(S.charAt(i))) {
+                while (!Character.isLetter(S.charAt(j)))
+                    j--;
+                ans.append(S.charAt(j--));
+            } else {
+                ans.append(S.charAt(i));
+            }
+        }
+
+        return ans.toString();
+    }
+}
