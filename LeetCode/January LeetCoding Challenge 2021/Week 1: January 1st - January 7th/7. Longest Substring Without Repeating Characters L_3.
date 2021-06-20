@@ -28,6 +28,8 @@ Constraints:
 s consists of English letters, digits, symbols and spaces.
 */
 
+//Solution 1
+
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int ans=0, i=0, n=s.length();
@@ -42,3 +44,59 @@ class Solution {
       return ans;
     }
 }
+
+//Solution 2
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s==null || s.length()==0)
+          return 0;
+        HashSet<Character> chars = new HashSet<>();
+        int l=0, r=0, result=0;
+      
+        while(r<s.length()){
+          char curr = s.charAt(r);
+          if(chars.contains(curr)){
+            while(s.charAt(l)!=curr){
+              chars.remove(s.charAt(l));
+              l++;
+            }
+            l++;
+          }
+          chars.add(curr);
+          result = Math.max(result, r-l+1);
+          r++;
+        }
+      
+      return result;
+    }
+}
+
+//Solution 3
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+      //basic check
+        if(s==null || s.length()==0)
+          return 0;
+      
+      //creating hasmap
+        HashMap<Character, Integer> hmap = new HashMap<>();
+      
+      //initializing variables
+        int l=0, r=0, result=0;
+      
+      
+        while(r<s.length()){
+          char curr = s.charAt(r);
+          if(hmap.containsKey(curr)){
+            l = Math.max(l, hmap.get(curr)+1);
+          }
+          hmap.put(curr, r);
+          result = Math.max(result, r-l+1);
+          r++;
+        }
+      return result;
+    }
+}
+
