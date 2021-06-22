@@ -32,3 +32,4 @@
 32. L_965. Univalued Binary Tree : https://leetcode.com/problems/univalued-binary-tree/discuss/1249658/Java-or-Easy-or-Commented-or-O(n)-or-0ms-or-100-Faster
 33. L_1800. Maximum Ascending Subarray Sum : https://leetcode.com/problems/maximum-ascending-subarray-sum/discuss/1267878/Java-or-Easy-or-0ms-or-Faster-than-100-or-O(n)-or-Commented
 L_257. Binary Tree Paths : https://leetcode.com/problems/binary-tree-paths/discuss/1279656/Java-or-Simple-or-Easy-or-DFS-or-Recursive
+L_993. Cousins in Binary Tree : https://leetcode.com/problems/cousins-in-binary-tree/discuss/1290592/Java-or-Easy-or-BFS-or-Queue-or-Modular-or-5ms
