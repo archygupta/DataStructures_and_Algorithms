@@ -1,0 +1,91 @@
+/*
+In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
+Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
+Return true if and only if the nodes corresponding to the values x and y are cousins.
+
+Example 1:
+Input: root = [1,2,3,4], x = 4, y = 3
+Output: false
+
+Example 2:
+Input: root = [1,2,3,null,4,null,5], x = 5, y = 4
+Output: true
+
+Example 3:
+Input: root = [1,2,3,null,4], x = 2, y = 3
+Output: false
+ 
+Constraints:
+The number of nodes in the tree will be between 2 and 100.
+Each node has a unique integer value from 1 to 100.
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+
+  boolean isParent(TreeNode root, int val) {
+    if (root.left != null && root.left.val == val)
+      return true;
+    if (root.right != null && root.right.val == val)
+      return true;
+    return false;
+  }
+
+  boolean bfs(TreeNode root, int x, int y) {
+    Queue < TreeNode > q = new LinkedList < > ();
+    q.add(root);
+    TreeNode parent = null;
+
+    while (!q.isEmpty()) {
+      int count = q.size();
+      while (count > 0) {
+        TreeNode temp = q.poll();
+        if (temp.left != null) {
+          q.add(temp.left);
+          if (temp.left.val == x)
+            parent = temp;
+        }
+        if (temp.right != null) {
+          q.add(temp.right);
+          if (temp.right.val == x)
+            parent = temp;
+
+        }
+        count--;
+      }
+
+      if (parent != null) {
+        for (TreeNode curr: q) {
+          if (!isParent(parent, curr.val)) {
+            if (curr.val == y) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+    }
+    return false;
+
+  }
+  public boolean isCousins(TreeNode root, int x, int y) {
+    return bfs(root, x, y);
+  }
+}
