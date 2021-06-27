@@ -41,3 +41,25 @@ class Solution {
         return findMin(nums, 0, nums.length);
     }
 }
+
+
+=============================================================================
+
+
+class Solution {
+    public int findMin(int[] nums,int start,int end) {
+        if(start==end) return nums[start];
+        int mid=(start+end)/2;
+        int lmin = Math.min(nums[start],nums[mid]);
+        int rmin = Math.min(nums[mid+1],nums[end]);
+        if(lmin==rmin) {
+            return Math.min(findMin(nums,start,mid),findMin(nums,mid+1,end));
+        }
+        else
+            return lmin<rmin ? findMin(nums,start,mid): findMin(nums,mid+1,end);
+    }
+    public int findMin(int[] nums) {
+        return findMin(nums,0,nums.length-1);
+    }
+}
+
