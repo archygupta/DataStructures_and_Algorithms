@@ -23,6 +23,8 @@ Constraints:
 haystack and needle consist of only lower-case English characters.
 */
 
+//TLE:
+
 class Solution {
     public int strStr(String haystack, String needle) {
         if(needle==null || needle.length() == 0){
