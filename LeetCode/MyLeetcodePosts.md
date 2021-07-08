@@ -34,3 +34,4 @@
 34. L_257. Binary Tree Paths : https://leetcode.com/problems/binary-tree-paths/discuss/1279656/Java-or-Simple-or-Easy-or-DFS-or-Recursive
 35. L_993. Cousins in Binary Tree : https://leetcode.com/problems/cousins-in-binary-tree/discuss/1290592/Java-or-Easy-or-BFS-or-Queue-or-Modular-or-5ms
 36. L_1047. Remove All Adjacent Duplicates In String : https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/discuss/1302279/Java-or-Easy-or-Stack
+37. L_718. Maximum Length of Repeated Subarray : https://leetcode.com/problems/maximum-length-of-repeated-subarray/discuss/1325491/Java-or-Recursive-or-Optimal-or-Easy-to-understand
