@@ -18,7 +18,8 @@ Hint #1
 Use dynamic programming. dp[i][j] will be the answer for inputs A[i:], B[j:].
 */
 
-//Recursioclass Solution {
+//Recursive
+class Solution {
 
   public int findLength(int[] nums1, int[] nums2, int m, int n, int count) {
     if (m == 0 || n == 0)
