@@ -34,3 +34,17 @@ class Solution {
         return s.trim();
     }
 }
+
+=========================================================
+
+class Solution {
+    public String reverseWords(String s) {
+        String str[] = s.trim().split("\\s+");
+        for(int i=str.length-1, j=0;i>j;i--,j++){
+          String temp = str[i];
+          str[i]=str[j];
+          str[j]=temp;
+        }
+      return String.join(" ", str);
+    }
+}
