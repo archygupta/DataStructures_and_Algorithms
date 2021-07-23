@@ -88,8 +88,6 @@ class MedianFinder {
           }
         }
     }
-            System.out.println(num+" "+pq1.size() + " "+pq2.size());
-
     }
     
     public double findMedian() {
