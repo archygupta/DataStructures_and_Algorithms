@@ -61,3 +61,45 @@ class Solution {
         return combinations;
     }
 }
+
+
+==================================================================================================
+
+//Without global variables
+
+class Solution {
+
+  public void makeMap(Map < Integer, String > map) {
+    map.put(2, "abc");
+    map.put(3, "def");
+    map.put(4, "ghi");
+    map.put(5, "jkl");
+    map.put(6, "mno");
+    map.put(7, "pqrs");
+    map.put(8, "tuv");
+    map.put(9, "wxyz");
+  }
+
+  public void makeLetterCombinations(int index, StringBuilder sb, String digits, Map < Integer, String > map, List < String > res) {
+    if (index == digits.length()) {
+      res.add(sb.toString());
+      return;
+    }
+    String curr = map.get((int) digits.charAt(index) - '0');
+    for (int i = 0; i < curr.length(); i++) {
+      sb.append(curr.charAt(i));
+      makeLetterCombinations(index + 1, sb, digits, map, res);
+      sb.deleteCharAt(sb.length() - 1);
+    }
+  }
+
+  public List < String > letterCombinations(String digits) {
+    List < String > res = new ArrayList < > ();
+    if (digits == null || digits.length() == 0)
+      return res;
+    Map < Integer, String > map = new HashMap < > ();
+    makeMap(map);
+    makeLetterCombinations(0, new StringBuilder(), digits, map, res);
+    return res;
+  }
+}
