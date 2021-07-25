@@ -67,3 +67,72 @@ class Solution {
         return sortedList(left, right);
     }
 }
+
+=====================================================================================
+
+class Solution {
+  
+    public ListNode sortListHelper(ListNode p, ListNode q){
+      if(p == null)
+        return q;
+      
+      if(q==null)
+        return p;
+      
+      ListNode sort=null;
+      if(p.val<=q.val){
+        sort=p;
+        p=p.next;
+      }
+      else{
+        sort=q;
+        q=q.next;
+      }
+      
+      ListNode root = sort;
+      
+      while(p!=null && q!=null){
+        if(p.val<=q.val){
+          sort.next=p;
+          p=p.next;
+          sort=sort.next;
+        }
+        else{
+          sort.next=q;
+          q=q.next;
+          sort=sort.next;
+        }
+      }
+      if(p!=null)
+        sort.next=p;
+      
+      if(q!=null)
+        sort.next=q;
+      
+      return root;
+    }
+  
+    public ListNode sortList(ListNode head) {
+      
+        if(head==null || head.next==null)
+          return head;
+      
+        ListNode mid = getMid(head);
+        ListNode next = mid.next;
+        mid.next=null;
+        ListNode left = sortList(head);
+        ListNode right = sortList(next);
+        
+        return sortListHelper(left, right);
+      
+    }
+  
+  public ListNode getMid(ListNode node){
+    ListNode fast=node, slow=node;
+    while(fast.next!=null && fast.next.next!=null){
+      fast=fast.next.next;
+      slow=slow.next;
+    }
+    return slow;
+  }
+}
