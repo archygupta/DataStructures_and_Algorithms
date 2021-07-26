@@ -1,0 +1,17 @@
+class Solution {
+  
+    public TreeNode buildBinaryTree(int[] nums, int start, int end){
+      if(start>end)
+        return null;
+      int mid = (start+end)/2;
+      TreeNode node = new TreeNode(nums[mid]);
+      node.left=buildBinaryTree(nums, start, mid-1);
+      node.right=buildBinaryTree(nums,mid+1,end);
+      return node;
+    }
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if(nums.length==0)
+          return null;
+        return buildBinaryTree(nums,0,nums.length-1);
+    }
+}
