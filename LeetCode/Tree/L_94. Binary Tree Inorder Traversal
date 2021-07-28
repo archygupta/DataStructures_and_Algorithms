@@ -43,3 +43,29 @@ class Solution {
         return res;
     }
 }
+
+========================================================================
+
+//Iterative
+
+https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode curr) {
+      List<Integer> res = new ArrayList<>();
+      if(curr==null)
+        return res;
+      
+        Stack<TreeNode> st = new Stack<>();
+        while(curr!=null || st.size()>0){
+          while(curr!=null){
+            st.add(curr);
+            curr=curr.left;
+          }
+          TreeNode n = st.pop();
+          res.add(n.val);
+          curr=n.right;
+        }
+      return res;
+    }
+}
