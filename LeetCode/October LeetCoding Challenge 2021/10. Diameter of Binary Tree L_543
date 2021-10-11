@@ -1,0 +1,31 @@
+class Solution {
+  
+    public int height(TreeNode root)
+    {
+      if(root==null)
+      {
+        return 0;
+      }
+      int lH =height(root.left);
+      int rH =height(root.right);
+      if(lH<rH)
+      {
+        return rH+1;
+      }
+      else
+      {
+        return lH+1;
+      }
+      
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+      if(root==null)
+      {
+        return 0;
+      }
+      int lheight = height(root.left);
+      int rheight = height(root.right);
+      return Math.max(Math.max(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)), lheight+rheight);
+        
+    }
+}
