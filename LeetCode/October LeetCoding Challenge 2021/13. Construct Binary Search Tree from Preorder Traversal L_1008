@@ -1,1 +1,31 @@
 https://github.com/archygupta/DataStructures_and_Algorithms/blob/master/LeetCode/30%20day%20leetcoding%20challenge/Week%203:%20April%2015th-April%2021st/6.%20Construct%20Binary%20Search%20Tree%20from%20Preorder%20Traversal
+
+youtube.com/watch?v=9sw8RRsBw6s
+
+o(n^2)
+
+class Solution {
+  
+    public TreeNode insert(TreeNode root, int val){
+      if(root==null)
+      {
+        root = new TreeNode(val);
+        return root;
+      }
+       if(root.val>val){
+        root.left = insert(root.left, val);
+      }
+      else{
+        root.right = insert(root.right, val);
+      }
+      return root;
+    }
+  
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root = null;
+        for(int i=0;i<preorder.length;i++){
+          root = insert(root, preorder[i]);
+        }
+      return root;
+    }
+}
