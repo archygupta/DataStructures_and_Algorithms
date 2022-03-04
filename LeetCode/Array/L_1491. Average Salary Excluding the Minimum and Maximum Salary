@@ -39,3 +39,23 @@ class Solution {
       return sum / (salary.length-2);
     }
 }
+
+======================================================
+
+class Solution {
+    public double average(int[] salary) {
+        int min=salary[0], max=salary[1];
+        double sum=0;
+        
+        for(int i: salary){
+            sum+=i;
+            min=Math.min(min,i);
+            max=Math.max(max,i);
+        }
+        
+        sum-=min;
+        sum-=max;
+        
+        return sum/(salary.length-2);
+    }
+}
