@@ -37,3 +37,4 @@
 37. L_718. Maximum Length of Repeated Subarray : https://leetcode.com/problems/maximum-length-of-repeated-subarray/discuss/1325491/Java-or-Recursive-or-Optimal-or-Easy-to-understand
 38. L_300. Longest Increasing Subsequence : https://leetcode.com/problems/longest-increasing-subsequence/discuss/1327303/Java-or-DP-or-Easy-to-understand
 39. L_113. Path Sum II : https://leetcode.com/problems/path-sum-ii/discuss/1383587/Java-or-Recursion-or-Backtracking-or-O(n)-or-Easy-to-understand
+40. L_289. Game of Life : https://leetcode.com/problems/game-of-life/discuss/1948770/Java-or-In-place-or-100-faster
