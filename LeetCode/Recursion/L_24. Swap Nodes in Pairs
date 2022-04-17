@@ -35,3 +35,26 @@ class Solution {
         
     }
 }
+
+
+======================================
+
+class Solution {
+     public ListNode swap(ListNode head, ListNode next){
+        if(head == null || next == null)
+            return head;
+        
+        ListNode temp = next.next;
+        next.next=head;
+        head.next= temp!=null ? swap(temp, temp.next): temp;
+        return next;
+    }
+    
+    
+    public ListNode swapPairs(ListNode head) {
+         if(head==null || head.next==null)
+            return head;
+        return swap(head, head.next);
+        
+    }
+}
