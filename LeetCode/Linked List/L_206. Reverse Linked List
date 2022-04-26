@@ -51,3 +51,24 @@ class Solution {
         return temp;
     }
 }
+
+//recursion 2
+
+class Solution {
+    
+    public ListNode reverseList(ListNode head, ListNode newh){
+        if(head == null){
+            return newh;
+        }
+        ListNode next = head.next;
+        head.next = newh;
+        return reverseList(next, head);
+     
+    }
+    
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null)
+            return head;
+        return reverseList(head, null);
+    }
+}
