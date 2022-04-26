@@ -22,3 +22,32 @@ class Solution {
       return prev;
     }
 }
+
+===================================================================
+
+//recursion 
+
+class Solution {
+    ListNode temp;
+    
+    public void reverseList(ListNode prev, ListNode curr){
+        if(curr.next==null){
+            temp=curr;
+            curr.next=prev;
+            prev.next=null;
+          
+            return;
+            
+        }
+        reverseList(curr, curr.next);
+        curr.next= prev;
+     
+    }
+    
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null)
+            return head;
+        reverseList(null, head);
+        return temp;
+    }
+}
