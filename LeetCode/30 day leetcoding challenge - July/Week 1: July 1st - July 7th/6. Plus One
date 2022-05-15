@@ -33,3 +33,36 @@ class Solution {
     return newNumber;
     }
 }
+
+=====================================================================
+
+109/111 tests passed
+
+class Solution {
+    
+    public void addOne(int[] digits, int[] result){
+        int carry = 0, sum = 1;
+        for(int i=digits.length-1 ; i>=0 ; i--){
+            sum += digits[i]+carry;
+            carry = sum>9 ?  1 : 0;
+            sum = sum%10;
+            result[i] = sum;
+            sum = 0;
+        }
+        if(result.length > digits.length)
+        result[0]=1;
+    }
+    public int[] plusOne(int[] digits) {
+        if(digits[digits.length - 1] < 9){
+            digits[digits.length - 1] = digits[digits.length - 1]+1;
+            return digits;
+        }
+        if(digits[0]==9){
+        int[] result = new int[digits.length+1];
+            addOne(digits, result);
+            return result;
+        }
+        addOne(digits, digits);
+        return digits;
+    }
+}
