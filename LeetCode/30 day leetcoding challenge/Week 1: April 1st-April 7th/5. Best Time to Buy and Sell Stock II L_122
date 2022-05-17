@@ -38,3 +38,29 @@ class Solution {
       return sum;        
     }
 }
+
+=========================================
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length == 1)
+            return 0;
+        int i=0,j=1,sum=0;
+        while(i<prices.length){
+            if(j<prices.length && prices[j]>prices[i]){
+            while(j+1<prices.length && prices[j+1]>prices[j]){
+                j++;
+            }
+                sum += prices[j]-prices[i];
+                i=j+1;
+                j=i+1;
+            }
+            else{
+            i++;
+            j=i+1;
+            }
+            
+        }
+        return sum;        
+    }
+}
