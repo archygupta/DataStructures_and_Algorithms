@@ -57,3 +57,29 @@ class Solution {
 
     }
 }
+
+===========================================
+
+class Solution {
+     private void reverse(int[][] matrix, int k){
+        for(int i=0, j=matrix[k].length-1 ; i<j ; i++, j--){
+            int temp = matrix[k][i];
+            matrix[k][i] = matrix[k][j];
+            matrix[k][j]=temp;
+            }
+    }
+    
+    public void rotate(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++){
+            for(int j=i;j<matrix.length;j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for(int i=0;i<matrix.length;i++){
+            reverse(matrix,i);
+        }
+    }
+    
+}
