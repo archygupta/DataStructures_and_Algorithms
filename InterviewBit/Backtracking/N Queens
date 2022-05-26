@@ -77,3 +77,101 @@ public class Solution {
         return m;
     }
 }
+
+================================================
+
+//space optimization
+
+public class Solution {
+
+
+    public void initializeTemp(ArrayList < String > temp, int a) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < a; i++) {
+            sb.append('.');
+        }
+        for (int i = 0; i < a; i++) {
+            temp.add(sb.toString());
+        }
+    }
+
+    public void updateTemp(int row, int col, int n, char c, ArrayList < String > temp) {
+        String s = temp.get(row);
+        s = s.substring(0, col) + c + s.substring(col + 1);
+        temp.set(row, s);
+    }
+
+    public boolean isSafe(int row, int column, int n, ArrayList < String > temp) {
+        //check row
+        for (int col = 0; col < n; col++) {
+            if (temp.get(row).charAt(col) == 'Q')
+                return false;
+        }
+
+        //check col
+        for (int r = 0; r < n; r++) {
+            if (temp.get(r).charAt(column) == 'Q')
+                return false;
+        }
+
+        //check diagonal
+        for (int r = row + 1, c = column + 1; r < n && c < n; r++, c++) {
+            if (temp.get(r).charAt(c) == 'Q') {
+                return false;
+            }
+        }
+
+        for (int r = row - 1, c = column - 1; r >= 0 && c >= 0; r--, c--) {
+            if (temp.get(r).charAt(c) == 'Q') {
+                return false;
+            }
+        }
+
+        for (int r = row - 1, c = column + 1; r >= 0 && c < n; r--, c++) {
+
+            if (temp.get(r).charAt(c) == 'Q') {
+
+                return false;
+
+            }
+
+        }
+
+        for (int r = row + 1, c = column - 1; r < n && c >= 0; r++, c--) {
+
+            if (temp.get(r).charAt(c) == 'Q') {
+
+                return false;
+
+            }
+
+        }
+
+
+
+        return true;
+    }
+    public void solveNQueens(int col, int n, ArrayList < String > temp, ArrayList < ArrayList < String >> res) {
+        if (col == n) {
+            res.add(new ArrayList < String > (temp));
+            return;
+        }
+        for (int row = 0; row < n; row++) {
+            if (isSafe(row, col, n, temp)) {
+                updateTemp(row, col, n, 'Q', temp);
+
+                solveNQueens(col + 1, n, temp, res);
+                updateTemp(row, col, n, '.', temp);
+            }
+
+        }
+    }
+
+    public ArrayList < ArrayList < String >> solveNQueens(int a) {
+        ArrayList < ArrayList < String >> res = new ArrayList < ArrayList < String >> ();
+        ArrayList < String > temp = new ArrayList < String > ();
+        initializeTemp(temp, a);
+        solveNQueens(0, a, temp, res);
+        return res;
+    }
+}
