@@ -19,6 +19,16 @@ Constraints:
 All the integers of nums are unique.
 */
 
+//extra space
+
+https://www.youtube.com/watch?v=YK78FU5Ffjw
+
+==========================================================================
+
+//less space complexity
+
+//https://www.youtube.com/watch?v=f2ic2Rsc9pU
+
 class Solution {
   
     public void swap(int[] nums, int l, int r){
