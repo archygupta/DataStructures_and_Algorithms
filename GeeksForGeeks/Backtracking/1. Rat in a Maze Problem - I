@@ -45,3 +45,36 @@ https://takeuforward.org/data-structure/rat-in-a-maze/
 
 https://www.youtube.com/watch?v=bLGZhJlt4y0&t=1110s
 
+class Solution {
+    
+    public static void findPath(int i, int j, int[][] m, int n, int[] diri, int[] dirj, String d, boolean[][] visited, ArrayList<String> res, String ans){
+        if(i==n-1 && j==n-1 && m[i][j]==1){
+            res.add(ans);
+            return;
+        }
+        for(int idx=0;idx<4;idx++){
+                int newI = i+diri[idx];
+                int newJ = j+dirj[idx];
+                if(newI>=0 && newI<n && newJ>=0 && newJ<n && visited[newI][newJ]==false && m[newI][newJ]==1){
+                    visited[i][j] =true;
+                    findPath(newI,newJ,m,n,diri,dirj,d,visited,res,ans+d.charAt(idx));
+                    visited[i][j] =false;
+                }
+            }
+        
+    }
+    
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        boolean[][] visited = new boolean[n][n];
+        ArrayList<String> res = new ArrayList<>();
+        if(m[0][0]==0)
+            return res;
+        int[] diri = new int[]{-1,1,0,0};
+        int[] dirj = new int[]{0,0,-1,1};
+        String d = "UDLR";
+        String ans = "";
+        findPath(0,0,m,n,diri,dirj,d,visited,res,ans);
+        return res;
+    }
+}
+
