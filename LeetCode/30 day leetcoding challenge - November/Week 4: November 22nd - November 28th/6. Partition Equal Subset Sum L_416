@@ -57,3 +57,33 @@ if(sum==0)
       else
         return partition(nums, sum-nums[n-1], n-1) || partition(nums, sum, n-1);
 */
+
+//Recursive 2
+
+class Solution {
+    public boolean canPartition(int n, int[] nums, int sum){
+        if(sum==0)
+            return true;
+        
+        if(n==0)
+            return false;
+        
+        if(sum >= nums[n-1]){
+            return canPartition(n-1, nums, sum-nums[n-1]) || canPartition(n-1, nums, sum);
+        }
+        else{
+            return canPartition(n-1, nums, sum);
+        }    
+    }
+    
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for(int i:nums)
+            sum += i;
+        
+        if(sum%2==1 || nums.length==1)
+            return false;
+        
+        return canPartition(nums.length, nums, sum/2);
+    }
+}
