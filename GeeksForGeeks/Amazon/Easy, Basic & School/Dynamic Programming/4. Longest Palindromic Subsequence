@@ -7,6 +7,75 @@ https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence/0
 https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/
 
 
+//Best Recursive
+
+class Solution {
+    
+     private String reverse(String text1){
+        StringBuilder s = new StringBuilder(text1);
+        s.reverse();
+        return s.toString();
+    }
+
+    public int longestPalindromeSubseq(String text1) {
+        String text2 = reverse(text1);
+        return longestPalindromeSubseq(text1, text2, text1.length(), text2.length());
+    }
+    
+     public int longestPalindromeSubseq(String text1, String text2, int l1, int l2){
+        if(l1 == 0 || l2 ==0){
+            return 0;
+        }
+        if(text1.charAt(l1-1) == text2.charAt(l2-1)){
+            return 1+ longestPalindromeSubseq(text1, text2, l1-1, l2-1);
+        }
+        else
+            return Math.max(longestPalindromeSubseq(text1, text2, l1-1, l2), longestPalindromeSubseq(text1, text2, l1, l2-1));
+    }
+  
+}
+
+=====================================================================================================================================
+
+DP:
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG {
+    public static String reverse(String s) {
+        return new String(new StringBuilder(s).reverse());
+    }
+    static int longestPalindromicSubsequence(String s1, int p) {
+        String s2 = reverse(s1);
+        int q = p;
+        int dp[][] = new int[p + 1][q + 1];
+        for (int i = 0; i <= p; i++) {
+            for (int j = 0; j <= q; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                } else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[p][q];
+
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            String s = sc.next();
+            System.out.println(longestPalindromicSubsequence(s, s.length()));
+        }
+    }
+}
+
+========================================================================================
+
 Recursive:
 
 Approach:
