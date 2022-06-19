@@ -44,3 +44,52 @@ class GFG
 	    }
 	 }
 }
+
+//https://www.youtube.com/watch?v=ekcwMsSIzVc
+
+//Recursive
+class Solution {
+    
+    public int lengthOfLIS(int idx, int prev_idx, int n, int[] nums){
+        if(idx==n)
+            return 0;
+        
+        int len = 0+lengthOfLIS(idx+1, prev_idx,n,nums);
+        if(prev_idx == -1 || nums[idx] > nums[prev_idx]){
+            len = Math.max(len, 1+lengthOfLIS(idx+1,idx,n,nums));
+        }
+        return len;
+
+    }
+    
+    public int lengthOfLIS(int[] nums) {
+        return lengthOfLIS(0, -1, nums.length,nums);
+    }
+}
+
+//Memoized
+class Solution {
+    
+    public int lengthOfLIS(int idx, int prev_idx, int n, int[][]dp,int[] nums){
+        if(idx==n)
+            return 0;
+        
+        if(dp[idx][prev_idx+1]!=-1)
+            return dp[idx][prev_idx+1];
+        
+        int len = 0+lengthOfLIS(idx+1, prev_idx,n,dp,nums);
+        if(prev_idx == -1 || nums[idx] > nums[prev_idx]){
+            len = Math.max(len, 1+lengthOfLIS(idx+1,idx,n,dp,nums));
+        }
+        return dp[idx][prev_idx+1]= len;
+
+    }
+    
+    public int lengthOfLIS(int[] nums) {
+        int[][] dp = new int[nums.length][nums.length+1];
+        for(int i=0;i<nums.length;i++){
+            Arrays.fill(dp[i], -1);
+        }
+        return lengthOfLIS(0, -1, nums.length, dp,nums);
+    }
+}
