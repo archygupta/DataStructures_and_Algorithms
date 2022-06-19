@@ -2,6 +2,30 @@ https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence/0
 
 https://www.geeksforgeeks.org/longest-repeating-subsequence/
 
+//Same as longest common subsequence(string, same string), just i!=j is the added condition
+
+// Recursive 
+
+class Solution
+{
+    public int LongestRepeatingSubsequence(String text1, String text2, int l1, int l2){
+        if(l1 == 0 || l2 ==0){
+            return 0;
+        }
+        if(text1.charAt(l1-1) == text2.charAt(l2-1) && l1!=l2){
+            return 1+ LongestRepeatingSubsequence(text1, text2, l1-1, l2-1);
+        }
+        else
+            return Math.max(LongestRepeatingSubsequence(text1, text2, l1-1, l2), LongestRepeatingSubsequence(text1, text2, l1, l2-1));
+    }
+    
+     public int LongestRepeatingSubsequence(String text1) {
+            return LongestRepeatingSubsequence(text1, text1, text1.length(), text1.length());
+     }
+}
+
+===================================================================================================
+ 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
