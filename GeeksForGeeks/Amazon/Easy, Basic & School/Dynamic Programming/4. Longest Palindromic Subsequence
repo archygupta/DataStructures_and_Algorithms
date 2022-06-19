@@ -1,5 +1,7 @@
 Best :  https://www.youtube.com/watch?v=wuOOOATz_IA
 
+//Just do same as longest common subsequence between (string, reversed string) for both recursive and dp
+
 https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence/0
 
 https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/
@@ -80,6 +82,8 @@ class GFG {
 }
 
     =================================================================
+
+//don't do this, unnecessarily complex
 
 import java.util.*;
 import java.lang.*;
