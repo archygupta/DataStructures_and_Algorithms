@@ -47,7 +47,7 @@ class GFG
                 dp[i+r]= Math.max(dp[i]+1, dp[i+r]);
             }
         }
-        return dp[l];
+        return dp[l]==-1?0:dp[l];
     }
 	public static void main (String[] args)
 	 {
@@ -62,4 +62,71 @@ class GFG
 	        System.out.println(maxCut(l,p,q,r));
 	    }
 	 }
+}
+
+//Recursion
+
+{
+    //Function to find the maximum number of cuts.
+    public int maximizeCuts(int l, int p, int q, int r)
+    {
+       if(l==0)
+       return 0;
+       
+       int a=0,b=0,c=0;
+       
+       if(p<=l){
+           a=maximizeCuts(l-p, p,q,r);
+       }
+       
+       if(q<=l){
+           b=maximizeCuts(l-q, p,q,r);
+       }
+       
+       if(r<=l){
+           c=maximizeCuts(l-r, p,q,r);
+       }
+       return 1+Math.max(a, Math.max(b,c));
+    }
+}
+
+
+==========================================================================
+
+
+//Memoization
+
+
+class Solution
+{
+int func(int l, int p, int q, int r, int[] dp)
+{
+    if(l==0)
+       return 0;                               
+            
+     if(dp[l]!=-1)                              
+        return dp[l];
+         
+     int a=Integer.MIN_VALUE,b=Integer.MIN_VALUE,c=Integer.MIN_VALUE;         
+   
+     if(p<=l)                                      
+        a=func(l-p,p,q,r,dp);
+   
+     if(q<=l)                                      
+        b=func(l-q,p,q,r,dp);
+   
+     if(r<=l)                                      
+        c=func(l-r,p,q,r,dp);
+   
+     return dp[l]=1+Math.max(a,Math.max(b,c));                    
+         
+}
+
+    public int maximizeCuts(int l, int p, int q, int r)
+    {
+        int[] dp = new int[l+1];
+        Arrays.fill(dp,-1);
+        func(l,p,q,r,dp);
+       return  dp[l] < 0 ? 0 : dp[l];
+    }
 }
