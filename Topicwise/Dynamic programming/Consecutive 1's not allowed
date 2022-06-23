@@ -1,0 +1,34 @@
+https://www.geeksforgeeks.org/count-number-binary-strings-without-consecutive-1s/
+
+https://www.youtube.com/watch?v=nqrXHJWMeBc
+
+//Explanation for consecutive 0's not allowed.
+//when n==1, only 2 solutions are possible i.e. 0,1, going forward for further n's, we can append 1's in both the previous solutions like -> 01,11 but we can only append 0 to
+the previous solution that ended with 1, because no two zero's are allowed consecutive, so we will append it to only 1, i.e. 10. the solution for 2 is 3 (0,1,10). u can solve further
+with same calculation
+
+===================================================
+
+Alternate soluion -> answer is always fibonacci(n+2), when u expand further solution, and make a visualization array it will look like following
+
+n->  1   2  3  4  5  6  
+  0  1   1  2  3  5  8   ->fibonacci  
+  1  1   2  3  5  8  13
+ 
+ //ans is sum of both rows
+
+class Solution {
+    long countStrings(int n) {
+        if (n == 1)
+            return 2;
+        long ans = 0;
+        long z = 1, o = 1;
+        for (int i = 2; i <= n; i++) {
+            long temp = z;
+            z = o % 1000000007 l;
+            o = (temp + o) % 1000000007 l;
+            ans = (z + o) % 1000000007 l;
+        }
+        return ans % 1000000007 l;
+    }
+}
