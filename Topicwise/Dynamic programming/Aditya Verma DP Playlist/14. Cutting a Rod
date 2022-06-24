@@ -1,3 +1,25 @@
 https://www.geeksforgeeks.org/cutting-a-rod-dp-13/
 
 https://www.youtube.com/watch?v=nqowUJzG-iM&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go
+
+//Unbounded knapsack without weight array, but weight array is 1-N, so we will make use of n variable itself, compare with unbounded knapsack to understand better
+
+class Solution{
+    
+    private int cutRod(int[] price,int n,  int wt){
+        if(wt<=0)
+            return 0;
+            
+        if(n==0)
+            return 0;
+            
+        if(wt>=n)          
+        return Math.max(price[n-1]+cutRod(price, n,  wt-n), cutRod(price,n-1, wt));
+        else
+        return cutRod(price, n-1, wt);
+    }
+    
+    public int cutRod(int price[], int n) {
+        return cutRod(price, n , n);
+    }
+}
