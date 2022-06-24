@@ -25,6 +25,37 @@ static int findMinNumberOfCoins(int[] arr, int k, int n) {
         return res;
 }
 
+========================================================================
+
+//Recursive: My version
+
+class Solution {
+    
+    private int coinChange(int[] coins, int n, int k){
+        if(k==0)
+            return 0;
+        
+        int res = Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            if(k>=coins[i]){
+                int subres1 = coinChange(coins, n, k-coins[i]);
+                int subres2 = coinChange(coins, n-1, k);
+                if(subres1!=Integer.MAX_VALUE && subres1+1<res)
+                    res = subres1+1;
+                 if(subres2!=Integer.MAX_VALUE && subres2+1<res)
+                    res = subres2+1;
+            }
+        }
+        return res;
+    }
+    public int coinChange(int[] coins, int amount) {
+        int ans = coinChange(coins, coins.length, amount);
+        return ans==Integer.MAX_VALUE? -1 : ans;
+    }
+}
+
+====================================================================
+
  //Dynamic programming:
  
  static int findMinNumberOfCoins(int[] arr, int k, int n) {
