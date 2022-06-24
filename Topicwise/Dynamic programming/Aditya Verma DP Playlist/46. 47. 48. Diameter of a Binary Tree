@@ -2,6 +2,37 @@ https://www.youtube.com/watch?v=zmPj_Ee3B8c&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY
 
 https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
 
+//Recursive - less optimized
+
+class Solution {
+    // Function to return the diameter of a Binary Tree.
+    
+    int height(Node root){
+        if(root==null){
+            return 0;
+        }
+        
+        int lh=height(root.left);
+        int rh=height(root.right);
+        
+        return lh>rh ? lh+1:rh+1;
+    }
+    
+    int diameter(Node root) {
+        if(root==null)
+            return 0;
+        int lheight = height(root.left);
+        int rheight = height(root.right);
+        
+        int dia1=diameter(root.left);
+        int dia2=diameter(root.right);
+        
+        return Math.max(1+lheight+rheight, Math.max(dia1, dia2));
+    }
+}
+
+=========================================================================
+
 class result {
     int res;
 }
