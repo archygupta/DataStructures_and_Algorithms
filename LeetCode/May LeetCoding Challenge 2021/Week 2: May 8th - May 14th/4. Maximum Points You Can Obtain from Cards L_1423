@@ -82,3 +82,29 @@ class Solution {
       return total - (minSum == Integer.MAX_VALUE ? 0 : minSum); 
     }
 }
+
+====================================================================
+
+//slidng window - easy
+
+https://www.youtube.com/watch?v=TsA4vbtfCvo
+
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int sum = 0, result=0;
+      
+        for(int i=cardPoints.length-k;i<cardPoints.length;i++){
+          sum+=cardPoints[i];
+        }
+        
+        result = sum;
+      
+        for(int i=0, j=cardPoints.length-k ; j<cardPoints.length;i++,j++){
+          sum -= cardPoints[j];
+          sum += cardPoints[i];
+          result = Math.max(sum, result);
+        }
+      
+      return result;
+    }
+}
