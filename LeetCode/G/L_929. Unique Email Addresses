@@ -36,9 +36,6 @@ class Solution {
             s[0] = s[0].substring(0, s[0].indexOf('+')==-1 ? s[0].length() : s[0].indexOf('+'));
             hs.add(s[0]+"@"+s[1]);
         }
-        for(String s:hs){
-            System.out.print(s+"       ");
-        }
         return hs.size();
     }
 }
