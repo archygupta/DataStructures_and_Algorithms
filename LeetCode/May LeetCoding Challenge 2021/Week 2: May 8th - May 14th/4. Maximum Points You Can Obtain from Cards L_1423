@@ -108,3 +108,29 @@ class Solution {
       return result;
     }
 }
+
+===============================================================
+
+//sliding window - easiest as per youtube video
+
+find n-k size window which has minimum sum, asnwer is totalSum- minimum sum
+
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int sum = 0, totSum = 0;
+        for(int i=0;i<cardPoints.length;i++){
+            if(i<cardPoints.length-k)
+                sum += cardPoints[i];
+            totSum += cardPoints[i];
+        }
+        
+        int minSum = sum;
+        
+        for(int i=0, j= cardPoints.length -k ; j<cardPoints.length ; i++, j++){
+            sum -= cardPoints[i];
+            sum += cardPoints[j];
+            minSum = Math.min(sum, minSum);
+        }
+        return totSum-minSum;        
+    }
+}
