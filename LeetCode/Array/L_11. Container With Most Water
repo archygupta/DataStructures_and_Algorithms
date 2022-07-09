@@ -1,5 +1,7 @@
 https://leetcode.com/problems/container-with-most-water/
 
+premium-account: https://leetcode.com/problems/container-with-most-water/solution/ 
+
 /*
 You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
 
@@ -30,6 +32,25 @@ n == height.length
 0 <= height[i] <= 104
 */
 
+
+class Solution {
+    public int maxArea(int[] height) {
+        int l=0, r=height.length-1, res=0;
+        while(l<r){
+            res = Math.max(res,Math.min(height[l], height[r])*(r-l));
+            if(height[l]<height[r]){
+                l++;
+            }
+            else{
+                r--;
+            }
+        }
+        return res;
+    }
+}
+
+
+=======================================================================
 
 class Solution {
     public int maxArea(int[] height) {
