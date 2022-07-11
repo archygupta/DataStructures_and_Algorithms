@@ -1,0 +1,98 @@
+https://leetcode.com/problems/multiply-strings/solution/
+
+/*
+Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+Example 1:
+Input: num1 = "2", num2 = "3"
+Output: "6"
+
+Example 2:
+Input: num1 = "123", num2 = "456"
+Output: "56088"
+ 
+Constraints:
+1 <= num1.length, num2.length <= 200
+num1 and num2 consist of digits only.
+Both num1 and num2 do not contain any leading zero, except the number 0 itself.
+*/
+
+class Solution {
+
+    public StringBuilder sumResults(ArrayList < ArrayList < Integer >> results) {
+
+        //keep one of the result in answer
+        ArrayList < Integer > ans = new ArrayList < > (results.get(results.size() - 1));
+
+        //add digitwise
+        for (int j = 0; j < results.size() - 1; j++) {
+            int carry = 0;
+            ArrayList < Integer > res = new ArrayList < > (results.get(j));
+            for (int i = 0; i < ans.size() || i < res.size(); i++) {
+                int d1 = i < ans.size() ? ans.get(i) : 0;
+                int d2 = i < res.size() ? res.get(i) : 0;
+                int sum = d1 + d2 + carry;
+                carry = sum / 10;
+                ans.set(i, sum % 10);
+
+            }
+            if (carry != 0)
+                ans.add(carry);
+
+        }
+
+        //put summed result from list to stringbilder
+        StringBuilder finalAnswer = new StringBuilder();
+        for (int digit: ans) {
+            finalAnswer.append(digit);
+        }
+
+        //return
+        return finalAnswer;
+    }
+
+    public ArrayList < Integer > multiplyDigit(StringBuilder f, char s, int idx) {
+
+        //arr required zeroes
+        ArrayList < Integer > curr = new ArrayList < > ();
+        for (int i = 0; i < idx; i++) {
+            curr.add(0);
+        }
+        int carry = 0;
+
+        //multiply and store
+        for (int i = 0; i < f.length(); i++) {
+            char first = f.charAt(i);
+            int temp = (s - '0') * (first - '0') + carry;
+            carry = temp / 10;
+            curr.add(temp % 10);
+        }
+        if (carry != 0) {
+            curr.add(carry);
+        }
+        return curr;
+    }
+
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0"))
+            return "0";
+        StringBuilder f = new StringBuilder(num1);
+        StringBuilder s = new StringBuilder(num2);
+
+        //reverse strings
+
+        f.reverse();
+        s.reverse();
+
+        ArrayList < ArrayList < Integer >> results = new ArrayList < > ();
+
+        //multiply each digit to second strig and append required zeroes
+        for (int i = 0; i < s.length(); i++) {
+            results.add(multiplyDigit(f, s.charAt(i), i));
+        }
+
+        //sum all results and reverse and reply
+        return sumResults(results).reverse().toString();
+    }
+}
