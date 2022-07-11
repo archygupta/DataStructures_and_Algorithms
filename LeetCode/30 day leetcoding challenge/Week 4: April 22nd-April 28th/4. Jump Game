@@ -33,3 +33,26 @@ class Solution {
         return false;
     }
 }
+
+=====================================================================
+
+//My very own
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums.length ==0 )
+            return true;
+        boolean[] temp = new boolean[nums.length];
+        temp[0]=true;
+        
+        //mark whatever can be reached with true, at the end return last index value
+        for(int i=0;i<nums.length;i++){
+            if(temp[i]==false)
+                return false;
+            for(int j=i+1;j<nums.length && j<=i+nums[i];j++){
+                temp[j]=true;
+            }
+        }
+        return temp[nums.length-1];
+    }
+}
