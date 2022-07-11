@@ -1,3 +1,5 @@
+https://leetcode.com/problems/next-permutation/solution/  -> has open solution
+
 /*
 Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
@@ -58,5 +60,50 @@ class Solution {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+}
+
+
+=============================================================
+
+class Solution {
+
+    public void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public void reverse(int[] nums, int start) {
+        int end = nums.length - 1;
+        while (start < end) {
+            swap(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        
+        //find a adjacent pair where right > left element
+        while (i >= 0) {
+            if (nums[i] < nums[i + 1])
+                break;
+            i--;
+        }
+        
+        
+        //find from last, an element which is greater than current ith element, swap them
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (nums[i] >= nums[j]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        
+        //reverse after swapping from i+1 to end
+        reverse(nums, i + 1);
     }
 }
