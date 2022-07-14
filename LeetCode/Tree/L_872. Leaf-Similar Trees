@@ -35,13 +35,7 @@ class Solution {
         List<Integer> li2 = new ArrayList<>();
         leafSimilarHelper(root1, li1);
         leafSimilarHelper(root2, li2);
-        if(li1.size()!=li2.size()){
-            return false;
-        }
-        for(int i=0;i<li1.size();i++){
-            if(li1.get(i) != li2.get(i))
-                return false;
-        }
-        return true;
+      
+        return li1.equals(li2);
     }
 }
