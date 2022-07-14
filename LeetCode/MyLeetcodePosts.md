@@ -41,3 +41,5 @@
 41. L_206. Reverse Linked List : https://leetcode.com/problems/reverse-linked-list/discuss/1982605/easy-or-o(n)-or-java
 42. L_350. Intersection of Two Arrays II : https://leetcode.com/problems/intersection-of-two-arrays-ii/discuss/2050355/Java-or-HashMap-or-o(n)-or-easy-to-understand
 43. L_55. Jump Game : https://leetcode.com/problems/jump-game/discuss/2268528/Java-or-Greedy-or-easy-to-understand
+44. L_872. Leaf-Similar Trees : https://leetcode.com/problems/leaf-similar-trees/discuss/2282602/Easy-or-Java-or-1ms
+46. L_257. Binary Tree Paths : https://leetcode.com/problems/binary-tree-paths/discuss/2282607/Easy-or-Java-or-4ms
