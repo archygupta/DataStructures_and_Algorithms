@@ -50,3 +50,32 @@ class Solution {
       return res;
     }
 }
+
+=============================================================================
+
+class Solution {
+    
+    private void binaryTreePaths(TreeNode root, List<String> res, StringBuilder str) {
+        str.append(root.val);
+        if(root.left==null && root.right==null){
+            res.add(str.toString());
+            str.delete(str.lastIndexOf(">")+1,str.length());
+            return;
+        }
+        str.append("->");
+        if(root.left!=null)
+        binaryTreePaths(root.left, res, str);
+         if(root.right!=null)
+        binaryTreePaths(root.right, res, str);
+        str.delete(str.length()-2, str.length());
+        str.delete(str.lastIndexOf(">")+1,str.length());
+    }
+    
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList();
+        if(root==null)
+            return res;
+        binaryTreePaths(root, res, new StringBuilder(""));
+        return res;
+    }
+}
