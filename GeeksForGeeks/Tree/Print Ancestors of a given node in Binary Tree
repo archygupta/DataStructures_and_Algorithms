@@ -1,0 +1,57 @@
+/*
+Given a Binary Tree and a target key, you need to find all the ancestors of the given target key.
+
+              1
+            /   \
+          2      3
+        /  \
+      4     5
+     /
+    7
+Key: 7
+Ancestor: 4 2 1
+Example 1:
+
+Input:
+        1
+      /   \
+     2     3
+target = 2
+Output: 1
+Example 2:
+
+Input:
+         1
+       /   \
+      2     3
+    /  \   /  \
+   4    5 6    8
+  /
+ 7
+target = 7
+Output: 4 2 1
+*/
+
+class Solution
+{
+    
+    public static boolean Ancestors(Node root, int target, ArrayList<Integer> ar)
+    {
+        if(root == null)
+        return false;
+        if(root.data==target)
+        return true;
+        
+        if( Ancestors(root.left, target,ar) ||  Ancestors(root.right, target,ar)){
+            ar.add(root.data);
+        }
+        return true;
+    }
+    
+    public static ArrayList<Integer> Ancestors(Node root, int target)
+    {
+        ArrayList<Integer> ar = new ArrayList<>();
+        Ancestors(root, target,ar);
+        return ar;
+    }
+}
