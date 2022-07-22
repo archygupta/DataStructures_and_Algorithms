@@ -89,3 +89,44 @@ class Solution {
         return root;
     }
 }
+
+======================================================================
+
+//GFG
+
+class Tree {
+    // Function to delete a node from BST.
+    public static Node deleteNode(Node root, int X) {
+        if(root==null)
+            return root;
+            
+        if(X < root.data){
+            root.left = deleteNode(root.left, X);
+        }
+        else if(X > root.data){
+            root.right = deleteNode(root.right, X);
+        }
+        else{
+            if(root.right==null)
+                return root.left;
+                
+            if(root.left==null)
+                return root.left;
+                
+            int val = findMin(root.right);
+            root.data = val;
+            root.right= deleteNode(root.right, val);
+        }
+        return root;
+    }
+    
+    static int findMin(Node root){
+        int res = Integer.MAX_VALUE;
+        Node temp = root;
+        while(temp!=null){
+            res = Math.min(res, temp.data);
+            temp = temp.left;
+        }
+        return res;
+    }
+}
