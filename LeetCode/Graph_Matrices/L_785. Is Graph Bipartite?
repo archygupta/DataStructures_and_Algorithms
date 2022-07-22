@@ -1,4 +1,4 @@
-https://leetcode.com/problems/is-graph-bipartite/Figures/785/RunningExample.mp4
+https://leetcode.com/problems/is-graph-bipartite/Figures/785/RunningExample.mp4   -> very clear explanation in premium account. link works without loging in to leetcode.
 
 /*
 There is an undirected graph with n nodes, where each node is numbered between 0 and n - 1. You are given a 2D array graph, where graph[u] is an array of nodes that node u is adjacent to. More formally, for each v in graph[u], there is an undirected edge between node u and node v. The graph has the following properties:
@@ -37,3 +37,32 @@ graph[u] does not contain u.
 All the values of graph[u] are unique.
 If graph[u] contains v, then graph[v] contains u.
 */
+
+
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] color = new int[n];
+        Arrays.fill(color, -1);
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<n;i++){
+            if(color[i]==-1){
+                color[i]=0;
+                st.add(i);
+            }
+            while(!st.isEmpty()){
+                int t = st.pop();
+                for(int curr : graph[t]){
+                    if(color[curr]==-1){
+                        st.add(curr);
+                        color[curr] = color[t] ^ 1;
+                    }
+                    else if(color[curr]==color[t]){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
