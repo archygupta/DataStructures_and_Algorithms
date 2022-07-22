@@ -42,3 +42,16 @@ class Solution{
         return max_so_far;
     }  
 }
+
+=========================================================
+
+class Solution{
+    long maxSubarraySum(int arr[], int n){
+        int curr = arr[0], max= arr[0];
+        for(int i=1;i<n;i++){
+            curr = Math.max(arr[i], curr+arr[i]);
+            max = Math.max(max, curr);
+        }
+        return max;
+    }
+}
