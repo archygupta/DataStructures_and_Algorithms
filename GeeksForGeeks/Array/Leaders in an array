@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/leaders-in-an-array/
+
+/*
+Write a program to print all the LEADERS in the array. An element is leader if it is greater than all the elements to its right side. And the rightmost element is always a leader. For example in the array {16, 17, 4, 3, 5, 2}, leaders are 17, 5 and 2. 
+Let the input array be arr[] and size of the array be size.
+ 
+ */
+ 
+ class Solution{
+    //Function to find the leaders in the array.
+    static ArrayList<Integer> leaders(int arr[], int n){
+        ArrayList<Integer> res = new ArrayList();
+        int max = Integer.MIN_VALUE;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]>=max){
+                res.add(arr[i]);
+            }
+            max=Math.max(max, arr[i]);
+        }
+        Collections.reverse(res);
+        return res;
+    }
+}
