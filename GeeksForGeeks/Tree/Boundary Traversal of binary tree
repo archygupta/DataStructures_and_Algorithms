@@ -57,3 +57,58 @@ Constraints:
 1 ≤ Number of nodes ≤ 105
 1 ≤ Data of a node ≤ 105
 */
+
+ Solution
+{  
+    private void addLeftBoundary(Node node, ArrayList<Integer> result){
+        if(node==null)
+            return;
+            
+        if(node.left!=null){
+            result.add(node.data);
+            addLeftBoundary(node.left, result);
+        }
+        else if(node.right!=null){
+            result.add(node.data);
+            addLeftBoundary(node.right, result);
+        }
+    }
+    
+    private void addRightBoundary(Node node, ArrayList<Integer> result){
+        if(node==null)
+            return;
+            
+        if(node.right!=null){
+            addRightBoundary(node.right, result);
+            result.add(node.data);
+        }
+        else if(node.left!=null){
+            addRightBoundary(node.left, result);
+            result.add(node.data);
+        }
+    }
+    
+    private void addLeaves(Node node, ArrayList<Integer> result){
+        if(node==null)
+            return;
+            
+        if(node.left==null && node.right==null)
+            result.add(node.data);
+        
+        addLeaves(node.left, result);
+        addLeaves(node.right, result);
+    }
+    
+	ArrayList <Integer> boundary(Node node)
+	{
+	    ArrayList<Integer> result = new ArrayList<>();
+	    result.add(node.data);
+	    
+	    addLeftBoundary(node.left, result);
+	    addLeaves(node.left, result);
+	    addLeaves(node.right, result);
+	    addRightBoundary(node.right, result);
+	    
+	    return result;
+	}
+}
