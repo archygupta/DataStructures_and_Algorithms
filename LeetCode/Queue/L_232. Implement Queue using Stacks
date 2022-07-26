@@ -35,6 +35,44 @@ All the calls to pop and peek are valid.
 */
 
 class MyQueue {
+
+    Stack<Integer> newSt;
+    Stack<Integer> oldSt;
+    public MyQueue() {
+         newSt = new Stack<Integer>();
+         oldSt = new Stack<Integer>();
+    }
+    
+    public void push(int x) {
+        newSt.add(x);
+    }
+    
+    public int pop() {
+        shiftStacks();
+        return oldSt.pop();
+    }
+    
+    public int peek() {
+        shiftStacks();
+        return oldSt.peek();
+    }
+    
+    public boolean empty() {
+        return newSt.isEmpty() && oldSt.isEmpty();
+    }
+  
+    public void shiftStacks(){
+      if(oldSt.isEmpty()){
+        while(!newSt.isEmpty()){
+          oldSt.add(newSt.pop());
+        }
+      }
+    }
+}
+
+===================================================================================
+
+class MyQueue {
     /** Initialize your data structure here. */
     Stack < Integer > newSt;
     Stack < Integer > oldSt;
