@@ -1,0 +1,61 @@
+https://leetcode.com/problems/flatten-binary-tree-to-linked-list/solution/ - premium account
+
+/*
+Given the root of a binary tree, flatten the tree into a "linked list":
+The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+ 
+Example 1:
+Input: root = [1,2,5,3,4,null,6]
+Output: [1,null,2,null,3,null,4,null,5,null,6]
+
+Example 2:
+Input: root = []
+Output: []
+
+Example 3:
+Input: root = [0]
+Output: [0]
+ 
+Constraints:
+The number of nodes in the tree is in the range [0, 2000].
+-100 <= Node.val <= 100
+ 
+Follow up: Can you flatten the tree in-place (with O(1) extra space)?
+*/
+
+/*Solution*/
+/*
+Approach 1: Recursion
+Intuition
+
+A common strategy for tree modification problems is recursion. A tree is a recursive structure. Every node gets to be a root node of some tree and that tree further has a bunch of smaller subtrees each with their own root nodes. So, when it comes to problems where the structure of the tree has to be modified or we have to traverse the tree in general, recursion is one of the top approaches that comes to mind simply because it's easy enough to code up and also is very intuitive to understand. Let's quickly look at a binary tree structure and then we will talk about how we can solve this problem using a recursive strategy.
+We haven't drawn the entire tree in the above image so as to build that intuition for that recursive solution. The main idea behind a recursive solution is that we use the solutions for subproblems to solve an uber level problem. In the case of a tree, the subtrees are essentially our subproblems. So, a recursive solution for this problem is essentially based on the idea that assuming we have already transformed the left and the right halves of a given root node, how do we establish or modify the necessary connections so that we get a right skewed tree overall. Let's look at what this means diagrammatically to have a better understanding.
+In the above figure, we simply showcase the root node of a tree and its left and right subtrees. A great way to think about recursion here is that we "suppose" that recursion does all the hard work for us and flattens out the left and the right subtrees as shown in the figure. What is it that we have to do then to get our final result? We need a right skewed tree, right? Well, we simply have to shuffle around some pointers to get our final result as shown below.
+Let's dive a bit deeper and take a look at an exact tree now to see what exact connections we'll need to establish exactly for this work.
+The figure shown below essentially highlights the exact set of nodes that are required for re-wiring the tree to our final right skewed tree. We've marked them "L" for left, "R" for right, and LT for "left tail". We'll get to the reason as to why we call that third node "left tail", later.
+And finally, let's see how our tree looks like once we rewire the "L" and the "R" nodes properly as well.
+Yeah, we haven't exactly explained what this left tail means. So, if you go back a few figures to the point where we had the left and the right subtrees all flattened out and we hadn't done any pointer manipulation yet, you'll notice that each subtree actually looks like a Linked List. Every linked list has a head node and in this case, we also need the tail node. Once recursion does the hard work for us and flattens out the subtrees, we will essentially get two linked lists and we need the tail end of the left one to attach it to the right one. Let's see what all information we will need in our recursive function at a given node.
+
+_node_ = The current node
+_leftChild_ = the left child of our current node
+_rightChild_ = the right child of our current node
+_leftTail_ = The tail node of the flattened out left subtree
+_rightTail_ = The tail node of the fully formed tree rooted at _node_. This information is needed by the parent recursive calls since the tree rooted at the current node can be some other's node's left subtree or right subtree.
+We have all the information available with us except the tail nodes. That's something that our recursion function will have to return. So, a recursion call for a given node will return the tail node of the flattened out tree. In our example, we will return the node 11 as the tail end of our final flattened out tree.
+
+Algorithm
+We'll have a separate function for flattening out the tree since the main function provided in the problem isn't supposed to return anything and our algorithm will return the tail node of the flattened out tree.
+For a given node, we will recursively flatten out the left and the right subtrees and store their corresponding tail nodes in leftTail and rightTail respectively.
+Next, we will make the following connections (only if there is a left child for the current node, else the leftTail would be null)
+
+ leftTail.right = node.right
+ node.right = node.left
+ node.left = None
+ 
+Next we have to return the tail of the final, flattened out tree rooted at node. So, if the node has a right child, then we will return the rightTail, else, we'll return the leftTail.
+
+Complexity Analysis
+Time Complexity: O(N)O(N) since we process each node of the tree exactly once.
+Space Complexity: O(N)O(N) which is occupied by the recursion stack. The problem statement doesn't mention anything about the tree being balanced or not and hence, the tree could be e.g. left skewed and in that case the longest branch (and hence the number of nodes in the recursion stack) would be NN.
+*/
