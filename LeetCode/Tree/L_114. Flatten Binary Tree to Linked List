@@ -59,3 +59,26 @@ Complexity Analysis
 Time Complexity: O(N)O(N) since we process each node of the tree exactly once.
 Space Complexity: O(N)O(N) which is occupied by the recursion stack. The problem statement doesn't mention anything about the tree being balanced or not and hence, the tree could be e.g. left skewed and in that case the longest branch (and hence the number of nodes in the recursion stack) would be NN.
 */
+
+class Solution {
+    private TreeNode flattenTree(TreeNode root){
+        if(root==null)
+            return root;
+        
+        if(root.left==null && root.right==null)
+            return root;
+        
+        TreeNode leftTail = flattenTree(root.left);
+        TreeNode rightTail = flattenTree(root.right);
+        
+        if(leftTail!=null){
+            leftTail.right = root.right;
+            root.right=root.left;
+            root.left=null;
+        }
+        return rightTail==null ? leftTail : rightTail;
+    }
+    public void flatten(TreeNode root) {
+        flattenTree(root);
+    }
+}
