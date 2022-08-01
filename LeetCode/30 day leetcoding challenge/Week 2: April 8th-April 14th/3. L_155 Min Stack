@@ -57,6 +57,59 @@ class MinStack {
 
 ===========================================================
 
+//With one stack:
+Explanation: https://www.youtube.com/watch?v=V09NfaGf2ao&t=639s
+
+class MinStack {
+
+    Stack<Long>  st;
+    Long min;
+    public MinStack() {
+        st = new Stack<>();
+        min=Long.MAX_VALUE;
+    }
+    
+    public void push(int val) {
+      Long l = Long.valueOf(val);
+        if(st.isEmpty()){
+          st.push(l);
+          min = l;
+        }
+      else{
+        if(min> l){
+         long value =  2*l - min;
+          st.push(value);
+          min = l;
+        }
+        else{
+          st.push(l);
+        }
+      }
+    }
+    
+    public void pop() {
+        if(!st.isEmpty()){
+          if(st.peek()<min){
+            min = 2*min - st.peek();
+          }
+          st.pop();
+        }
+    }
+    
+    public int top() {
+        if(st.peek()< min){
+          return min.intValue();
+        }
+      return st.peek().intValue();
+    }
+    
+    public int getMin() {
+        return min.intValue();
+    }
+}
+
+======================================================================
+
 class MinStack {
     /** initialize your data structure here. */
     /** initialize your data structure here. */
