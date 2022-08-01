@@ -36,6 +36,31 @@ Every timestamp will be passed in non-decreasing order (chronological order).
 At most 104 calls will be made to shouldPrintMessage.
 */
 
+
+//My Solution - easy and intuitive
+
+class Logger {
+    
+    HashMap<String, Integer> log_time;
+    public Logger() {
+        log_time = new HashMap<>();
+    }
+    
+    public boolean shouldPrintMessage(int timestamp, String message) {
+        if(log_time.containsKey(message)){
+            if(timestamp - log_time.get(message) < 10){
+                return false;
+            }
+        }
+        log_time.put(message, timestamp);
+        return true;
+    }
+}
+
+=======================================================================================
+
+Leetcode solutions below:
+
 class Pair<U, V> {
   public U first;
   public V second;
