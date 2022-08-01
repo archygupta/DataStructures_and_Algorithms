@@ -56,6 +56,64 @@ Please use double-quote instead of single-quote when you write test cases even f
 Please remember to RESET your class variables declared in class AutocompleteSystem, as static/class variables are persisted across multiple test cases. Please see here for more details.
  */
  
+ 
+ //Youtube video code written by me
+ 
+ class WordFreq{
+    String sentence;
+    int frequency;
+    
+    public WordFreq(String s, int f){
+        sentence = s;
+        frequency = f;
+    }
+}
+class AutocompleteSystem {
+    
+    HashMap<String, Integer>[] array;
+    String currStr = "";
+
+    public AutocompleteSystem(String[] sentences, int[] times) {
+        array = new HashMap[26];
+        for(int idx=0;idx<26;idx++){
+            array[idx] = new HashMap<String, Integer>();
+        }
+        
+        for(int idx = 0;idx<sentences.length;idx++){
+            array[sentences[idx].charAt(0)- 'a'].put(sentences[idx], times[idx]);
+        }
+    }
+    
+    public List<String> input(char c) {
+        List<String> result =new ArrayList();
+        
+       
+        if(c=='#'){
+             char ch =  currStr.charAt(0);
+            array[ch-'a'].put(currStr, array[ch-'a'].getOrDefault(currStr, 0)+1);
+            currStr = "";
+        }
+        else{
+            currStr +=c;
+            List<WordFreq> list = new ArrayList();
+            for(String key: array[currStr.charAt(0)-'a'].keySet()){
+                if(key.indexOf(currStr)==0){
+                    list.add(new WordFreq(key, array[currStr.charAt(0)-'a'].get(key)));
+                }
+            }
+            Collections.sort(list, (a,b) -> a.frequency == b.frequency?
+                            a.sentence.compareTo(b.sentence):
+                            b.frequency-a.frequency);
+            
+            for(int idx = 0; idx < Math.min(3, list.size()); idx++){
+                result.add(list.get(idx).sentence);
+            }
+        }
+        return result;
+    }
+}
+ 
+ ================================================================================
  class Node {
   String sentence;
   int times;
