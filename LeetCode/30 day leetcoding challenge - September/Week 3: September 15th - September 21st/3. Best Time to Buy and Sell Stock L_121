@@ -18,6 +18,24 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 class Solution {
     public int maxProfit(int[] prices) {
+        int minPro = Integer.MAX_VALUE;
+        int maxPro = 0;
+        for(int i=0;i<prices.length;i++){
+          if(prices[i]<minPro){
+            minPro = prices[i];
+          }
+          else if(maxPro <prices[i]-minPro){
+            maxPro=prices[i]-minPro;
+          }
+        }
+      return maxPro;
+    }
+}
+
+==============================================
+
+class Solution {
+    public int maxProfit(int[] prices) {
         int n = prices.length;
         int min = prices[0];
         int result = 0;
