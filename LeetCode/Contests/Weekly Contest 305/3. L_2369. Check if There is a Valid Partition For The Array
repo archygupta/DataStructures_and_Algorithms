@@ -1,3 +1,5 @@
+https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/discuss/2390630/O(n)-DP-or-Easy-to-understand
+
 /*
 You are given a 0-indexed integer array nums. You have to partition the array into one or more contiguous subarrays.
 
@@ -30,6 +32,37 @@ Constraints:
 
 */
 
+//Working
+
+class Solution {
+    public boolean validPartition(int[] nums) {
+        int n=nums.length;
+        boolean[] valid = new boolean[n];
+      
+       
+        if(nums[0]==nums[1])
+          valid[1]=true;
+       
+        if(n==2)
+          return valid[1];
+      
+       if((nums[0]==nums[1] && nums[1]==nums[2]) || (nums[0]+1==nums[1] && nums[1]+1==nums[2]))
+         valid[2]=true;
+      
+       if(n==3)
+        return valid[2];      
+      
+      for(int i=3;i<n;i++){
+        if(nums[i]==nums[i-1] && valid[i-2]) valid[i]=true;
+        if(nums[i]==nums[i-1] && nums[i-1]==nums[i-2] && valid[i-3]) valid[i]=true;
+        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1 && valid[i-3]) valid[i]=true;
+      }
+      return valid[n-1];
+    }
+}
+
+===================================================================================================
+
 //Memory exception
 
 class Solution {
@@ -52,3 +85,4 @@ class Solution {
         
     }
 }
+
