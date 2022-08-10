@@ -42,3 +42,37 @@ n == nums1.length == nums2.length
 1 <= n <= 105
 1 <= nums1[i], nums2[i] <= 104
 */
+
+class Solution {
+  
+    public int kadane(ArrayList<Integer> a)
+    {
+        int size = a.size();
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+  
+        for (int i = 0; i < size; i++)
+        {
+            max_ending_here = max_ending_here + a.get(i);
+            if (max_so_far < max_ending_here)
+                max_so_far = max_ending_here;
+            if (max_ending_here < 0)
+                max_ending_here = 0;
+        }
+        return max_so_far;
+    }
+    public int maximumsSplicedArray(int[] nums1, int[] nums2) {
+        ArrayList<Integer> ar1 = new ArrayList<>();
+        ArrayList<Integer> ar2 = new ArrayList<>();
+        int sum1=0,sum2=0;
+        for(int i=0;i<nums1.length;i++){
+          sum1 += nums1[i];
+          sum2 += nums2[i];
+          ar1.add(nums1[i]-nums2[i]);
+          ar2.add(nums2[i]-nums1[i]);
+        }
+      
+       int res1= sum2+kadane(ar1);
+        int res2 = sum1+kadane(ar2);
+        return Math.max(res1, res2);
+    }
+}
