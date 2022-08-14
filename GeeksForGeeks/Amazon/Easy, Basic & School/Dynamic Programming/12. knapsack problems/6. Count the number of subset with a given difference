@@ -1,5 +1,9 @@
 Aitya verma: https://www.youtube.com/watch?v=ot_XBHyqpFc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=12
 
+s1-s2 = diff;
+s1+s2 = sum;
+s1 = (diff+sum)/2;
+
 //eclipse: inside amazon
 package Practice;
 
