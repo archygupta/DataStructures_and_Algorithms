@@ -1,5 +1,11 @@
 https://leetcode.com/problems/gray-code/
 
+
+/*for 1, ans is (1,0)
+further, we need to recurse untill 1 and then prefix 0 to result list got by recursion, then prefix list by 1 to result list
+we got by recursion but in reverse order of list.
+*/
+
 /*
 An n-bit gray code sequence is a sequence of 2n integers where:
 
