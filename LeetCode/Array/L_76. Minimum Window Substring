@@ -1,0 +1,50 @@
+https://leetcode.com/problems/minimum-window-substring/
+
+class Solution {
+    public String minWindow(String s, String t) {
+      
+        if(s.length()==0 || t.length()==0)
+          return "";
+        HashMap<Character, Integer> tFreq = new HashMap<>();
+        for(int i=0;i<t.length();i++){
+          tFreq.put(t.charAt(i), tFreq.getOrDefault(t.charAt(i),0)+1);
+        }
+        int formed = 0;
+        int l=0, r=0;
+              int required = tFreq.size();
+
+        Map<Character, Integer> winCount = new HashMap<>();
+        int[] ans = {-1,0,0};
+        while(r<s.length()){
+          char c = s.charAt(r);
+          int count = winCount.getOrDefault(c,0);
+          winCount.put(c,count+1);
+        
+      
+      if(tFreq.containsKey(c) && tFreq.get(c).intValue() == winCount.get(c).intValue()){
+        formed++;
+      }
+      
+      while(l<=r && formed == required){
+        c=s.charAt(l);
+        if(ans[0]==-1 || r-l+1<ans[0]){
+          ans[0] = r-l+1;
+          ans[1]= l;
+          ans[2]= r;
+        }
+        
+        winCount.put(c, winCount.get(c)-1);
+        if(tFreq.containsKey(c) && winCount.get(c).intValue() < tFreq.get(c).intValue())
+          formed--;
+        
+        l++;
+      }
+      r++;
+        }
+      
+       return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+
+    }
+  
+
+}
