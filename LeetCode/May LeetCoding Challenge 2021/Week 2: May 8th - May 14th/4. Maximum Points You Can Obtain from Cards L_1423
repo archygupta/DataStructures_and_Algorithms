@@ -2,6 +2,8 @@ https://www.youtube.com/watch?v=lmHMhe9GtA8
 
 https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/discuss/1202361/Java-Easy-solution-Minimum-subarray-Sum-explained
 
+//find minimum sum subset of length (length-k), subtract it from total and get your answer
+
 /*
 There are several cards arranged in a row, and each card has an associated number of points The points are given in the integer array cardPoints.
 In one step, you can take one card from the beginning or from the end of the row. You have to take exactly k cards.
