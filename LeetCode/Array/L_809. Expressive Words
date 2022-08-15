@@ -1,0 +1,49 @@
+https://leetcode.com/problems/expressive-words/
+
+
+class Solution {
+    public int expressiveWords(String s, String[] words) {
+      if(s == null || words==null)
+          return 0;
+      
+      int count=0;
+      for(String str: words){
+        if(expressable(s, str)){
+          count++;
+        }
+      }
+      return count;
+    }
+  
+    public boolean expressable(String S, String T){
+      int i=0, j=0;
+      while(i<S.length() && j<T.length()){
+      if (S.charAt(i) == T.charAt(j)) {
+        int len1 = countFreq(S, i);
+        int len2 = countFreq(T, j);
+        if(len1 < 3 && len1!=len2 || len1 >= 3 && len1<len2){
+          return false;
+        }
+        i+=len1;
+        j+=len2;
+      }
+        else{
+          return false;
+        }
+      }
+      return i==S.length() && j==T.length();
+    }
+  
+    public int countFreq(String S, int idx){
+      int count=0;
+      for(int i=idx;i<S.length();i++){
+        if(S.charAt(i)==S.charAt(idx)){
+          count++;
+        }
+        else{
+          break;
+        }
+      }
+      return count;
+    }
+}
