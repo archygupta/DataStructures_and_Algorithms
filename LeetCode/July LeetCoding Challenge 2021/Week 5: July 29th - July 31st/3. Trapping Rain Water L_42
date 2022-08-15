@@ -15,3 +15,22 @@ n == height.length
 0 <= n <= 3 * 104
 0 <= height[i] <= 105
 */
+
+class Solution {
+    public int trap(int[] height) {
+        int[] left = new int[height.length];
+        left[0]=height[0];
+        for(int i=1;i<height.length;i++){
+          left[i] = Math.max(height[i], left[i-1]);
+        }
+      
+        int result = 0;
+        int right = 0;
+        for(int i=height.length-1;i>=0;i--){
+        right = Math.max(right, height[i]);
+        result +=  Math.min(left[i], right)-height[i];
+        
+        }
+      return result;
+    }
+}
