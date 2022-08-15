@@ -1,0 +1,29 @@
+https://leetcode.com/problems/find-and-replace-in-string/
+
+//Almost correct -> works for sorted list of indices
+
+class Solution {
+    public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+        StringBuilder res = new StringBuilder();
+        int idx=0;
+        for(int i=0;i<s.length();){
+          if(idx< indices.length && i== indices[idx]){
+
+            if(i+sources[idx].length() <= s.length() && sources[idx].equals(s.substring(i,i+sources[idx].length()))){
+              res.append(targets[idx]);
+              i += sources[idx].length();
+            }
+            else{
+            res.append(s.charAt(i));
+            i++;
+          }
+            idx++;
+          }
+          else{
+            res.append(s.charAt(i));
+            i++;
+          }
+        }
+      return res.toString();
+    }
+}
