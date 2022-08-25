@@ -40,3 +40,67 @@ A node with a value of start exists in the tree.
 
 */
 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int amountOfTime(TreeNode root, int start) {
+      HashMap<Integer, Set<Integer>> map= new HashMap<>();
+      createGraph(root, null, map);
+      
+      Queue<Integer> q = new LinkedList<>();
+      HashSet<Integer> visited = new HashSet<>();
+      q.add(start);
+      visited.add(start);
+      
+      int count = map.size();
+      int res = 0;
+      while(!q.isEmpty()){
+      int size = q.size();
+      for(int i=0;i<size;i++){
+        int curr = q.poll();
+        count--;
+        if(count==0)
+          return res;
+        
+        Set<Integer> temp = map.getOrDefault(curr, new HashSet<Integer>());
+        for(int c: temp){
+          if(!visited.contains(c)){
+            visited.add(c);
+            q.add(c);
+          }
+        }
+        
+      }
+        res++;
+        
+        
+        }
+      return 0;
+    }
+  
+  public void createGraph(TreeNode curr, TreeNode parent, HashMap<Integer, Set<Integer>> map){
+    if(curr==null)
+      return;
+    if(parent!=null){
+      map.putIfAbsent(curr.val, new HashSet<Integer>());
+      map.get(curr.val).add(parent.val);
+      map.putIfAbsent(parent.val, new HashSet<Integer>());
+      map.get(parent.val).add(curr.val);
+    }
+    createGraph(curr.left, curr, map);
+    createGraph(curr.right, curr, map);
+  }
+}
