@@ -1,0 +1,34 @@
+https://leetcode.com/problems/number-of-flowers-in-full-bloom/discuss/1977565/JAVA-BEATS-100.00-MEMORYSPEED-0ms-APRIL-2022
+
+class Solution {
+    public int[] fullBloomFlowers(int[][] flowers, int[] persons) {
+      int max=0;
+        for(int i=0;i<flowers.length;i++){
+          max=Math.max(max, flowers[i][1]);
+        }
+      
+      int[][] flo = new int[flowers.length][max];
+      for(int i=0;i<flowers.length;i++){
+        int start= flowers[i][0]-1, end = flowers[i][1]-1;
+        while(start<=end){
+          flo[i][start]=1;
+          start++;
+        }
+      }
+      
+      int[] res = new int[persons.length];
+      for(int i=0;i<persons.length;i++){
+        int curr = persons[i]-1;
+        int count=0;
+        if(curr<flo[0].length){
+        for(int j=0;j<flo.length;j++){
+          if(flo[j][curr]==1){
+            count++;
+          }
+        }
+        }
+      res[i]=count;
+      }
+      return res;
+    }
+}
