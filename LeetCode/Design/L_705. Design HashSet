@@ -255,3 +255,44 @@ class BSTree {
  * obj.remove(key);
  * boolean param_3 = obj.contains(key);
  */
+
+=========================================================================
+
+
+class MyHashSet {
+    private int bucketSize;
+    private List<Integer>[] hashSet;
+    public MyHashSet() {
+        bucketSize = 15000;
+        hashSet = new LinkedList[bucketSize];
+    }
+  
+    public int findHash(int key){
+      return key%15000;
+    }
+    
+    public void add(int key) {
+        int index = findHash(key);
+        if(hashSet[index] == null){
+          hashSet[index] = new LinkedList<>();
+        }
+      if(hashSet[index].indexOf(key)==-1)
+       hashSet[index].add(key);
+    }
+    
+    public void remove(int key) {
+        int index = findHash(key);
+        if(hashSet[index] == null || hashSet[index].indexOf(key)==-1){
+          return;
+        }
+       hashSet[index].remove(hashSet[index].indexOf(key));
+    }
+    
+    public boolean contains(int key) {
+        int index = findHash(key);
+        if(hashSet[index] == null || hashSet[index].indexOf(key)==-1){
+          return false;
+        }
+      return true;
+    }
+}
