@@ -31,6 +31,33 @@ tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the ran
 */
 
 class Solution {
+    public int evalRPN(String[] tokens) {
+      Stack<String> st = new Stack<>();
+      for(String token: tokens){
+        if(token.equals("+") || token.equals("-") || token.equals("/") || token.equals("*")){
+          int a = Integer.parseInt(st.pop());
+          int b = Integer.parseInt(st.pop());
+          if(token.equals("+"))
+            st.push(String.valueOf(a+b));
+          if(token.equals("-"))
+            st.push(String.valueOf(b-a));
+          if(token.equals("/"))
+            st.push(String.valueOf(b/a));
+          if(token.equals("*"))
+            st.push(String.valueOf(a*b));
+        }
+        else{
+          st.push(token);
+        }
+      }
+      return Integer.parseInt(st.pop());
+    }
+}
+
+==============================================================================
+
+
+class Solution {
 
 //Function to calculate an operation
   private int calOpration(int a, int b, String op) {
