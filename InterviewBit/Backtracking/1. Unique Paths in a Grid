@@ -1,0 +1,30 @@
+public class Solution {
+    
+    int max = 0;
+    
+    public void uniquePathsWithObstacles(int[][] A, int m, int n, int i, int j) {
+        if(i==m-1 && j==n-1){
+            max = max+1;
+        }
+        
+        if(i>=0 && i<m && j>=0 && j<n && A[i][j]!=1){
+        A[i][j]=-1;
+        uniquePathsWithObstacles(A, m, n, i+1, j);
+        uniquePathsWithObstacles(A, m,n, i, j+1);
+        A[i][j]=0;
+        }
+    }
+    
+    public int uniquePathsWithObstacles(int[][] A) {
+        if(A.length == 0)
+            return 0;
+            
+        if(A[0][0]==1 || A[A.length-1][A[0].length-1]==1)
+            return 0;
+            
+        uniquePathsWithObstacles(A, A.length, A[0].length, 0, 0);
+        
+        //System.out.print(max);
+        return max;
+    }
+}
