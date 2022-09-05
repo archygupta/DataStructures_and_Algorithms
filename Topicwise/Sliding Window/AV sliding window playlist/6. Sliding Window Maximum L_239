@@ -4,3 +4,30 @@ https://leetcode.com/problems/sliding-window-maximum/discuss/65884/Java-O(n)-sol
 
 https://github.com/archygupta/DataStructures_and_Algorithms/blob/master/LeetCode/30%20day%20leetcoding%20challenge%20-%20November/Week%204:%20November%2022nd%20-%20November%2028th/7.%20Sliding%20Window%20Maximum%20L_239
 
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Deque<Integer> q = new LinkedList<Integer>();
+        int[] res = new int[nums.length-k+1];
+        int idx=0;
+        for(int i=0;i<nums.length;i++){
+          //remove outside window indexes
+          if(!q.isEmpty() && q.getFirst()<i-k+1){
+            q.removeFirst();
+          }
+          
+          //remove less value indexes than current
+          while(!q.isEmpty() && nums[q.getLast()]<nums[i]){
+            q.removeLast();
+          }
+          
+          //add current to queue
+          q.add(i);
+          
+          //add to result, if current window size is k
+          if(i>=k-1){
+            res[idx++]=nums[q.getFirst()];
+          }
+        }
+      return res;
+    }
+}
