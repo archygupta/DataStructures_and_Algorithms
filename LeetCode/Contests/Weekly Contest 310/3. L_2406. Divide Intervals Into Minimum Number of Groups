@@ -1,3 +1,5 @@
+https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/discuss/2560836/C%2B%2B-Easy-Solution
+
 /*
 You are given a 2D integer array intervals where intervals[i] = [lefti, righti] represents the inclusive interval [lefti, righti].
 
