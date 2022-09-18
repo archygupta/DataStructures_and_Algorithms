@@ -1,0 +1,111 @@
+//799 tests passed out of 3999
+
+https://leetcode.com/problems/integer-to-roman/
+
+class Solution {
+  
+  public static void buildMap(Map<Integer, Character> map) {
+		map.put(1, 'I');
+		map.put(5, 'V');
+		map.put(10, 'X');
+		map.put(50, 'L');
+		map.put(100, 'C');
+		map.put(500, 'D');
+		map.put(1000, 'M');
+	}
+
+	public static StringBuilder process2(int n, int pos) {
+		StringBuilder sb = new StringBuilder();
+		if (pos == 1) {
+			if (n == 4) {
+				sb.append("IV");
+				return sb;
+			} else {
+				sb.append("IX");
+				return sb;
+			}
+		} else if (pos == 2) {
+			if (n == 40) {
+				sb.append("XL");
+			} else {
+				sb.append("XC");
+				return sb;
+			}
+		} else if (pos == 3) {
+			if (n == 400) {
+				sb.append("CD");
+			} else {
+				sb.append("CM");
+				return sb;
+			}
+		}
+		return sb;
+	}
+
+	public static StringBuilder process(int n, int pos) {
+		StringBuilder sb = new StringBuilder();
+		if (pos == 1) {
+			if (n/5  > 0) {
+				sb.append('V');
+				n = n % 5;
+			}
+			for (int i = 0; i < n; i++) {
+				sb.append('I');
+			}
+			return sb;
+		} else if (pos == 2) {
+			if (n/5> 0) {
+				sb.append('L');
+				n = n % 50;
+			}
+			for (int i = 0; i < n; i++) {
+				sb.append('X');
+			}
+			return sb;
+		}else if(pos==3) {
+			if (n/5 > 0) {
+				sb.append('D');
+				n = n % 500;
+			}
+			for (int i = 0; i < n; i++) {
+				sb.append('C');
+			}
+			return sb;
+
+		}
+		else {
+			for (int i = 0; i < n; i++) {
+				sb.append('M');
+			}
+			return sb;
+		}
+	}
+
+	public static int appendZeroes(int curr, int pos) {
+		for (int i = 1; i < pos; i++) {
+			curr = curr * 10;
+		}
+		return curr;
+	}
+
+	public static String intToRoman(int num) {
+		Map<Integer, Character> map = new HashMap<>();
+		buildMap(map);
+		String s = String.valueOf(num);
+		StringBuilder sb = new StringBuilder();
+		int pos = 1;
+		for (int i = s.length() - 1; i >= 0; i--) {
+			int c = s.charAt(i) - '0';
+			if (c == 1 || c == 5) {
+				int curr = appendZeroes(c, pos);
+				sb.insert(0, map.get(curr));
+			} else if (c != 4 || c != 9) {
+				sb.insert(0, process(c, pos));
+			} else if (c == 4 || c == 9) {
+				sb.insert(0, process2(c, pos));
+			}
+			pos = pos+1;
+		}
+		return sb.toString();
+	}
+}
