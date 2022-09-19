@@ -1,3 +1,5 @@
+https://leetcode.com/problems/divide-two-integers/submissions/
+
 https://www.youtube.com/watch?v=8eNsG6OI4EM
 
 /*
@@ -20,3 +22,54 @@ Constraints:
 -231 <= dividend, divisor <= 231 - 1
 divisor != 0
 */
+
+class Solution {
+    public int divide(int dividend, int divisor) {
+        boolean neg = false;
+         long count=0;
+      
+        if((dividend<0 && divisor>0) || (dividend>0 && divisor<0)){
+          neg = true;
+        }
+      
+        long ldividend = Math.abs((long)dividend);
+        long ldivisor = Math.abs((long)divisor);
+      
+        if(ldivisor == 0 || ldivisor > ldividend)
+          return 0;
+      
+        count = longDivide(ldividend, ldivisor);    
+        if(count > Integer.MAX_VALUE){
+          if(neg)
+          {
+            return Integer.MIN_VALUE;
+          }
+          else{
+            return Integer.MAX_VALUE;
+          }
+        }
+      else{
+        if(neg){
+          return (int)(-count);
+        }
+        else{
+          return (int)count;
+        }
+      }
+    }
+  
+    public long longDivide(long ldividend, long ldivisor){
+      if(ldividend < ldivisor)
+      {
+        return 0;
+      }
+      
+      long count = 1;
+      long sum = ldivisor;
+      while((sum+sum) <= ldividend){
+        sum = sum+sum;
+        count = count+count;
+      }
+      return count + longDivide(ldividend - sum, ldivisor);
+    }
+}
