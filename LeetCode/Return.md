@@ -3,3 +3,4 @@
 4. https://leetcode.com/problems/subsets/
 5. https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
 6. https://leetcode.com/problems/subsets-ii/
+7. https://leetcode.com/problems/design-browser-history/
