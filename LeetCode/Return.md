@@ -10,6 +10,8 @@
 11. https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/
 12. https://leetcode.com/problems/insertion-sort-list/
 13. https://leetcode.com/problems/longest-ideal-subsequence/
+14. https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/
+
 
 Linked list
 Backtracking
