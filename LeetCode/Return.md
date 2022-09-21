@@ -7,6 +7,8 @@
 8. https://leetcode.com/problems/add-two-numbers-ii/
 9. https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 10. https://leetcode.com/problems/swap-nodes-in-pairs/
+11. https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/
+12. https://leetcode.com/problems/insertion-sort-list/
 
 Linked list
 Backtracking
