@@ -28,6 +28,24 @@ solution.getRandom();
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+ 
+ class Solution {
+  private ArrayList<Integer> range = new ArrayList();
+    public Solution(ListNode head) {
+        while(head!=null){
+          range.add(head.val);
+          head=head.next;
+        }
+    }
+    
+    public int getRandom() {
+      Random r = new Random();
+      return range.get(r.nextInt(range.size()));
+    }
+}
+
+====================================================================
+
 class Solution {
     private ArrayList < Integer > range = new ArrayList();
     /** @param head The linked list's head.
