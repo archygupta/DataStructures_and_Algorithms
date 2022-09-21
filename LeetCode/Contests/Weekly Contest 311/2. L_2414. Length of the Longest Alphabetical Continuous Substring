@@ -27,6 +27,25 @@ s consists of only English lowercase letters.
 
 class Solution {
     public int longestContinuousSubstring(String s) {
+     int ans = 0;
+     int curr = 1;
+     for(int i =1;i<s.length();i++){
+        if(s.charAt(i-1)+1==s.charAt(i))
+            curr++;
+        else{
+            ans = Math.max(curr,ans);
+            curr=1;
+        }
+    }
+    ans = Math.max(curr,ans);
+    return ans;
+    }
+}
+
+=============================================================
+
+class Solution {
+    public int longestContinuousSubstring(String s) {
         int res = 1;
         for(int i=1;i<s.length();i++){
           int count = 1;
