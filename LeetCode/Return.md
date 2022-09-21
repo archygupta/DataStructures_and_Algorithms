@@ -9,6 +9,7 @@
 10. https://leetcode.com/problems/swap-nodes-in-pairs/
 11. https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/
 12. https://leetcode.com/problems/insertion-sort-list/
+13. https://leetcode.com/problems/longest-ideal-subsequence/
 
 Linked list
 Backtracking
