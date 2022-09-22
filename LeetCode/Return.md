@@ -13,6 +13,7 @@
 14. https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/
 15. https://leetcode.com/problems/iterator-for-combination/
 16. https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
+17. https://leetcode.com/problems/reorder-data-in-log-files/submissions/
 
 
 Linked list
