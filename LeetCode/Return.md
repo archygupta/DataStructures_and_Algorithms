@@ -16,6 +16,8 @@
 17. https://leetcode.com/problems/reorder-data-in-log-files/submissions/
 18. https://leetcode.com/problems/word-break/solution/
 19. https://leetcode.com/problems/largest-number/solution/
+20. https://leetcode.com/problems/increasing-triplet-subsequence/
+21. https://leetcode.com/problems/queue-reconstruction-by-height/
 
 
 Linked list
