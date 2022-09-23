@@ -21,6 +21,7 @@
 22. https://leetcode.com/problems/non-overlapping-intervals/
 23. https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 24. https://leetcode.com/problems/rotting-oranges/
+25. https://leetcode.com/problems/valid-triangle-number/solution/
 
 
 Linked list
