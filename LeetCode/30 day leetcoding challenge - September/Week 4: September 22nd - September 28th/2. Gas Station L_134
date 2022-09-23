@@ -43,6 +43,36 @@ You cannot travel back to station 2, as it requires 4 unit of gas but you only h
 Therefore, you can't travel around the circuit once no matter where you start.
 */
 
+https://www.youtube.com/watch?v=lJwbPZGo05A
+
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+      int gasC = 0, costC=0;
+     for(int i=0;i<gas.length;i++){
+       gasC += gas[i];
+     }   
+      
+    for(int i=0;i<cost.length;i++){
+       costC += cost[i];
+     } 
+      
+      if(gasC <costC)
+        return -1;
+      
+      int start=0, count = 0;
+      for(int i=0;i<gas.length;i++){
+       count+= gas[i] - cost[i];
+        if(count<0){
+          count = 0;
+          start = i+1;
+        }
+      }
+      return start;
+    }
+}
+
+============================================================================================
+
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         for (int i = 0; i < cost.length; i++) {
