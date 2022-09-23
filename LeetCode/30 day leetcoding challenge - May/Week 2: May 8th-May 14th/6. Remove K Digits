@@ -21,6 +21,43 @@ Output: "0"
 Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 */
 
+https://leetcode.com/problems/remove-k-digits/solution/
+
+class Solution {
+    public String removeKdigits(String num, int k) {
+        if(k==0)
+          return num;
+      
+        if(num.length() == k)
+          return "0";
+      
+        Stack<Character> st = new Stack<>();
+        for(int i=0;i<num.length();i++){
+          char ch = num.charAt(i);
+          while(!st.isEmpty() && k>0 && st.peek() > ch){
+            st.pop();
+            k--;
+          }
+          st.push(ch);
+        }
+      while(k>0){
+        st.pop();
+        k--;
+      }
+      StringBuilder sb = new StringBuilder();
+      while(!st.isEmpty()){
+        sb.append(st.pop());
+      }
+      sb=sb.reverse();
+      while(sb.length()> 1 && sb.charAt(0)=='0'){
+        sb.deleteCharAt(0);
+      }
+      return String.valueOf(sb);
+    }
+}
+
+===========================================================================
+
 class Solution {
     public String removeKdigits(String num, int k) {
         if (k == 0 || num == null)
