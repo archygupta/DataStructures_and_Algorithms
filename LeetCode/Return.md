@@ -22,6 +22,7 @@
 23. https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 24. https://leetcode.com/problems/rotting-oranges/
 25. https://leetcode.com/problems/valid-triangle-number/solution/
+26. https://leetcode.com/problems/frequency-of-the-most-frequent-element/
 
 
 Linked list
