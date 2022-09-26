@@ -1,0 +1,23 @@
+ static int indexEqualsValueSearch(int[] arr ) { 
+    return indexEqualsValueSearch(arr, 0, arr.length-1);
+  }
+  
+  static int indexEqualsValueSearch(int[] arr,int start, int end ) {
+    while(start<=end){
+      int mid = start +(end-start)/2;
+      if(mid == arr[mid]){
+        int alternative =indexEqualsValueSearch(arr, start, mid-1);
+        return Math.min(mid, alternative == -1 ? Integer.MAX_VALUE: alternative);
+      }
+      else{
+        if(mid > arr[mid]){
+          return indexEqualsValueSearch(arr, mid+1, end);
+        }
+        else{
+          return indexEqualsValueSearch(arr, start, mid-1);
+        }
+        }
+      }
+    return -1;
+    }
+  
