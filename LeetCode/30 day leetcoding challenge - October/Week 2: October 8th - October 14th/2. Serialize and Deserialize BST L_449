@@ -48,6 +48,9 @@ public class Codec {
 
     }
     public TreeNode deserializeHelper(Queue < String > q) {
+        if(q.isEmpty())
+        return null;
+        
         String value = q.poll();
         if (value.equals("X"))
             return null;
