@@ -97,7 +97,8 @@ public class Solution {
         }
         Set<Integer> appeared = new HashSet<>();
         for (int i=index; i<nums.length; ++i) {
-            if (appeared.add(nums[i])) {
+             if (!appeared.contains(nums[i])) {
+                appeared.add(nums[i]);
                 swap(nums, index, i);
                 permute(ans, nums, index+1);
                 swap(nums, index, i);
