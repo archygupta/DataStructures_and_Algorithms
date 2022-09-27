@@ -24,6 +24,63 @@ words[i] consists of lowercase English letters.
 All the strings of words are unique.
 */
 
+class Trie{
+  Trie[] children = new Trie[26];
+  String word=null;
+}
+
+class Solution {
+    int[][] dir = new int[][]{{0,1}, {0,-1}, {1,0}, {-1,0}};
+    public List<String> findWords(char[][] board, String[] words) {
+        Trie root= new Trie();
+        for(String word : words){
+          Trie curr=root;
+          for(char c: word.toCharArray()){
+            if(curr.children[c-'a']==null){
+              curr.children[c-'a']=new Trie();
+            }
+            curr = curr.children[c-'a'];
+          }
+          curr.word = word;
+        }
+      
+       List<String> res= new ArrayList();
+      for(int i=0;i<board.length;i++){
+        for(int j=0;j<board[0].length;j++){
+          char c = board[i][j];
+          if(root.children[c-'a']!=null){
+            backTrack(board, i, j, res, root);
+          }
+        }
+      }
+      return res;
+    }
+  
+    public void backTrack(char[][] board, int i, int j, List<String> res, Trie parent){      
+      char c = board[i][j];
+      Trie curr = parent.children[c-'a'];
+      if(curr.word!=null){
+        res.add(curr.word);
+        curr.word=null;
+      }
+      board[i][j]='#';
+      for(int idx=0;idx<dir.length;idx++){
+        int newI = i+dir[idx][0], newJ = j+dir[idx][1];
+        if(newI<0 || newI>=board.length || newJ<0 || newJ>=board[0].length || board[newI][newJ]=='#')
+          continue;
+        
+         char ch = board[newI][newJ];
+         if(curr.children[ch-'a']!=null){
+           backTrack(board,newI, newJ,res,curr);
+         }
+      }
+      board[i][j]=c;
+    }
+}
+
+===========================================================================================
+
+
 
 class TrieNode{
   HashMap<Character, TrieNode> children = new HashMap<>();
