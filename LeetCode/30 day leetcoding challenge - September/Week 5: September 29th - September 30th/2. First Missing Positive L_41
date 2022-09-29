@@ -29,6 +29,56 @@ Remember that O(2n) = O(n)
 */
 
 class Solution {
+  
+    public boolean checkOne(int[] nums){
+      for(int i=0;i<nums.length;i++){
+        if(nums[i]==1)
+          return true;
+      }
+      return false;
+    }
+  
+    public void makeOnes(int[] nums){
+      for(int i=0;i<nums.length;i++){
+        if(nums[i]<=0 || nums[i]>nums.length){
+          nums[i]=1;
+        }
+      }
+    }
+  
+    public int firstMissingPositive(int[] nums) {
+        int n=nums.length;
+
+        if(!checkOne(nums))
+          return 1;
+      
+        makeOnes(nums);
+      
+        for(int i=0;i<n;i++){
+          int curr = Math.abs(nums[i]);
+          
+          if(curr==n ){
+            nums[0] = -Math.abs(nums[0]);
+          }
+          else {
+            nums[curr]= -Math.abs(nums[curr]);
+          }
+        }
+        for(int i=1;i<n;i++){
+          if(nums[i]>0){
+            return i;
+          }
+        }
+        if(nums[0]>0)
+          return n;
+      
+        return n+1;
+    }
+}
+
+=====================================================================
+
+class Solution {
 
     public int firstMissingPositive(int[] nums) {
         boolean oneExist = false;
