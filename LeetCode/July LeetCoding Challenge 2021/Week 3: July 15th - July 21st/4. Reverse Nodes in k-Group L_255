@@ -63,7 +63,7 @@ The number of nodes in the list is n.
             count--;
 
         }
-        if (curr != null) {
+        if (next != null) {
             head.next = reverseKGroup(next, k);
         }
         return prev;
