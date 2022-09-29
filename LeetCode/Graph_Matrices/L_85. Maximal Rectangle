@@ -28,3 +28,12 @@ class Solution {
         } return maxarea;
     }
 }
+
+Complexity Analysis
+
+Time complexity : O(N^2M). Computing the maximum area for one point takes O(N) time, since it iterates over the values in the same column. 
+This is done for all N * M points, giving O(N) * O(NM) = O(N^2M)
+
+Space complexity : O(NM). We allocate an equal sized array to store the maximum width at each point.
+
+
