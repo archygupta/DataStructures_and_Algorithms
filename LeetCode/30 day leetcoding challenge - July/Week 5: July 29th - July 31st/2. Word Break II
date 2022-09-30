@@ -37,6 +37,69 @@ Output:
 []
 */
 
+https://www.youtube.com/watch?v=fNVs1J2KCyo -TechDose
+
+class Solution {
+  
+  Trie node = new Trie();
+  class Trie{
+    Trie[] children = new Trie[26];
+    boolean word;
+  }
+    
+    public void insert(String word){
+      Trie curr=node;
+      for(char ch:word.toCharArray()){
+        if(curr.children[ch-'a']==null){
+          curr.children[ch-'a'] = new Trie();
+        }
+        curr = curr.children[ch-'a'];
+      }
+      curr.word=true;
+    }
+    
+    public boolean search(String word){
+      Trie curr=node;
+      for(char ch:word.toCharArray()){
+        if(curr.children[ch-'a']==null){
+          return false;
+        }
+        curr = curr.children[ch-'a'];
+      }
+      return curr.word;
+    }
+  
+  
+  public void solve(String s, String st, int idx, List<String> ans){
+    if(idx==s.length()){
+      ans.add(st);
+      return;
+    }
+    
+    st+=" ";
+    for(int i=idx;i<s.length();i++){
+      if(search(s.substring(idx, i+1)))
+        solve(s, st+s.substring(idx, i+1),i+1,ans);
+    }
+  }
+  
+    public List<String> wordBreak(String s, List<String> wordDict) {
+      
+        for(String word:wordDict){
+          insert(word);
+        }
+      
+         List<String> ans = new ArrayList();
+        for(int i=0;i<s.length();i++){
+          if(search(s.substring(0, i+1)))
+            solve(s, s.substring(0,i+1), i+1, ans);
+        }
+      return ans;
+    }
+}
+
+==================================================================================
+
 class Solution {
     Map < String, List < String >> dp = new HashMap();
     public List < String > wordBreak(String s, List < String > wordDict) {
