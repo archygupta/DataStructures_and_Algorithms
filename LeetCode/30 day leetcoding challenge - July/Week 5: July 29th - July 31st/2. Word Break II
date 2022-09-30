@@ -37,6 +37,7 @@ Output:
 []
 */
 
+
 https://www.youtube.com/watch?v=fNVs1J2KCyo -TechDose
 
 class Solution {
@@ -96,6 +97,35 @@ class Solution {
         }
       return ans;
     }
+}
+
+================================================================================
+
+class Solution {
+   public List<String> wordBreak(String s, List<String> wordDict) {
+		List<String> result = new ArrayList<>();
+		wordBreakHelper(s, wordDict, result, new StringBuilder());
+		return result;
+	}
+
+	private void wordBreakHelper(String s, List<String> wordDict, List<String> result, StringBuilder current) {
+		if (s.equals("")) {
+			// We do this because we don't want to add space on the last word
+			current.deleteCharAt(current.length() - 1);
+			result.add(current.toString());
+			return;
+		}
+		for (String word : wordDict) {
+			if (s.indexOf(word) == 0) {
+				current.append(word);
+				current.append(" ");
+				wordBreakHelper(s.substring(word.length(), s.length()), wordDict, result, new StringBuilder(current));
+				// We do this because we want to remove the last added space and the last word
+				current.delete(current.length() - word.length() - 1, current.length());
+			}
+		}
+		return;
+	}
 }
 
 ==================================================================================
