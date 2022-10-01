@@ -1,5 +1,7 @@
 https://leetcode.com/problems/number-of-pairs-satisfying-inequality/discuss/2646585/Easy-Merge-Sort-based-solution-or-C%2B%2B-or
 
+https://www.youtube.com/watch?v=USh4o9_9hn0
+
 /*
 You are given two 0-indexed integer arrays nums1 and nums2, each of size n, and an integer diff. Find the number of pairs (i, j) such that:
 
@@ -26,3 +28,73 @@ Output: 0
 Explanation:
 Since there does not exist any pair that satisfies the conditions, we return 0.
 */
+
+
+class Solution {
+  
+  long count = 0;
+  
+  
+   void checkCount(int[] newN, int s, int m, int e, int d){
+     int l=s, r=m+1;
+     while(l<=m && r<=e){
+       if(newN[l]<=(newN[r]+d)){
+         count += e-r+1;
+         l++;
+       }
+       else{
+         r++;
+       }
+     }
+     
+     int[] li = new int[e-s+1];
+     int i=s, j=m+1, k=0;
+      while(i<=m && j<=e){ 
+        if(newN[i]<=newN[j]){
+          li[k]=newN[i];
+          i++;
+          k++;
+        }
+        else{
+          li[k]=newN[j];
+          j++;
+          k++;
+        }
+      }
+     while(i<=m){
+       li[k]=newN[i];
+          i++;
+          k++;
+     }
+     while(j<=e){
+       li[k]=newN[j];
+          j++;
+          k++;
+     }
+     int idx=0;
+     for(int z=s;z<=e;z++){
+       newN[z]=li[idx++];
+     }
+   }
+  
+    void mergeSort(int newN[], int start, int end, int d){
+      if(start==end)
+        return;
+      
+      int mid=(start+end)/2;
+      mergeSort(newN, start,mid,d);
+      mergeSort(newN, mid+1,end, d);
+      checkCount(newN, start, mid, end, d);    
+      return;
+      
+    }
+    public long numberOfPairs(int[] nums1, int[] nums2, int diff) {
+        int newN[] = new int[nums1.length];
+        for(int i=0;i<nums1.length;i++){
+            newN[i]=nums1[i]-nums2[i];
+        }
+     
+      mergeSort(newN, 0, nums1.length-1, diff);
+        return count;
+    }
+}
