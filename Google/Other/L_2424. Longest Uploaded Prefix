@@ -1,0 +1,40 @@
+https://leetcode.com/problems/longest-uploaded-prefix/
+
+class LUPrefix {
+ 
+    int longest;
+    TreeSet<Integer> ts;
+  
+    public void updateLongest(){
+      while(!ts.isEmpty() && ts.contains(longest+1)){
+        longest=longest+1;
+        ts.remove(longest); 
+      }
+    }
+  
+    public LUPrefix(int n) {
+      longest = 0;
+      ts = new TreeSet<>();
+    }
+    
+    public void upload(int n) {
+         if(n==longest+1){
+          longest++;
+        }
+      else{
+        ts.add(n); 
+      }
+      updateLongest();
+    }
+    
+    public int longest() {
+     return longest;   
+    }
+}
+
+/**
+ * Your LUPrefix object will be instantiated and called as such:
+ * LUPrefix obj = new LUPrefix(n);
+ * obj.upload(video);
+ * int param_2 = obj.longest();
+ */
