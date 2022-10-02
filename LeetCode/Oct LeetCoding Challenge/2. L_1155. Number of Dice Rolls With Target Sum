@@ -50,3 +50,64 @@ class Solution {
         return numRollsToTargetHelper(d, f, target);
     }
 }
+
+==================================================================
+
+class Solution {
+    int res = 0;
+
+    public int numRollsToTargetHelper(int dice, int faces, int target, int[][] dp) {
+        if (target < 0) return 0;
+
+        if (dice == 0 && target != 0) return 0;
+        if (dice == 0 && target == 0) return 1;
+
+      if(dp[dice][target]!=-1)
+        return dp[dice][target];
+        int ans = 0;
+        for (int i = 1; i <= faces; i++) {
+          int res = numRollsToTargetHelper(dice - 1, faces, target - i, dp)% 1000000007;
+          ans += res;
+          ans = ans % 1000000007;
+        }
+        return dp[dice][target]=ans;
+    }
+
+    public int numRollsToTarget(int d, int f, int target) {
+        int[][] dp = new int[d+1][target+1];
+        for(int[] i :dp){
+          Arrays.fill(i,-1);
+        }
+        return numRollsToTargetHelper(d, f, target, dp);
+    }
+}
+
+==================================================================
+
+class Solution {
+    int res = 0;
+
+    public int numRollsToTargetHelper(int d, int f, int t) {
+        int[][] dp = new int[d + 1][t + 1];
+
+        dp[0][0] = 1;
+
+        for (int dice = 1; dice <= d; dice++) {
+            for (int target = 1; target <= t; target++) {
+              int ans = 0;
+              for(int i=1;i<=f;i++){
+                if(target-i >=0){
+                  ans  = (ans+dp[dice-1][target-i]) % 1000000007;
+                  ans = ans % 1000000007;
+                }
+              }
+              dp[dice][target]=ans;
+            }
+        }
+      return dp[d][t]% 1000000007;
+    }
+
+    public int numRollsToTarget(int d, int f, int target) {
+        return numRollsToTargetHelper(d, f, target);
+    }
+}
