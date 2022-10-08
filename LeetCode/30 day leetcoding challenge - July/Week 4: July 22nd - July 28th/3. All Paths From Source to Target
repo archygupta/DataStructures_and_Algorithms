@@ -21,6 +21,33 @@ You can print different paths in any order, but you should keep the order of nod
 */
 
 class Solution {
+
+    public void allPathsSourceTargetHelper(int[][] graph, List<List<Integer>> res, List<Integer> temp, int src, int dest) {
+        temp.add(src);
+        if (src == dest) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i : graph[src]) {
+                allPathsSourceTargetHelper(graph, res, temp, i, dest);
+            
+            temp.remove(temp.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        int n = graph.length;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList();
+        allPathsSourceTargetHelper(graph, res, temp, 0, n - 1);
+        return res;
+    }
+}
+ 
+ ===================================================================
+ 
+class Solution {
     public static void dfs(int[][] graph, List<List<Integer>> result, List<Integer> path, int v)
     {
       path.add(v);
