@@ -1,0 +1,120 @@
+https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/
+
+/*
+You are given a 0-indexed m x n integer matrix grid and an integer k. You are currently at position (0, 0) and you want to reach position (m - 1, n - 1) moving only down or right.
+
+Return the number of paths where the sum of the elements on the path is divisible by k. Since the answer may be very large, return it modulo 109 + 7.
+
+ 
+
+Example 1:
+
+
+Input: grid = [[5,2,4],[3,0,5],[0,7,2]], k = 3
+Output: 2
+Explanation: There are two paths where the sum of the elements on the path is divisible by k.
+The first path highlighted in red has a sum of 5 + 2 + 4 + 5 + 2 = 18 which is divisible by 3.
+The second path highlighted in blue has a sum of 5 + 3 + 0 + 5 + 2 = 15 which is divisible by 3.
+Example 2:
+
+
+Input: grid = [[0,0]], k = 5
+Output: 1
+Explanation: The path highlighted in red has a sum of 0 + 0 = 0 which is divisible by 5.
+Example 3:
+
+
+Input: grid = [[7,3,4,9],[2,3,6,2],[2,3,7,0]], k = 1
+Output: 10
+Explanation: Every integer is divisible by 1 so the sum of the elements on every possible path is divisible by k.
+ 
+
+Constraints:
+
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 5 * 104
+1 <= m * n <= 5 * 104
+0 <= grid[i][j] <= 100
+1 <= k <= 50
+*/
+
+//73 out of 83 passed, TLE
+
+class Solution {
+    HashMap<String, Integer> map = new HashMap<>();
+
+    public int numberOfPaths(int m, int n, int i, int j, int[][] grid, int k, int sum) {
+        if (i < 0 || i >= m || j < 0 || j >= n) {
+            return 0;
+        }
+
+        if (i == m - 1 && j == n - 1) {
+            sum += grid[i][j];
+
+            if (sum % k == 0) {
+                return 1;
+            }
+        }
+
+        String s = i + "," + j + "," + sum;
+        if (map.containsKey(s)) return map.get(s);
+
+        sum += grid[i][j];
+        int left = numberOfPaths(m, n, i + 1, j, grid, k, sum) % 1000000007;
+
+        int right = numberOfPaths(m, n, i, j + 1, grid, k, sum) % 1000000007;
+
+        int ans = (left + right) % 1000000007;
+        map.put(s, ans);
+        return ans;
+    }
+
+    public int numberOfPaths(int[][] grid, int k) {
+        return numberOfPaths(grid.length, grid[0].length, 0, 0, grid, k, 0);
+    }
+}
+
+==========================================================
+
+https://www.youtube.com/watch?v=eOIS88-dPVA
+
+//passed
+
+class Solution {
+
+    public int numberOfPaths(int m, int n, int i, int j, int[][] grid, int k, int sum, int dp[][][]) {
+        if (i < 0 || i >= m || j < 0 || j >= n) {
+            return 0;
+        }
+
+        if (i == m - 1 && j == n - 1) {
+            sum += grid[i][j];
+
+            if (sum % k == 0) {
+                return 1;
+            }
+        }
+
+        sum += grid[i][j];
+        if (dp[i][j][sum % k] != -1) return dp[i][j][sum % k];
+        int left = numberOfPaths(m, n, i + 1, j, grid, k, sum, dp) % 1000000007;
+
+        int right = numberOfPaths(m, n, i, j + 1, grid, k, sum, dp) % 1000000007;
+
+        int ans = (left + right) % 1000000007;
+        dp[i][j][sum % k] = ans;
+        return ans;
+    }
+
+    public int numberOfPaths(int[][] grid, int k) {
+        int dp[][][] = new int[grid.length][grid[0].length][k];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                Arrays.fill(dp[i][j], -1);
+            }
+        }
+        return numberOfPaths(grid.length, grid[0].length, 0, 0, grid, k, 0, dp);
+    }
+}
+
