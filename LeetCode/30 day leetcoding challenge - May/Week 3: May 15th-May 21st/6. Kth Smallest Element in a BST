@@ -58,3 +58,23 @@ class Solution {
         return ans;
     }
 }
+
+=================================================
+
+class Solution {
+    private int counter =0;
+    private TreeNode target = null;
+    public int kthSmallest(TreeNode root,int k) {
+        inorderTraversal(root,k);
+        return target.val;
+    }
+
+    private void inorderTraversal(TreeNode root,int k){
+        if(root == null || target != null) return;
+        inorderTraversal(root.left,k);
+        counter++;
+        if(counter == k && target == null)
+            target = root;
+        inorderTraversal(root.right,k);
+    }
+}
