@@ -39,6 +39,26 @@ nums is sorted and rotated between 1 and n times.
 
 class Solution {
   
+    public int findMin(int[] nums, int start, int end) {
+      if(start == end)
+        return nums[start];
+      
+      int mid = (start+end)/2;
+      
+      int lmin = Math.min(nums[start], nums[mid]);   //left arr min
+      int rmin = Math.min(nums[mid+1], nums[end]);
+      return lmin > rmin  ? findMin(nums, mid+1, end) : findMin(nums, start, mid);
+      
+    }
+    public int findMin(int[] nums) {
+        return findMin(nums, 0, nums.length-1);
+    }
+}
+
+====================================================================================
+
+class Solution {
+  
   public int findMin(int[] nums, int start, int end){
     while(start<end){
       int mid = (start+end)/2;
