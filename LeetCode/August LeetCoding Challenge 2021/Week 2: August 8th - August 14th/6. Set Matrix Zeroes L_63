@@ -1,1 +1,65 @@
 https://github.com/archygupta/DataStructures_and_Algorithms/blob/master/InterviewBit/Arrays/Set%20Matrix%20Zeros
+
+//CTCI
+
+class Solution {
+
+    public void nullifyRow(int[][] matrix, int r) {
+        for (int i = 0; i < matrix[0].length; i++) {
+            matrix[r][i] = 0;
+        }
+    }
+
+    public void nullifyColumn(int[][] matrix, int c) {
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][c] = 0;
+        }
+    }
+
+    public void setZeroes(int[][] matrix) {
+        Boolean isCol = false;
+        Boolean isRow = false;
+        int R = matrix.length;
+        int C = matrix[0].length;
+
+        for (int i = 0; i < R; i++) {
+            if (matrix[i][0] == 0) {
+                isCol = true;
+                break;
+            }
+        }
+
+        for (int i = 0; i < C; i++) {
+            if (matrix[0][i] == 0) {
+                isRow = true;
+                break;
+            }
+        }
+
+        for (int i = 1; i < R; i++) {
+            for (int j = 1; j < C; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+
+        for (int i = 1; i < R; i++) {
+            if (matrix[i][0] == 0) {
+                nullifyRow(matrix, i);
+            }
+        }
+
+        for (int i = 1; i < C; i++) {
+            if (matrix[0][i] == 0) {
+                nullifyColumn(matrix, i);
+            }
+        }
+
+        if (isRow) nullifyRow(matrix, 0);
+
+        if (isCol) nullifyColumn(matrix, 0);
+    }
+}
+
