@@ -36,3 +36,35 @@ Constraints:
 1 <= s.length <= 100
 s contains only lower and upper case English letters.
 */
+
+class Solution {
+    public boolean check(char a, char b){
+        if(a >='a' && a <='z' && b >='A' && b<='Z'){
+             return a == Character.toLowerCase(b); 
+        }
+
+        else if(a >='A' && a <='Z' && b>='a' && b<='z'){
+            return a == Character.toUpperCase(b); 
+        }
+        return false;
+    }
+
+    public String makeGood(String s) {
+        if(s.length()==0)
+        return s;
+        Stack<Character> st = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(!st.isEmpty() && check(st.peek(), s.charAt(i))){
+                st.pop();
+            }
+            else{
+            st.push(s.charAt(i));
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty()){
+            sb.append(st.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
