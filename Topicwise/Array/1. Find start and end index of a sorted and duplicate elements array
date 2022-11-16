@@ -1,0 +1,58 @@
+public class findIndices {
+	
+	public static void findIndexes(int[] arr, int start, int end, int[] res, int ele) {
+		if(res[0]!=-1 && res[1] !=-1)
+			return;
+		if(start<=end) {
+			int mid = (start+end)/2;
+			if(arr[mid]<ele) {
+				findIndexes(arr, mid+1, end, res, ele);
+			}
+			else if(arr[mid]>ele) {
+				findIndexes(arr, start, mid-1, res, ele);
+			}
+			else {
+				if(mid==0) {
+					res[0]=mid;
+					return;
+				}
+				else if(arr[mid-1]!=ele && res[0]==-1) {
+					res[0]=mid;
+					return;
+				}
+				else {
+					findIndexes(arr, start, mid-1, res, ele);
+				}
+				
+				if(mid==arr.length-1) {
+					res[1]=mid;
+				}
+				else if(arr[mid+1]!=ele  && res[1]==-1) {
+					res[1]=mid;
+				}
+				else {
+					findIndexes(arr, mid+1, end, res, ele);
+				}
+			}
+		}
+	}
+	
+	public static int[] findIndex(int[] arr, int ele) {
+		int[] res = new int[2];
+		Arrays.fill(res, -1);
+		findIndexes(arr, 0, arr.length-1, res, ele);
+		return res;
+		
+	}
+	
+	public static void main(String args[]) {
+		int[] res = findIndex(new int[] {1,2,3,3,4,5,6,6,6,6,7,8}, 6);
+		System.out.print(res[0]+" "+res[1]);
+		
+		res = new int[2];
+		Arrays.fill(res, -1);
+		
+		res = findIndex(new int[] {1,2,3,3,4,5,6,6,6,6,6}, 6);
+		System.out.print(res[0]+" "+res[1]);
+	}
+}
