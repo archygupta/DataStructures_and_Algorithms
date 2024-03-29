@@ -43,3 +43,38 @@ Constraints:
 1 <= N <= 1000, where N is number of nodes
 */
 
+
+class Solution
+{
+    public Node minValue(Node node)
+   {
+    Node current = node;
+    while (current.left != null) 
+    {
+        current = current.left;
+    }
+    return current;
+}
+
+	public Node inorderSuccessor(Node root,Node x)
+         {
+          if(x.right!=null)
+            return minValue(x.right);
+         
+         Node succ=null;
+         while(root!=null){
+             if(root.data>x.data){
+                  succ=root;
+                 root=root.left;
+             }
+             else if(root.data < x.data){
+                 root=root.right;
+             }
+             else
+             break;
+             
+             
+         }
+         return succ;
+       }
+}
