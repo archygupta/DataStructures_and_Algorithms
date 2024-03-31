@@ -20,6 +20,29 @@ num1 and num2 consist of only digits.
 num1 and num2 don't have any leading zeros except for the zero itself.
 */
 
+class Solution {
+    public String addStrings(String num1, String num2) {
+        int p1=num1.length()-1, p2=num2.length()-1;
+        StringBuilder res = new StringBuilder();
+        int carry = 0;
+        while(p1>=0 || p2>=0){
+            int x = p1>=0? num1.charAt(p1)-'0' : 0;
+            int y = p2>=0? num2.charAt(p2)-'0' : 0;
+            int val = (x+y+carry)%10;
+            carry = (x+y+carry)/10;
+            res.append(val);
+            p1--;
+            p2--;
+        }
+        if(carry>0)
+            res.append(carry);
+        return res.reverse().toString();
+    }
+}
+
+==========================================================
+
+
 import java.math.BigInteger;
 
 class Solution {
