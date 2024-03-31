@@ -38,3 +38,31 @@ class Solution {
         return true;
     }
 }
+
+==============================================
+
+Avoiding substring
+
+class Solution {
+    boolean flag = false;
+    public boolean validPalindrome(String s) {
+        int start = 0, end  = s.length()-1;
+        return validPalindrome(s, start, end);
+    }
+
+    public boolean validPalindrome(String s, int start, int end) {
+        while(start<end){
+            if(s.charAt(start)==s.charAt(end)){
+                start++;
+                end--;
+            }
+            else if (flag == false){
+                flag = true;
+                return validPalindrome(s,start,end-1) || validPalindrome(s,start+1,end);
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+}
