@@ -24,6 +24,7 @@ https://leetcode.com/problems/construct-binary-tree-from-string/editorial/commen
 
 class Solution {
     public TreeNode str2tree(String s) {
+
         Stack<TreeNode> st = new Stack<>();
         int currVal = 0;
         int currSign = 1;
@@ -55,7 +56,10 @@ class Solution {
             }
         }
         if(st.isEmpty())
-            return null;
+            if(s.length()>0)
+                return new TreeNode(currVal*currSign);
+            else
+                return null;
         else
             return st.pop();
     }
