@@ -1,0 +1,40 @@
+/*
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+Example 1:
+Input: s = "aba"
+Output: true
+
+Example 2:
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+
+Example 3:
+Input: s = "abc"
+Output: false
+
+Constraints:
+1 <= s.length <= 105
+s consists of lowercase English letters.
+*/
+
+class Solution {
+    boolean flag = false;
+    public boolean validPalindrome(String s) {
+        int start = 0, end  = s.length()-1;
+        while(start<end){
+            if(s.charAt(start)==s.charAt(end)){
+                start++;
+                end--;
+            }
+            else if (flag == false){
+                flag = true;
+                return validPalindrome(s.substring(start, end)) || validPalindrome(s.substring(start+1, end+1));
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+}
