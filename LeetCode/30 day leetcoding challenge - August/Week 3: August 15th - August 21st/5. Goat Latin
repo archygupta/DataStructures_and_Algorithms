@@ -29,6 +29,38 @@ S contains only uppercase, lowercase and spaces. Exactly one space between each 
 */
 
 class Solution {
+    public String toGoatLatin(String sentence) {
+        HashSet<Character> vowels = new HashSet<>();
+        for(char c:"aeiouAEIOU".toCharArray()){
+            vowels.add(c);
+        }
+
+        StringBuilder result = new StringBuilder();
+        int idx=1;
+        for(String word: sentence.split(" ")){
+            if(idx>1){
+                result.append(" ");
+            }
+            char letter = word.charAt(0);
+            if(vowels.contains(letter)){
+                result.append(word+"ma");
+            }
+            else{
+                result.append(word.substring(1)+letter+"ma");
+            }
+            for(int i=0;i<idx;i++){
+                result.append("a");
+            }
+            idx++;
+        }
+
+        return result.toString();
+    }
+}
+
+===================================================================
+
+class Solution {
 
     public boolean startsWithVowel(String s) {
         return s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u' || s.charAt(0) == 'A' || s.charAt(0) == 'E' || s.charAt(0) == 'I' || s.charAt(0) == 'O' || s.charAt(0) == 'U';
