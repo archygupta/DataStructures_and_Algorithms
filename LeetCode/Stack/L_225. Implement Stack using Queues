@@ -60,19 +60,15 @@ class MyStack {
     }
     
     public int pop() {
-         if(!q1.isEmpty()){
-	        int temp =  q1.peek();
-	        q1.remove();
-	        return temp;
-	    }
-	    return -1;
+        if(!q1.isEmpty()){ 
+            return q1.remove();
+        }
+        return -1;
     }
     
     public int top() {
         if(!q1.isEmpty()){
-	        int temp =  q1.peek();
-	        
-	        return temp;
+	        return  q1.peek();
 	    }
 	    return -1;
     }
