@@ -35,23 +35,24 @@ Output: 4 2 1
 class Solution
 {
     
-    public static boolean Ancestors(Node root, int target, ArrayList<Integer> ar)
-    {
-        if(root == null)
-        return false;
-        if(root.data==target)
-        return true;
-        
-        if( Ancestors(root.left, target,ar) ||  Ancestors(root.right, target,ar)){
-            ar.add(root.data);
+    public static boolean Ancestors(Node root, int target, ArrayList<Integer> li){
+        if(root==null)
+            return false;
+        if(root.data == target)
+            return true;
+        if(Ancestors(root.left, target, li) || Ancestors(root.right, target, li)){
+            li.add(root.data);
+            return true;
+            
         }
         return true;
+        
     }
     
     public static ArrayList<Integer> Ancestors(Node root, int target)
     {
-        ArrayList<Integer> ar = new ArrayList<>();
-        Ancestors(root, target,ar);
-        return ar;
+        ArrayList<Integer> li = new ArrayList<Integer>();
+        Ancestors(root, target, li);
+        return li;
     }
 }
