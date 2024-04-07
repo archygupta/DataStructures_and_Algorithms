@@ -37,6 +37,35 @@ Hint #2
 Check the array from left to right, remove characters that do not meet the property mentioned above, same idea in backward way.
 */
 
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        Stack<Integer> st = new Stack<Integer>();
+        for(int i=0;i<sb.length();i++){
+            if(sb.charAt(i)=='('){
+                st.add(i);
+            }
+            else if (sb.charAt(i)==')'){
+                if(!st.isEmpty()){
+                    st.pop(); 
+                }   
+                else{
+                    sb.deleteCharAt(i);
+                    i--;
+                }
+            }
+        }
+        System.out.println(sb);
+        while(!st.isEmpty()){
+            sb.deleteCharAt(st.pop());
+        }
+        return sb.toString();
+    }
+}
+
+====================================================================================
+
 class Solution {
     public String minRemoveToMakeValid(String s) {
         StringBuilder sb = new StringBuilder(s);
