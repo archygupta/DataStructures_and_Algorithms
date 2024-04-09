@@ -22,6 +22,44 @@ The number of nodes in the list is in the range [0, 5 * 104].
 -106 <= Node.val, insertVal <= 106
 */
 
+https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/editorial/comments/919842
+
+class Solution {
+    public Node insert(Node head, int insertVal) {
+        Node node = new Node(insertVal);
+        Boolean flag = true;
+        if(head==null){
+            node.next=node;
+            return node;
+        }
+        // if(head.next==head){
+        //     head.next=node;
+        //     node.next=head;
+        //     return head;
+        // }
+        Node curr=head;
+        while(curr.next!=head){
+            if(curr.val<=curr.next.val){
+                if(curr.val<=insertVal && insertVal <=curr.next.val){
+                    break;
+                }
+            }
+            else{
+                if(insertVal >=curr.val || insertVal<=curr.next.val){
+                    break;
+                }
+            }
+            curr=curr.next;
+        }
+        Node next=curr.next;
+        curr.next=node;
+        node.next=next;
+        return head;
+    }
+}
+
+==================================================================
+
 class Solution {
     public Node insert(Node head, int insertVal) {
         Node node = new Node(insertVal);
