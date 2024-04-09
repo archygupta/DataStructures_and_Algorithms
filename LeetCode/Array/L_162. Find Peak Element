@@ -23,6 +23,34 @@ Explanation: Your function can return either index number 1 where the peak eleme
 Follow up: Your solution should be in logarithmic complexity.
 */
 
+https://www.youtube.com/watch?v=cXxmbemS6XM
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int n=nums.length;
+        if(n==1)
+            return 0;
+        if(nums[1]<nums[0])
+            return 0;
+        if(nums[n-1]>nums[n-2])
+            return n-1;
+        
+        int low=1, high=n-2;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(nums[mid]>nums[mid-1] && nums[mid]>nums[mid+1])
+                return mid;
+            else if(nums[mid]<nums[mid-1])
+                high=mid-1;
+            else 
+                low=mid+1;
+        }
+        return -1;
+    }
+}
+
+=============================================================
+
 class Solution {
     public int findPeakElement(int[] nums) {
         if (nums.length == 0 || nums.length == 1)
