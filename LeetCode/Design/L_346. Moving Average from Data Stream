@@ -43,21 +43,15 @@ class MovingAverage {
     }
     
     public double next(int val) {
-        if(q.size()<qSize){
-            q.add(val);
-            currSum+=val;
-            return (currSum*1.0)/q.size();
-            }
-            else {
                 q.add(val);
                 currSum+=val;
-                int out=q.poll();
-                currSum-=out;
-                return currSum/qSize;
+                if(q.size()>qSize){
+                    int out=q.poll();
+                    currSum-=out;
             }
+            return currSum/q.size();
+        }
     }
-
-}
 
 ==========================================
 
