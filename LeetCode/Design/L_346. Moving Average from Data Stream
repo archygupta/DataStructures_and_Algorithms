@@ -32,6 +32,36 @@ At most 104 calls will be made to next.
 
 
 class MovingAverage {
+
+    Queue<Integer> q;
+    int qSize;
+    double currSum;
+
+    public MovingAverage(int size) {
+        q=new LinkedList<Integer>();
+        qSize=size;
+    }
+    
+    public double next(int val) {
+        if(q.size()<qSize){
+            q.add(val);
+            currSum+=val;
+            return (currSum*1.0)/q.size();
+            }
+            else {
+                q.add(val);
+                currSum+=val;
+                int out=q.poll();
+                currSum-=out;
+                return currSum/qSize;
+            }
+    }
+
+}
+
+==========================================
+
+class MovingAverage {
   int size;
   List queue = new ArrayList<Integer>();
   public MovingAverage(int size) {
