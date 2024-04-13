@@ -26,6 +26,31 @@ Constraints:
 https://www.youtube.com/watch?v=Vn2v6ajA7U0
 
 class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        subsets(nums, 0, res, new ArrayList<>());
+        return res;
+    }
+
+    public void subsets(int[] nums, int idx, List<List<Integer>> res, List<Integer> temp){
+        res.add(new ArrayList<>(temp));
+        for(int i=idx;i<nums.length;i++){
+            temp.add(nums[i]);
+            subsets(nums, i+1, res, temp);
+            temp.remove(temp.size()-1);
+            while(i<nums.length-1 && nums[i]==nums[i+1]){
+                i++;
+            }
+        }
+    }
+
+    
+}
+
+============================================================
+
+class Solution {
     
     private void subsetsWithDup(int idx, int[] nums, List<List<Integer>> res, List<Integer> temp){
         if(idx==nums.length)
