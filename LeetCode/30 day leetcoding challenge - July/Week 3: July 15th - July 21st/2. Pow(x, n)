@@ -21,6 +21,32 @@ Note:
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
 
+================================================================
+
+Intuition: 2^10 -> 2^(2*5) -> 4^5 -> 4*(4^4) -> 4* 4^(2*2) -> 4* 16^2 -> 4*256 -> 1024
+
+class Solution {
+    public double myPow(double x, int n) {
+        long newn = n; //for handling test case with n=-2147483648
+        return myPow(x,newn);
+    }
+
+    public double myPow(double x, long n) {
+        if(n==0)
+            return 1;
+        if(n<0){
+            return myPow(1/x, -n);
+        }
+        if(n%2==0)
+            return myPow(x*x,n/2);
+        else
+            return x*myPow(x, n-1);
+    }
+}
+
+===================================================
+
+
 class Solution {
     public double myPow(double x, int n) {
         if (n == 0) {
