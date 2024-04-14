@@ -24,6 +24,44 @@ Note:
 */
 
 class Solution {
+
+    public double findDistance(int[] point){
+        return Math.sqrt(point[0]*point[0] + point[1]*point[1]);
+    }
+
+    public int[][] kClosest(int[][] points, int k) {
+
+        PriorityQueue<Double> pq = new PriorityQueue<Double>();
+        Map<Double, List<int[]>> map= new HashMap<>();
+        int[][] res = new int[k][2];
+
+        for(int[] point: points){
+            double distance = findDistance(point);
+            pq.add(distance);
+            List<int[]> temp = map.getOrDefault(distance, new ArrayList<int[]>());
+            temp.add(point);
+            map.put(distance, temp);
+        }
+
+        for(int i =0;i<k;i++){
+            double distance = pq.poll();
+            List<int[]> li = map.get(distance);
+            for(int[] point : li){
+                if(i<k){
+                res[i][0] = point[0];
+                res[i][1] = point[1];
+                i++;
+                }
+            }
+            i--;
+        }
+        return res;
+    }
+}
+
+==========================================================
+
+class Solution {
     public int[][] kClosest(int[][] points, int K) {
         HashMap < Integer, ArrayList < int[] >> hm = new HashMap < Integer, ArrayList < int[] >> ();
         ArrayList < int[] > li;
