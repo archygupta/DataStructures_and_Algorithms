@@ -1,0 +1,73 @@
+/*
+We can shift a string by shifting each of its letters to its successive letter.
+For example, "abc" can be shifted to be "bcd".
+We can keep shifting the string to form a sequence.
+
+For example, we can keep shifting "abc" to form the sequence: "abc" -> "bcd" -> ... -> "xyz".
+Given an array of strings strings, group all strings[i] that belong to the same shifting sequence. You may return the answer in any order.
+
+Example 1:
+Input: strings = ["abc","bcd","acef","xyz","az","ba","a","z"]
+Output: [["acef"],["a","z"],["abc","bcd","xyz"],["az","ba"]]
+
+Example 2:
+Input: strings = ["a"]
+Output: [["a"]]
+ 
+
+Constraints:
+1 <= strings.length <= 200
+1 <= strings[i].length <= 50
+strings[i] consists of lowercase English letters.
+*/
+
+class Solution {
+
+    public boolean findCompatibility(String s ,  String t){
+        for(int i=1;i<s.length();i++){
+            int a = s.charAt(i)-s.charAt(i-1);
+            int b = t.charAt(i)-t.charAt(i-1);
+            a = a<0 ? a+26 : a;
+            b = b<0 ? b+26 : b;
+            if(a != b)
+                return false;
+        }
+        return true;
+    }
+
+    public List<List<String>> groupStrings(String[] strings) {
+        List<List<String>> res = new ArrayList<>();
+        Map<Integer, List<List<String>>> map = new HashMap<>();
+
+        for(String s: strings){
+            int n = s.length();
+            if(!map.containsKey(n)){
+                map.putIfAbsent(n, new ArrayList<>());
+                List<String> li = new ArrayList<>();
+                li.add(s);
+                map.get(n).add(li);
+            }
+            else{
+                List<List<String>> li = map.get(n);
+                boolean works = false;
+                for(List<String> list : li){
+                    if(findCompatibility(list.get(0), s)){
+                        list.add(s);
+                        works = true;
+                        break;
+                    }
+                }
+                if(!works){
+                    List<String> newLi = new ArrayList<>();
+                    newLi.add(s);
+                    map.get(n).add(newLi);
+                }
+            }         
+        }
+
+        for(Map.Entry<Integer, List<List<String>>> m : map.entrySet()){
+            res.addAll(m.getValue());
+        }
+        return res;
+    }
+}
