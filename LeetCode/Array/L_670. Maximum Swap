@@ -1,4 +1,4 @@
-https://leetcode.com/problems/maximum-swap/discuss/1208593/Faster-than-100-oror-Java
+https://leetcode.com/problems/maximum-swap/solutions/107076/fastest-o-n-time-java-solution-w-detailed-explanation-intuitive-and-easy-to-understand/comments/109343
 
 /*
 You are given an integer num. You can swap two digits at most once to get the maximum valued number.
@@ -17,6 +17,44 @@ Explanation: No swap.
 Constraints:
 0 <= num <= 108
 */
+
+class Solution {
+    public int maximumSwap(int num) {
+        String s = String.valueOf(num);
+        int minI = -1,  maxI=-1;
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)>s.charAt(i-1)){
+                minI=i-1;
+                maxI=i;
+                break;
+            }
+        }
+
+        if(minI == -1)
+            return num;
+
+        for(int i=maxI+1;i<s.length();i++){
+            if(s.charAt(i)>=s.charAt(maxI)){
+                maxI=i;
+            }
+        }
+
+        for(int i=0;i<maxI;i++){
+            if(s.charAt(i)<s.charAt(maxI)){
+                char c1 = s.charAt(i);
+                char c2 = s.charAt(maxI);
+                s = s.substring(0,i)+c2+s.substring(i+1, maxI)+c1+s.substring(maxI+1);
+                return Integer.parseInt(s);
+            }
+        }
+        return num;
+    }
+}
+
+========================================================
+
+https://leetcode.com/problems/maximum-swap/discuss/1208593/Faster-than-100-oror-Java
+
 
 class Solution {
     public int maximumSwap(int num) {
