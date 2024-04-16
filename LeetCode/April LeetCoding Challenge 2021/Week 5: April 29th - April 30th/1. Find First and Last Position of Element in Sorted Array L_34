@@ -23,6 +23,35 @@ nums is a non-decreasing array.
 */
 
 class Solution {
+    public void searchRange(int[] nums, int target, int start, int end, int[] res){
+        if(start<=end){
+            int mid = (end+start)/2;
+            if(nums[mid]==target){
+                if(res[0]==-1 || res[0]>mid)
+                    res[0]=mid;
+                if (res[1]==-1 || res[1]<mid)
+                    res[1]=mid;
+            }
+            if(mid>0 && target>=nums[start] && target<=nums[mid-1]){
+                searchRange(nums, target,start,mid-1, res);
+            }
+            if(mid<nums.length-1 && target>=nums[mid+1] && target<=nums[end]){
+                searchRange(nums, target, mid+1, end, res);
+            }
+        }
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        int[] res = new int[2];
+        Arrays.fill(res, -1);
+        searchRange(nums, target, 0, nums.length-1, res);
+        return res;
+    }
+}
+
+=========================================================================================
+
+class Solution {
 
     int res[] = new int[] {
         Integer.MIN_VALUE, Integer.MIN_VALUE
