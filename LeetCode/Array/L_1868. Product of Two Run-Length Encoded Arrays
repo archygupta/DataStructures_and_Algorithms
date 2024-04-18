@@ -40,6 +40,8 @@ The full arrays that encoded1 and encoded2 represent are the same length.
 
 */
 
+Not working
+
 class Solution {
     public List<List<Integer>> findRLEArray(int[][] encoded1, int[][] encoded2) {
         List<List<Integer>> res = new ArrayList<>();
