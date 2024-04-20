@@ -55,6 +55,43 @@ There are no repeated edges and no self-loops in the graph.
 The Graph is connected and all nodes can be visited starting from the given node.
 */
 
+class Solution {
+
+    public Node getNode(int val, HashMap<Integer, Node> nodeList){
+        if(nodeList.containsKey(val)){
+            return nodeList.get(val);
+        }
+        Node newN = new Node(val);
+        nodeList.put(val, newN);
+        return newN;
+    }
+
+    public Node cloneGraph(Node node) {
+
+        if(node==null)
+            return node;
+
+        HashMap<Integer, Node> nodeList = new HashMap<>();
+
+        return cloneGraph(node, nodeList);
+    }
+
+    public Node cloneGraph(Node node, HashMap<Integer, Node> nodeList){
+        if(nodeList.containsKey(node.val))
+            return nodeList.get(node.val);
+
+        Node newN = getNode(node.val, nodeList);
+
+        for(Node neighbor : node.neighbors){
+            newN.neighbors.add(cloneGraph(neighbor, nodeList));
+            Node newNeighbor = getNode(neighbor.val, nodeList);
+        }
+
+        return newN;
+    }
+}
+
+=======================================
 
 class Solution {
 
