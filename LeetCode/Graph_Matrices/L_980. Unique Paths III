@@ -1,0 +1,43 @@
+class Solution {
+
+    int[][] dir = new int[][]{{0,-1}, {-1, 0}, {0,1}, { 1,0}};
+
+    void dfs(int[][] grid, int i, int j, int m, int n, boolean[][] visited, Result res, int currLen, int obstacles){
+        if(i<0 || i>=m || j<0 || j>=n || visited[i][j] || grid[i][j]==-1)
+            return;
+        
+        if(grid[i][j]==2 && currLen== (m*n)-obstacles){
+            res.val+=1;
+            return;
+        }
+        visited[i][j]=true;
+
+        for(int idx=0;idx<dir.length;idx++){
+            int newI = i+dir[idx][0], newJ= j+dir[idx][1];
+           
+            dfs(grid, newI, newJ, m, n, visited, res, currLen+1, obstacles);
+        }
+        visited[i][j]=false;
+    }
+
+    public int uniquePathsIII(int[][] grid) {
+        int m =grid.length;
+        int n =grid[0].length;
+        Result res= new Result();
+        boolean[][] visited = new boolean[m][n];
+        int idxI=0, idxJ=0, obstacles=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1)
+                    {
+                        idxI = i; idxJ=j;
+                    }
+                if(grid[i][j]==-1)
+                    obstacles++;
+            }
+        }
+            
+        dfs(grid, idxI,idxJ, m,n,visited, res, 1, obstacles);
+        return res.val;
+    }
+}
