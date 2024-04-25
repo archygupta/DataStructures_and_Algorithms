@@ -1,0 +1,79 @@
+https://www.youtube.com/watch?v=wtoNj0d-OEI
+
+/*
+Given a string s that contains parentheses and letters, remove the minimum number of invalid parentheses to make the input string valid.
+Return a list of unique strings that are valid with the minimum number of removals. You may return the answer in any order.
+
+Example 1:
+Input: s = "()())()"
+Output: ["(())()","()()()"]
+
+Example 2:
+Input: s = "(a)())()"
+Output: ["(a())()","(a)()()"]
+
+Example 3:
+Input: s = ")("
+Output: [""]
+ 
+Constraints:
+1 <= s.length <= 25
+s consists of lowercase English letters and parentheses '(' and ')'.
+There will be at most 20 parentheses in s.
+*/
+
+
+class Solution {
+    int longest = -1;
+    Set<String> res = new HashSet<>();
+
+    public List<String> removeInvalidParentheses(String s) {
+        
+        dfs(s, 0, new StringBuilder(""), 0, 0);
+
+        if(res.size()==0) 
+            res.add("");
+
+        return new ArrayList<>(res);
+
+    }
+
+    public void dfs(String s, int curr_idx, StringBuilder sb, int lcount, int rcount){
+        if(curr_idx >= s.length()){
+            if(lcount == rcount){
+                if(sb.length()>longest){
+                    res = new HashSet<>();
+                    res.add(sb.toString());
+                    longest = sb.length();
+                }
+                else if(sb.length()==longest){
+                    res.add(sb.toString());
+                }
+            }
+            return;
+        }
+
+        char currCh = s.charAt(curr_idx);
+        if(currCh == '('){
+            sb.append(currCh);
+            dfs(s, curr_idx+1, sb, lcount+1, rcount);
+            sb.deleteCharAt(sb.length()-1);
+
+            dfs(s, curr_idx+1, sb, lcount, rcount);
+        }
+        else if(currCh== ')'){
+            dfs(s, curr_idx+1, sb, lcount, rcount);
+
+            if(lcount>rcount){
+                sb.append(currCh);
+                dfs(s, curr_idx+1, sb, lcount, rcount+1);
+                sb.deleteCharAt(sb.length()-1);
+            }
+        }
+        else{
+            sb.append(currCh);
+            dfs(s, curr_idx+1, sb, lcount, rcount);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}
