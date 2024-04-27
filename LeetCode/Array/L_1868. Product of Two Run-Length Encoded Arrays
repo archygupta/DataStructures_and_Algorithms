@@ -46,6 +46,48 @@ class Solution {
     public List<List<Integer>> findRLEArray(int[][] encoded1, int[][] encoded2) {
         List<List<Integer>> res = new ArrayList<>();
         int i=0, j=0;
+        while(i<encoded1.length && j<encoded2.length){
+            int val1 = encoded1[i][0], freq1 = encoded1[i][1];
+            int val2 = encoded2[j][0], freq2 = encoded2[j][1];
+
+            if(freq1==freq2){
+                res.add(Arrays.asList(val1*val2, freq1));
+                i++;
+                j++;
+            }
+            else if(freq1<freq2){
+                res.add(Arrays.asList(val1*val2, freq1));
+                encoded2[j][1] -= freq1;
+                i++;
+            }
+            else if(freq2<freq1){
+                res.add(Arrays.asList(val1*val2, freq2));
+                encoded1[i][1] -= freq2;
+                j++;
+            }
+            if(res.size()>=2 && (res.get(res.size()-1).get(0) == res.get(res.size()-2).get(0))){
+                res.get(res.size()-2).set(1, res.get(res.size()-1).get(1)+ res.get(res.size()-2).get(1));
+                res.remove(res.size()-1);
+            }
+        }
+         if(i!=encoded1.length){
+            res.add(new ArrayList<>(List.of(encoded1[i][0], encoded1[i][1])));
+        }
+        if(j!=encoded2.length){
+            res.add(new ArrayList<>(List.of(encoded2[j][0], encoded2[j][1])));
+        }
+        return res;
+    }
+}
+
+==========================================================================================
+
+Not working
+
+class Solution {
+    public List<List<Integer>> findRLEArray(int[][] encoded1, int[][] encoded2) {
+        List<List<Integer>> res = new ArrayList<>();
+        int i=0, j=0;
         while(i<encoded1.length && j<encoded2.length)
         {
             if(encoded1[i][1] == encoded2[j][1]){
