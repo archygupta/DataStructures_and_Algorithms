@@ -24,6 +24,32 @@ The number of nodes in the tree is in the range [0, 2000].
 Follow up: Can you flatten the tree in-place (with O(1) extra space)?
 */
 
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root==null)
+            return;
+        
+        TreeNode left = root.left;
+        TreeNode right=root.right;
+
+        root.left=null;
+
+        flatten(left);
+        flatten(right);
+
+        root.right=left;
+        
+        TreeNode curr=root;
+        while(curr.right!=null){
+                curr=curr.right;
+        }
+        curr.right=right;
+
+    }
+}
+
+================================================================
+
 /*Solution*/
 /*
 Approach 1: Recursion
@@ -59,6 +85,7 @@ Complexity Analysis
 Time Complexity: O(N)O(N) since we process each node of the tree exactly once.
 Space Complexity: O(N)O(N) which is occupied by the recursion stack. The problem statement doesn't mention anything about the tree being balanced or not and hence, the tree could be e.g. left skewed and in that case the longest branch (and hence the number of nodes in the recursion stack) would be NN.
 */
+
 
 class Solution {
     private TreeNode flattenTree(TreeNode root){
