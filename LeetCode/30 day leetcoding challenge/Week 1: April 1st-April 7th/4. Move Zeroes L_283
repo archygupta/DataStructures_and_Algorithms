@@ -13,6 +13,25 @@ Minimize the total number of operations.
 
 class Solution {
     public void moveZeroes(int[] nums) {
+        for(int i=0, curr=0;curr<nums.length;curr++){
+            if(nums[curr]!=0){
+                swap(nums, i++, curr);
+            }
+        }
+    }
+
+    public void swap(int[] nums, int i, int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+
+    }
+}
+
+==========================================================
+
+class Solution {
+    public void moveZeroes(int[] nums) {
       int index=0;
       for(int i=0;i<nums.length;i++)
       {
