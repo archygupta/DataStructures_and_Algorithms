@@ -26,6 +26,46 @@ Keep track of how many positive numbers are missing as you scan the array.
 
 class Solution {
     public int findKthPositive(int[] arr, int k) {
+        if(k<=arr[0]-1){
+            return k;
+        }
+
+        k-=arr[0]-1;
+
+        int n=arr.length;
+
+        for(int i=1;i<n;i++){
+
+                int diff=arr[i]-arr[i-1]-1;
+                 if(diff>=k){
+                    return arr[i-1]+k;
+                }
+
+                k-=diff;
+        }
+        return arr[n-1]+k;
+    }
+}
+============================================
+
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int left=0, right=arr.length-1;
+        while(left<=right){
+            int mid = (left+right)/2;
+            if(k<=(arr[mid]-mid-1)){
+                right=mid-1;
+            }
+            else
+                left=mid+1;
+        }
+        return left+k;
+    }
+}
+
+=====================================================
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
         int prev = 0;
         int curr = arr[0];
         int prevcount = 0; //prev count of missing number
