@@ -55,3 +55,35 @@ class Solution {
         return true;
     }
 }
+
+=======================================================
+
+Tims = O(M), Space = O(1)
+
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        int[] orderMap = new int[26];
+        for(int idx = 0 ; idx < order.length() ; idx++){
+            orderMap[order.charAt(idx)-'a'] = idx;
+        }
+        for(int idx1 = 0 ; idx1 < words.length-1 ; idx1++){
+            for(int idx2 = 0 ; idx2 < words[idx1].length() ; idx2++){
+                
+                if(idx2 >= words[idx1+1].length())
+                    return false;
+
+                if(words[idx1].charAt(idx2) != words[idx1+1].charAt(idx2)){
+                    int currWordChar = words[idx1].charAt(idx2) - 'a';
+                    int nextWordChar = words[idx1+1].charAt(idx2) - 'a';
+                    if(orderMap[currWordChar] > orderMap[nextWordChar]){
+                        return false;
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
