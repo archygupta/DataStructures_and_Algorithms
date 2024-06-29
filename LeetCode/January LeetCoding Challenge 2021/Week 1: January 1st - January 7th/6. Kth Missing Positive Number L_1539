@@ -59,7 +59,8 @@ class Solution {
             else
                 left=mid+1;
         }
-        return left+k;
+        return left+k; //or  [ return right+k+1; // [ans = {a[r]+k - (a[r] - r - 1)} = {a[r]+k-a[r]+r+1} ={k+r+1} ] ]
+
     }
 }
 
