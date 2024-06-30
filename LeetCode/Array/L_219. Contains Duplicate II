@@ -18,6 +18,38 @@ Output: false
 
 class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> numIndices = new HashMap<>();
+        for(int idx = 0; idx < nums.length; idx++){
+            if(numIndices.containsKey(nums[idx])){
+                if(idx - numIndices.get(nums[idx]) <= k)
+                    return true;
+            }
+            numIndices.put(nums[idx], idx);
+        }
+        return false;
+    }
+}
+
+=======================================================
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashSet<Integer> numSet = new HashSet<>();
+        for(int idx = 0; idx < nums.length; idx++){
+            if(numSet.contains(nums[idx])) return true;
+            numSet.add(nums[idx]);
+            if(numSet.size() > k){
+                numSet.remove(nums[idx-k]);
+            }
+        }
+        return false;
+    }
+}
+
+=======================================================
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
         HashSet < Integer > hs = new HashSet < > ();
         for (int i = 0; i < nums.length; i++) {
             if (i > k)
