@@ -32,3 +32,39 @@ Use a stack to store the characters, when there are k same characters, delete th
 Hint #2  
 To make it more efficient, use a pair to store the value and the count of each character.
 */
+
+class Solution {
+
+    class Pair{
+        char ch;
+        int count;
+        Pair(char ch, int count){
+            this.ch = ch;
+            this.count = count;
+        }
+    }
+    public String removeDuplicates(String s, int k) {
+        Stack<Pair> chars = new Stack<>();
+        for(char curr : s.toCharArray()){
+            if(!chars.isEmpty() && chars.peek().ch == curr){
+                Pair pair = chars.pop();
+                pair.count++;
+                chars.push(pair);      
+            }
+            else{
+                Pair pair = new Pair(curr, 1);
+                chars.push(pair);
+            }
+            if(chars.peek().count == k){
+                    chars.pop();
+                }
+        }
+        StringBuilder str = new StringBuilder();
+        for(Pair p : chars){
+            for(int idx = 0 ; idx<p.count ; idx++){
+                str.append(p.ch);
+            }
+        }
+        return str.toString();
+    }
+}
