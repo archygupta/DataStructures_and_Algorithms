@@ -1,0 +1,53 @@
+/*
+Given a string s, return all the palindromic permutations (without duplicates) of it.
+You may return the answer in any order. If s has no palindromic permutation, return an empty list.
+
+Example 1:
+Input: s = "aabb"
+Output: ["abba","baab"]
+
+Example 2:
+Input: s = "abc"
+Output: []
+ 
+Constraints:
+1 <= s.length <= 16
+s consists of only lowercase English letters.
+
+*/
+
+class Solution {
+    public List<String> generatePalindromes(String s) {
+       List<String> ans = new ArrayList<>();
+       int[] count = new int[256];
+       int odd = 0;
+
+       for(char c: s.toCharArray())
+            count[c]++;
+        for(int c : count) if(c%2!=0) odd++;
+
+        if(odd <= 1){
+            Character center = null;
+            for(int idx = 0; idx<count.length; idx++){
+                if(count[idx]%2==1){
+                    center = (char)idx;
+                    count[idx]--;
+                    break;
+                }
+            }
+                generate(ans, count, (center!= null ? (String.valueOf(center)) : new String()), s.length());
+        }
+        return ans;
+    }
+
+    public void generate(List<String> ans , int[] count, String str, int len){
+        for(int idx=0 ; idx < count.length ; idx++){
+                if(count[idx] > 0){
+                    count[idx] -= 2 ;
+                    generate(ans, count, ((char)idx)+ str + ((char)idx), len);
+                    count[idx] += 2;
+                }
+        }
+        if(str.length() == len) ans.add(new String(str));
+    }
+}
