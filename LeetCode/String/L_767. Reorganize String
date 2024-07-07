@@ -1,0 +1,79 @@
+ https://leetcode.com/problems/reorganize-string/editorial/
+
+/*
+Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+
+Return any possible rearrangement of s or return "" if not possible.
+
+ 
+
+Example 1:
+
+Input: s = "aab"
+Output: "aba"
+Example 2:
+
+Input: s = "aaab"
+Output: ""
+ 
+
+Constraints:
+
+1 <= s.length <= 500
+s consists of lowercase English letters.
+*/
+
+
+class pair{
+        char ch;
+        int count;
+        pair(char ch, int count){
+            this.ch = ch;
+            this.count =count;
+        }
+    }
+    
+    class Solution {
+
+     public String reorganizeString(String s) {
+        int[] charC = new int[26];
+        for(char ch : s.toCharArray()){
+            charC[ch-'a']++;
+        }
+
+
+        PriorityQueue<pair> pq = new PriorityQueue<>((pair a, pair b) -> b.count - a.count);
+
+        for(int idx = 0; idx<26 ; idx++){
+            if(charC[idx] > 0){
+                pq.add(new pair((char)(idx+'a'), charC[idx]));
+            }
+        }
+
+        StringBuilder str = new StringBuilder();
+
+        while(!pq.isEmpty()){
+            pair first = pq.poll();
+            if(str.length() == 0 || (first.ch != str.charAt(str.length()-1))){
+                str.append(first.ch);
+                if(--first.count > 0){
+                    pq.add(first);
+                }
+            }
+            else{
+                if(pq.isEmpty()){
+                    return "";
+                }
+            pair second = pq.poll();
+            str.append(second.ch);
+            if(--second.count > 0){
+                    pq.add(second);
+                }
+           
+                pq.add(first);
+            }
+        }
+
+            return str.toString();
+    }
+}
