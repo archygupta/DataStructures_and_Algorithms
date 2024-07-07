@@ -20,6 +20,36 @@ Constraints:
 s consists of digits, '(', ')', and '-' only.
 */
 
+
+
+https://leetcode.com/problems/construct-binary-tree-from-string/solutions/100359/java-stack-solution/
+
+class Solution {
+    public TreeNode str2tree(String s) {
+        Stack<TreeNode> nodes = new Stack<>();
+
+        for(int idx = 0, idx1 = idx; idx < s.length() ; idx++, idx1=idx){
+            char ch = s.charAt(idx);
+            if(ch == ')')   nodes.pop();
+            else if(ch >= '0' && ch <= '9' || ch == '-'){
+                while(idx+1 < s.length() && s.charAt(idx+1) >= '0' && s.charAt(idx+1) <= '9')  idx++;
+                TreeNode currNode = new TreeNode(Integer.parseInt(s.substring(idx1 , idx+1)));
+                if(!nodes.isEmpty()){
+                    TreeNode parent = nodes.peek();
+                    if(parent.left != null) parent.right = currNode;
+                    else parent.left = currNode;
+                }
+                nodes.push(currNode);
+            }
+        }
+        return nodes.isEmpty() ? null : nodes.peek();
+        
+    }
+}
+
+=========================================================================================
+
+
 https://leetcode.com/problems/construct-binary-tree-from-string/editorial/comments/1274805
 
 class Solution {
