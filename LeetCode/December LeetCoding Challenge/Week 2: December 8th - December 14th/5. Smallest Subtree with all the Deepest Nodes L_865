@@ -47,6 +47,39 @@ The values of the nodes in the tree are unique.
  *     }
  * }
  */
+
+class Solution {
+
+    public int height(TreeNode root){
+        if(root==null)
+            return 0;
+        int left = height(root.left);
+        int right = height(root.right);
+        return left>right ? left+1 : right+1;        
+    }
+
+    public TreeNode getNode(TreeNode root, int h, int H){
+        if(root==null)
+            return null;
+        
+        if(h==H)
+            return root;
+        
+        TreeNode left = getNode(root.left, h+1, H);
+        TreeNode right = getNode(root.right, h+1, H);
+
+        if(left != null && right != null) return root; 
+
+        return left!=null ?left: right;
+
+    }
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+       return getNode(root, 1, height(root));
+    }
+}
+
+======================================================
+
 class Solution {
     class Result {
         TreeNode first;
@@ -74,3 +107,4 @@ class Solution {
         }
     }
 }
+
