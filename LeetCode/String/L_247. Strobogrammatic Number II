@@ -1,0 +1,62 @@
+/*
+Given an integer n, return all the strobogrammatic numbers that are of length n. You may return the answer in any order.
+
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+
+ 
+
+Example 1:
+
+Input: n = 2
+Output: ["11","69","88","96"]
+Example 2:
+
+Input: n = 1
+Output: ["0","1","8"]
+ 
+
+Constraints:
+
+1 <= n <= 14
+*/
+
+class Solution {
+
+    public char[][] reversiblePairs = {{'0', '0'}, {'1', '1'}, {'6', '9'}, {'9','6'}, {'8', '8'}};
+
+    public List<String> findStrobogrammatic(int n) {
+        Queue<String> q = new LinkedList<>();
+        int currLen;
+
+        if(n%2==0){
+            currLen = 0;
+            q.add("");
+        }
+        else{
+            currLen = 1;
+            q.add("0"); q.add("1"); q.add("8");
+        }
+
+        while(currLen < n){
+            currLen += 2;
+            for(int i = q.size(); i>0 ; i-- ){
+                String num = q.poll();
+
+                for(char[] p : reversiblePairs){
+                    if(currLen != n || p[0]!='0'){
+                        q.add(p[0] + num + p[1]);
+                    }
+                }
+            }
+
+        }
+
+        List<String> res = new ArrayList<>();
+        while(!q.isEmpty()){
+            res.add(q.poll());
+        }
+
+        return res;
+    }
+
+}
