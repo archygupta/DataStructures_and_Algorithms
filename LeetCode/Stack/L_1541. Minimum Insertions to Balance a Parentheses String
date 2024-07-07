@@ -36,6 +36,8 @@ s consists of '(' and ')' only.
 
 */
 
+https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/solutions/779928/simple-o-n-stack-solution-with-detailed-explanation/
+
 class Solution {
     public int minInsertions(String s) {
         int ans = 0;
