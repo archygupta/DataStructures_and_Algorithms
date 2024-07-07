@@ -12,6 +12,65 @@ The number of nodes in the tree is between 1 and 10^4.
 The value of nodes is between 1 and 100.
 */
 
+BFS
+
+class Solution {
+
+     int findVal(TreeNode root) {
+        return root == null ? 0 : root.val;
+    }
+
+    public int sumEvenGrandparent(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        Queue<TreeNode> nodeQ = new LinkedList<>();
+        nodeQ.add(root);
+
+        int sum = 0;
+
+        while(!nodeQ.isEmpty()){
+            TreeNode curr = nodeQ.remove();
+            if(curr.val%2 ==0){
+                if(curr.left!=null){
+                    sum += findVal(curr.left.left) + findVal(curr.left.right);
+                }
+                if(curr.right!=null){
+                    sum += findVal(curr.right.left) + findVal(curr.right.right);
+                }
+            }
+            if(curr.left!=null)
+                nodeQ.add(curr.left);
+            
+            if(curr.right!=null)
+                nodeQ.add(curr.right);
+        }
+        return sum;        
+    }
+}
+
+================================================================
+
+DFS
+
+class Solution {
+
+    public int sumEvenGrandparentHelper(TreeNode root, int parent, int gParent){
+        if(root == null)
+            return 0;
+        
+        return sumEvenGrandparentHelper(root.left, root.val, parent)+
+                sumEvenGrandparentHelper(root.right, root.val, parent) +
+                (gParent%2 == 0 ? root.val : 0);
+    }
+
+    public int sumEvenGrandparent(TreeNode root) {
+        return sumEvenGrandparentHelper(root, -1, -1);
+    }
+}
+
+================================================================
+
 class Solution {
 
  //Result variable
