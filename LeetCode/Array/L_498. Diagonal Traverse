@@ -16,6 +16,59 @@ n == mat[i].length
 -105 <= mat[i][j] <= 105
 */
 
+https://www.youtube.com/watch?v=NTF7sDU0IWA
+
+class Solution {
+    public int[] findDiagonalOrder(int[][] mat) {
+        if(mat.length == 0 || mat[0].length == 0)
+            return new int[]{};
+        
+        int r = mat.length, c = mat[0].length;
+        int[] res = new int[r*c];
+        int idx = 0;
+        int row = 0, col = 0;
+        boolean up = true;
+
+        while(row<r && col<c){
+            if(up){
+                while(row>0 && col<c-1){
+                    res[idx++] = mat[row][col];
+                    row--;
+                    col++;
+                }
+                res[idx++] = mat[row][col];
+                if(col == c-1){
+                    row++;
+                }
+                else{
+                    col++;
+                }
+            }
+            else{
+                while(row < r-1 && col > 0){
+                    res[idx++] = mat[row][col];
+                    row++;
+                    col--;
+                }
+                res[idx++] = mat[row][col];
+                if(row == r-1){
+                    col++;
+                }
+                else{
+                    row++;
+                }
+
+            }
+            up = !up;
+        }
+        return res;
+    }
+}
+
+
+================================================
+
+
 https://leetcode.com/problems/diagonal-traverse/solutions/581868/easy-python-no-direction-checking/comments/593475
 
 class Solution {
