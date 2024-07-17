@@ -1,0 +1,75 @@
+/*
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+ 
+
+Example 1:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+Output: true
+Example 2:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+Output: true
+Example 3:
+
+
+Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+Output: false
+ 
+
+Constraints:
+
+m == board.length
+n = board[i].length
+1 <= m, n <= 6
+1 <= word.length <= 15
+board and word consists of only lowercase and uppercase English letters.
+ 
+
+Follow up: Could you use search pruning to make your solution faster with a larger board?
+
+*/
+
+class Solution {
+
+    public boolean dfs(char[][] board, String word, int r, int c, int row, int col, boolean[][] visited, int index){
+        if(index >= word.length())
+            return true;
+
+        visited[r][c] = true;
+
+        int[][] dir = new int[][]{{0,1}, {1,0}, {-1,0}, {0,-1}};
+
+        for(int idx = 0; idx<dir.length ;idx++){
+            int nRow = r+dir[idx][0], nCol = c+dir[idx][1];
+            
+            if(nRow >=0 && nRow< row && nCol >=0 && nCol < col && !visited[nRow][nCol] && board[nRow][nCol] == word.charAt(index)){
+                if(dfs(board, word, nRow, nCol, row, col, visited, index+1))
+                    return true;
+            }
+        }
+
+        visited[r][c] = false;
+        return false;
+    }
+
+    public boolean exist(char[][] board, String word) {
+        int row = board.length, col = board[0].length;
+        boolean[][] visited = new boolean[row][col];
+
+        for(int r = 0; r<row ; r++){
+            for(int c = 0; c<col ;c++){
+                if(board[r][c] == word.charAt(0)){
+                    if(dfs(board, word, r, c, row, col, visited, 1))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+}
