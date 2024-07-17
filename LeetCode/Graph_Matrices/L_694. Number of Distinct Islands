@@ -1,0 +1,70 @@
+/*
+You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
+
+An island is considered to be the same as another if and only if one island can be translated (and not rotated or reflected) to equal the other.
+
+Return the number of distinct islands.
+
+ 
+
+Example 1:
+
+
+Input: grid = [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
+Output: 1
+Example 2:
+
+
+Input: grid = [[1,1,0,1,1],[1,0,0,0,0],[0,0,0,0,1],[1,1,0,1,1]]
+Output: 3
+ 
+
+Constraints:
+
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 50
+grid[i][j] is either 0 or 1.
+
+*/
+
+class Solution {
+
+    public void dfs(int row, int col, int[][] grid, boolean[][]visited, ArrayList<String> island, int row0, int col0){
+        int r = grid.length;
+        int c = grid[0].length;
+        visited[row][col] = true;
+
+        //island.add(toString(row - row0, col - col0));
+        island.add((""+(row - row0) +", "+ (col - col0)));
+
+        int[][] dir = new int[][]{{-1,0}, {0,-1}, {1,0}, {0,1}};
+
+        for(int idx = 0; idx<dir.length; idx++){
+            int nRow = row+dir[idx][0], nCol = col+dir[idx][1];
+            if(nRow >= 0 && nRow < r && nCol >=0 && nCol<c && !visited[nRow][nCol] && grid[nRow][nCol]==1){
+                dfs(nRow, nCol, grid, visited, island, row0, col0);
+            }
+        }
+
+    }
+
+    public int numDistinctIslands(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        boolean[][] visited = new boolean[r][c];
+
+        Set<ArrayList<String>> islandList = new HashSet<>();
+
+        for(int row = 0 ; row < r ; row++){
+            for(int col = 0; col < c ; col++){
+                if(!visited[row][col] && grid[row][col]==1){
+                    ArrayList<String> island = new ArrayList<>();
+                    dfs(row, col, grid, visited, island, row, col);
+                    islandList.add(island);
+                }
+            }
+        }
+        return islandList.size();
+    }
+}
