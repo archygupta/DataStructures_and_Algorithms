@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=0sWShKIJoo4
+
 see trie based solution *Further Thoughts / Follow up* in leetcode solution https://leetcode.com/problems/longest-common-prefix/solution/*
 
 Write a function to find the longest common prefix string amongst an array of strings.
@@ -18,6 +20,20 @@ Constraints:
 strs[i] consists of only lower-case English letters.
 */
 
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        StringBuilder res = new StringBuilder();
+        for(int idx = 0 ; idx < strs[0].length() ; idx++){
+            for(String s : strs){
+                if(idx == s.length() || s.charAt(idx) != strs[0].charAt(idx))
+                    return res.toString();
+            }
+            res.append(strs[0].charAt(idx));  
+        }
+        return res.toString();
+    }
+}
+===============================================
 class Solution {
     public String longestCommonPrefix(String[] strs) {
       String res = new String();
