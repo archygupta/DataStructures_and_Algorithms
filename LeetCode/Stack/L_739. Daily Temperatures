@@ -20,6 +20,27 @@ Constraints:
 30 <= temperatures[i] <= 100
 */
 
+https://www.youtube.com/watch?v=cTBiBSnjO3c
+
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        int[] res = new int[n];
+        Stack<int[]> temp = new Stack<>();
+
+        for(int idx = 0 ; idx < n ; idx++){
+            while(!temp.isEmpty() && temperatures[idx] > temp.peek()[1]){
+                int[] curr = temp.pop();
+                res[curr[0]] = idx-curr[0];
+            }
+            temp.push(new int[]{idx, temperatures[idx]});
+        }
+        return res;
+    }
+}
+
+==================================================================
+
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         Stack<Integer> st = new Stack<>();
