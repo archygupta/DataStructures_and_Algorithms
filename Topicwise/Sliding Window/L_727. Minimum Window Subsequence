@@ -1,0 +1,70 @@
+/*
+Given strings s1 and s2, return the minimum contiguous substring part of s1, so that s2 is a subsequence of the part.
+
+If there is no such window in s1 that covers all characters in s2, return the empty string "". If there are multiple such minimum-length windows, return the one with the left-most starting index.
+
+ 
+
+Example 1:
+
+Input: s1 = "abcdebdde", s2 = "bde"
+Output: "bcde"
+Explanation: 
+"bcde" is the answer because it occurs before "bdde" which has the same length.
+"deb" is not a smaller window because the elements of s2 in the window must occur in order.
+Example 2:
+
+Input: s1 = "jmeqksfrsdcmsiwvaovztaqenprpvnbstl", s2 = "u"
+Output: ""
+ 
+
+Constraints:
+
+1 <= s1.length <= 2 * 104
+1 <= s2.length <= 100
+s1 and s2 consist of lowercase English letters.
+
+*/
+
+class Solution {
+
+    public int findword(String s, String t, int l){
+        int i = 0;
+        while(l<s.length()){
+            while(l<s.length() && i<t.length() && s.charAt(l) != t.charAt(i)){
+                l++;
+            } 
+            i++;
+            l++;
+            if(i==t.length())
+                return l;
+        }
+        return -1;
+    }
+
+    public String minWindow(String s, String t) {
+        if(s.length() == 0 || t.length() == 0)
+            return s;
+        
+        if(s.length() < t.length())
+            return "";
+
+        String ans = "";
+        int l=0, r = 0;
+
+        while(r < s.length()){
+            while(l<s.length() && s.charAt(l) != t.charAt(0)){
+                l++;
+            }
+            
+            r = findword(s, t, l);
+            if(r!= -1 && r<=s.length() && (ans.equals("") || ans.length() > r-l)){
+                ans = s.substring(l,r);
+            }
+            l++; 
+            r=l;           
+        }
+        return ans;
+
+    }
+}
