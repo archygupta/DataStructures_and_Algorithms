@@ -22,6 +22,29 @@ strings[i] consists of lowercase English letters.
 */
 
 class Solution {
+    public List<List<String>> groupStrings(String[] strings) {
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s : strings){
+            String hashKey = getHash(s);
+            map.putIfAbsent(hashKey, new ArrayList<>());
+            map.get(hashKey).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    public String getHash(String s){
+        char[] ch = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for(int idx = 1 ; idx<s.length(); idx++){
+            sb.append( (ch[idx] - ch[idx-1] + 26)%26 +'a');
+        }
+        return sb.toString();
+    }
+}
+
+======================================================================
+
+class Solution {
 
     public boolean findCompatibility(String s ,  String t){
         for(int i=1;i<s.length();i++){
